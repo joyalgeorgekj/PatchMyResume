@@ -13,7 +13,7 @@ export default function AuthButton({ Icon, label, className }: AuthButtonProps) 
         <button
             onClick={handleLogin}
             className={
-                'cursor-pointer flex w-full items-center justify-center gap-2 rounded-md border-2 border-base px-4 py-2 text-sm font-medium shadow-sm ' +
+                'border-dark flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border-2 px-4 py-2 text-sm font-medium shadow-sm ' +
                 className
             }
         >

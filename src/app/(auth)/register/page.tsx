@@ -7,12 +7,12 @@ import { authList } from '@/data/constants/variables';
 
 export default function RegisterPage() {
     return (
-        <div className="bg-surface flex min-h-screen items-center justify-center px-4">
+        <div className="bg-light flex min-h-screen items-center justify-center px-4">
             <div className="w-full max-w-md rounded-lg p-8 shadow-lg">
                 <div className="space-y-3">
                     <Link
                         href="/"
-                        className="text-text mb-2 flex w-min items-center gap-1 text-sm font-medium hover:underline"
+                        className="text-dark mb-2 flex w-min items-center gap-1 text-sm font-medium hover:underline"
                     >
                         <FaHome className="text-base" />
                         Home
@@ -20,10 +20,10 @@ export default function RegisterPage() {
                 </div>
 
                 {/* Welcome Message */}
-                <h2 className="text-text mb-2 text-center text-2xl font-bold">
+                <h2 className="text-dark mb-2 text-center text-2xl font-bold">
                     Create your account
                 </h2>
-                <p className="text-muted-foreground mb-6 text-center text-sm">
+                <p className="text-dark-muted mb-6 text-center text-sm">
                     Join us today! It's quick and easy.
                 </p>
 
@@ -33,13 +33,13 @@ export default function RegisterPage() {
                             key={ind}
                             Icon={val.Icon}
                             label={val.label}
-                            className="bg-surface"
+                            className="bg-light"
                         />
                     ))}
                 </div>
 
                 {/* Register redirect */}
-                <p className="text-foreground mt-6 text-center text-sm">
+                <p className="text-dark mt-6 text-center text-sm">
                     Already have an account?{' '}
                     <Link href="/login" className="text-dark font-medium underline hover:underline">
                         Login
