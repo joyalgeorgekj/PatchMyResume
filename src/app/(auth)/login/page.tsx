@@ -41,12 +41,12 @@ export default function Login() {
                 {/* Register redirect */}
                 <p className="text-foreground mt-6 text-center text-sm">
                     Don’t have an account?{' '}
-                    <a
+                    <Link
                         href="/register"
                         className="text-primary font-medium underline hover:underline"
                     >
                         Register
-                    </a>
+                    </Link>
                 </p>
             </div>
         </div>

@@ -41,9 +41,9 @@ export default function RegisterPage() {
                 {/* Register redirect */}
                 <p className="text-foreground mt-6 text-center text-sm">
                     Already have an account?{' '}
-                    <a href="/login" className="text-primary font-medium underline hover:underline">
+                    <Link href="/login" className="text-dark font-medium underline hover:underline">
                         Login
-                    </a>
+                    </Link>
                 </p>
             </div>
         </div>
