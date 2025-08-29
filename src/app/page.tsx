@@ -1,3 +1,4 @@
+import StepperForm from '@/components/stepper/StepperForm';
 import Feature from '@/components/ui/landing/Feature';
 import HowItWorks from '@/components/ui/landing/HowItWorks';
 import Main from '@/components/ui/landing/Main';
@@ -5,9 +6,11 @@ import Main from '@/components/ui/landing/Main';
 export default function LandingPage() {
     return (
         <div className="bg-light text-default-foreground flex flex-col">
-            <Main />
+            {/* <Main />
             <Feature />
-            <HowItWorks />
+            <HowItWorks /> */}
+
+            <StepperForm />
         </div>
     );
 }
