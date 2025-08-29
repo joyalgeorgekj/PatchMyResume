@@ -1,6 +1,6 @@
+import LandingWrapper from '@/components/ui/landing/LandingWrapper';
 import { Geist, Geist_Mono } from 'next/font/google';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
+import { ThemeProvider } from 'next-themes'
 import type { Metadata } from 'next';
 import './globals.css';
 
@@ -26,11 +26,11 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <Header />
-                {children}
-                <Footer />
+        <html lang="en" suppressHydrationWarning>
+            <body className={`font-mono antialiased`}>
+                <ThemeProvider attribute="class" enableSystem>
+                    <LandingWrapper>{children}</LandingWrapper>
+                </ThemeProvider>
             </body>
         </html>
     );
