@@ -1,13 +1,6 @@
 import { signIn } from 'next-auth/react';
-import { IconType } from 'react-icons/lib';
 
-interface AuthButtonProps {
-    Icon: IconType;
-    label: string;
-    className?: string;
-}
-
-export default function AuthButton({ Icon, label, className }: AuthButtonProps) {
+export default function AuthButton({ Icon, label, className }: AuthListType) {
     const handleLogin = () => signIn(label.toLowerCase());
     return (
         <button
