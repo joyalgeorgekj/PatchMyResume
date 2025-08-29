@@ -42,7 +42,7 @@ export default function HowItWorks() {
                                         <div className="bg-primary/10 text-primary flex h-8 w-8 items-center justify-center rounded-full text-sm font-extrabold">
                                             {s.id}
                                         </div>
-                                        <h3 className="text pt-0.5 text-lg font-semibold">
+                                        <h3 className="text-dark pt-0.5 text-lg font-semibold">
                                             {s.title}
                                         </h3>
                                     </div>
