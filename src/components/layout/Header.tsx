@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ThemeButton from './ThemeButton';
 
 export default function Header() {
     return (
@@ -12,19 +13,13 @@ export default function Header() {
 
                 {/* CTA */}
                 <div className="flex gap-4">
+                    <ThemeButton />
                     <Link
-                        href="/login"
+                        href="/signin"
                         // className="px-4 py-2 shadow-btn border font-medium text-text"
-                        className="border-primary-muted text-primary flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border-2 px-4 py-2 text-sm font-medium shadow-sm transition-all hover:scale-105"
+                        className="border-base flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border-2 bg-linear-65 from-pink-600 to-pink-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:scale-105 whitespace-pre"
                     >
-                        Login
-                    </Link>
-                    <Link
-                        href="/register"
-                        // className="px-4 py-2 shadow-btn border font-medium text-text"
-                        className="border-base flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border-2 bg-linear-65 from-pink-600 to-pink-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:scale-105"
-                    >
-                        Register
+                        Sign In to Use
                     </Link>
                 </div>
             </div>
