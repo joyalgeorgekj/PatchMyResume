@@ -1,11 +1,6 @@
-import { IconType } from 'react-icons';
 import { FaApple, FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-
-export interface AuthListType {
-    Icon: IconType;
-    label: string;
-}
+import { AuthListType, FeatureList, MainWorkFlowSteps, ResumeDataType } from './types';
 
 export const authList: AuthListType[] = [
     {
