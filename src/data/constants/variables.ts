@@ -79,3 +79,10 @@ export const featureList: FeatureList[] = [
         desc: 'AI-powered improvements for stronger wording and layout.',
     },
 ];
+export const STEPS = [
+    { id: 1, label: 'API & Model' },
+    { id: 2, label: 'Resume Data' },
+    { id: 3, label: 'Job Description' },
+    { id: 4, label: 'AI Suggestions' },
+    { id: 5, label: 'Final Review' },
+];
