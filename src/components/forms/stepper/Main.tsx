@@ -27,7 +27,7 @@ export default function Main() {
     // Resume Data
     const [resumeUserData, setResumeUserData] = useState<ResumeDataType>(ExampleResume);
     // Job Description
-    const [jd, setJD] = useState<string>('');
+    const [jobDescription, setJobDescription] = useState<string>('');
     // AI
     const [suggestions, setSuggestions] = useState({});
     // Preview
@@ -48,18 +48,22 @@ export default function Main() {
                 resumeUserData
                     ? setStep((prev) => (prev < STEPS.length ? prev + 1 : prev))
                     : setToast({ type: 'error', message: 'Resume Data is Required' });
+                break;
             case 3:
-                jd !== ''
+                jobDescription !== ''
                     ? setStep((prev) => (prev < STEPS.length ? prev + 1 : prev))
                     : setToast({ type: 'error', message: 'Job Description is Required' });
+                break;
             case 4:
                 suggestions
                     ? setStep((prev) => (prev < STEPS.length ? prev + 1 : prev))
                     : setToast({ type: 'error', message: 'Pick Suggestions' });
+                break;
             case 5:
                 resumeUserData
                     ? setStep((prev) => (prev < STEPS.length ? prev + 1 : prev))
                     : setToast({ type: 'success', message: 'Data Successfully Extracted' });
+                break;
             default:
                 break;
         }
@@ -78,9 +82,9 @@ export default function Main() {
     }, [resumeUserData]);
     
     useEffect(() => {
-        console.log('Job Description', jd);
-    }, [jd]);
-    
+        console.log('Job Description: ', jobDescription);
+    }, [jobDescription]);
+
     useEffect(() => {
         console.log('AI Suggestions', suggestions);
     }, [suggestions]);
