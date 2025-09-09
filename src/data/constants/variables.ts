@@ -26,12 +26,6 @@ export const authList: AuthListType[] = [
     },
 ];
 
-export interface MainWorkFlowSteps {
-    id: number;
-    title: string;
-    more: string;
-}
-
 export const mainWorkFlowSteps: MainWorkFlowSteps[] = [
     {
         id: 1,
@@ -59,11 +53,6 @@ export const mainWorkFlowSteps: MainWorkFlowSteps[] = [
         more: '- We render to LaTeX and export a clean, ATS-friendly PDF. \n- Choose template, spacing, and section order. \n- Exports are deterministic and formatting-safe for ATS parsers.',
     },
 ];
-
-export interface FeatureList {
-    title: string;
-    desc: string;
-}
 
 export const featureList: FeatureList[] = [
     {
