@@ -86,3 +86,10 @@ export const STEPS = [
     { id: 4, label: 'AI Suggestions' },
     { id: 5, label: 'Final Review' },
 ];
+
+export const MODELS = [
+    'gemini-1.5-flash',
+    'gemini-1.5-pro',
+    'gemini-1.0-pro',
+    'gemini-1.0-pro-vision',
+];
