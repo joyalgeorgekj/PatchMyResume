@@ -4,6 +4,9 @@ import { ExampleResume, STEPS } from '@/data/constants/variables';
 import { useEffect, useMemo, useState } from 'react';
 import StepApiModel from './StepApiModel';
 import StepResumeData from './StepResumeData';
+import StepJobDescription from './StepJobDescription';
+import StepFinalPreview from './StepFinalPreview';
+import StepAiSuggestions from './StepAiSuggestions';
 
 export type AiDataType = {
     API_KEY: string;
@@ -129,22 +132,17 @@ export default function Main() {
                     {step === 3 && (
                         <StepJobDescription
                             jobDescription={jobDescription}
-                            onChange={setJobDescription}
+                            setJobDescription={setJobDescription}
                         />
                     )}
                     {step === 4 && (
                         <StepAiSuggestions
-                            resume={resumeJson}
-                            jobDescription={jobDescription}
-                            suggestions={suggestions}
-                            onGenerate={(items) => {
-                                setSuggestions(items);
-                                // surface alert
-                                showAlert({ type: 'success', message: 'Suggestions generated!' });
+                            onGenerate={() => {
+                                setToast({ type: 'success', message: 'Suggestions generated!' });
                             }}
                         />
                     )}
-                    {step === 5 && <StepFinalPreview resume={resumeJson} selected={selected} />}
+                    {step === 5 && <StepFinalPreview />}
 
                     {/* Nav */}
                     <div className="mt-8 flex items-center justify-between">
