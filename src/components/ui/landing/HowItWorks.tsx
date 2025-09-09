@@ -33,7 +33,7 @@ export default function HowItWorks() {
                         return (
                             <div
                                 key={s.id}
-                                className="border-dark-muted/15 bg-surface relative flex cursor-pointer flex-col gap-3 rounded-2xl border p-5 shadow-sm transition hover:shadow-md"
+                                className="border-dark-muted/15 bg-surface relative flex cursor-pointer flex-col gap-3 rounded-2xl border p-5 transition hover:border-dark-muted/50 hover-border-2 hover:scale-105"
                                 onClick={() => setOpenStep(isOpen ? 0 : s.id)}
                             >
                                 {/* Step header */}

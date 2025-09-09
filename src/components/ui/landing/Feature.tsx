@@ -8,9 +8,9 @@ export default function Feature() {
                     {featureList.map((feature, i) => (
                         <div
                             key={i}
-                            className="dark:bg-light-intense border-dark-muted/15 rounded-2xl border bg-white p-6 shadow-md transition-all hover:scale-105"
+                            className="border-dark-muted/15 rounded-2xl border bg-light p-6 transition-all hover:scale-105 hover:shadow hover:shadow-dark-muted/50"
                         >
-                            <h3 className="text-dark-intense mb-3 text-xl font-medium">
+                            <h3 className="text-dark-intense mb-3 text-xl font-bold">
                                 {feature.title}
                             </h3>
                             <p className="text-dark-muted">{feature.desc}</p>

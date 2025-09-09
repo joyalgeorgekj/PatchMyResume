@@ -14,7 +14,7 @@ export default function AuthButton({ Icon, label }: AuthListType) {
         <button
             onClick={handleLogin}
             className={
-                'border-dark-muted/15 flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border-2 px-4 py-2 text-dark text-sm font-medium shadow-sm shadow-dark-muted'
+                'border-primary-muted text-dark shadow-primary-muted flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border-2 px-4 py-2 text-sm font-medium shadow-sm hover:scale-105 transition'
             }
         >
             <Icon className="text-lg" /> {label}
