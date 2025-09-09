@@ -27,19 +27,15 @@ export default function ProfileAvatar({ session }: { session: Session }) {
 
             {/* Dropdown */}
             {open && (
-                <div className="absolute right-0 mt-2 w-48 overflow-hidden rounded-lg border border-dark-muted/25 bg-light shadow-lg z-50">
+                <div className="border-dark-muted/25 bg-light absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-lg border shadow-lg">
                     <div className="px-4 py-3">
-                        <p className="text-sm font-medium text-dark">
-                            {session?.user?.name}
-                        </p>
-                        <p className="text-xs text-gray-500">
-                            {session?.user?.email}
-                        </p>
+                        <p className="text-dark text-sm font-medium">{session?.user?.name}</p>
+                        <p className="text-xs text-gray-500">{session?.user?.email}</p>
                     </div>
-                    <div className="border-t border-dark-muted/25">
+                    <div className="border-dark-muted/25 border-t">
                         <button
                             onClick={() => signOut({ callbackUrl: '/' })}
-                            className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-light-muted cursor-pointer"
+                            className="hover:bg-light-muted w-full cursor-pointer px-4 py-2 text-left text-sm text-red-600"
                         >
                             Sign out
                         </button>
