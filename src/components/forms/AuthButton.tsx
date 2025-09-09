@@ -1,4 +1,5 @@
-import { AuthListType } from '@/data/constants/variables';
+import { useUI } from '@/context/UIContext';
+import { AuthListType } from '@/data/constants/types';
 import { signIn } from 'next-auth/react';
 
 export default function AuthButton({ Icon, label }: AuthListType) {
