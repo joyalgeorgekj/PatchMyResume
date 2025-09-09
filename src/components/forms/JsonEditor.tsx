@@ -12,6 +12,21 @@ export default function JsonEditor({
     setResumeUserData: Dispatch<SetStateAction<ResumeDataType>>;
 }) {
     const [dataText, setDataText] = useState<string>(JSON.stringify(resumeUserData, null, 4));
+    const {setToast} = useUI();
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            try {
+                setResumeUserData(JSON.parse(dataText));
+                setToast({ type: 'success', message: 'Sucess: Updated Global Resume Data!'});
+            } catch (e) {
+                setToast({ type: 'info', message: 'Warning: Invalid JSON, not updating global state'});
+            }
+        }, 1000); // ⏱ 1 second debounce
+
+        return () => clearTimeout(handler);
+    }, [dataText, setResumeUserData]);
+
     return (
         <div>
             <label className="mb-2 block text-sm font-medium">Resume JSON</label>
