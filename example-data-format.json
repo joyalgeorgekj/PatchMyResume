@@ -1,0 +1,105 @@
+{
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "phone": "+1-234-567-890",
+    "location": "San Francisco, CA",
+    "links": [
+        {
+            "linkedin": "https://linkedin.com/in/johndoe",
+            "github": "https://github.com/johndoe",
+            "portfolio": "https://johndoe.dev"
+        }
+    ],
+    "summary": "Full-stack developer with 5+ years of experience building scalable web and mobile applications using React, Next.js, Node.js, and cloud technologies. Passionate about performance optimization and delivering user-centric solutions.",
+    "experience": [
+        {
+            "title": "Senior Software Engineer",
+            "company": "Example Inc.",
+            "location": "San Francisco, CA",
+            "startDate": "2021-06",
+            "endDate": "Present",
+            "description": [
+                "Led a team of 6 engineers in developing SaaS applications using Next.js and Node.js.",
+                "Implemented CI/CD pipelines reducing deployment time by 40%.",
+                "Collaborated with product managers to design features increasing user retention by 25%."
+            ]
+        },
+        {
+            "title": "Software Engineer",
+            "company": "Example Solutions",
+            "location": "Remote",
+            "startDate": "2018-04",
+            "endDate": "2021-05",
+            "description": [
+                "Developed microservices in Node.js and deployed on AWS Lambda.",
+                "Built responsive React dashboards with TailwindCSS.",
+                "Optimized database queries, reducing API response time by 30%."
+            ]
+        }
+    ],
+    "projects": [
+        {
+            "name": "PatchMyResume",
+            "link": "https://patchmyresume.ai",
+            "description": "AI-powered resume tailoring tool helping users customize resumes for specific job descriptions."
+        },
+        {
+            "name": "TaskFlow",
+            "link": "https://github.com/johndoe/taskflow",
+            "description": "Open-source task management app with real-time collaboration using Firebase and React."
+        }
+    ],
+    "skills": [
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Node.js",
+        "TailwindCSS",
+        "Appwrite",
+        "Firebase",
+        "AWS",
+        "Docker",
+        "Git",
+        "SQL",
+        "MongoDB"
+    ],
+    "education": [
+        {
+            "degree": "B.Sc. Computer Science",
+            "institute": "University of California, Berkeley",
+            "year": "2017"
+        }
+    ],
+    "certifications": [
+        {
+            "name": "AWS Certified Solutions Architect",
+            "issuer": "Amazon Web Services",
+            "year": "2020"
+        },
+        {
+            "name": "Certified Kubernetes Administrator",
+            "issuer": "Cloud Native Computing Foundation",
+            "year": "2019"
+        }
+    ],
+    "awards": [
+        {
+            "title": "Employee of the Year",
+            "issuer": "Example Inc.",
+            "year": "2022"
+        }
+    ],
+    "languages": [
+        { "language": "English", "proficiency": "Native" },
+        { "language": "Spanish", "proficiency": "Professional Working" }
+    ],
+    "publications": [
+        {
+            "title": "Optimizing React Apps for Performance",
+            "publisher": "Medium",
+            "year": "2021",
+            "link": "https://medium.com/@johndoe/react-performance"
+        }
+    ]
+}
