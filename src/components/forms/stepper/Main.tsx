@@ -16,8 +16,6 @@ export type AiDataType = {
 export default function Main() {
     const { setToast } = useUI();
     const [step, setStep] = useState<number>(1);
-    const progress = useMemo(() => Math.round(((step - 1) / (STEPS.length - 1)) * 100), [step]);
-
     // data to be collected
     // Api Model
     const [aiApiModel, setAiApiModel] = useState<AiDataType>({
