@@ -1,18 +1,8 @@
 import LandingWrapper from '@/components/ui/landing/LandingWrapper';
-import { Geist, Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from 'next-themes'
 import type { Metadata } from 'next';
 import './globals.css';
-
-const geistSans = Geist({
-    variable: '--font-geist-sans',
-    subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-    variable: '--font-geist-mono',
-    subsets: ['latin'],
-});
+import { UIProvider } from '@/context/UIContext';
 
 export const metadata: Metadata = {
     title: 'PatchMyResume',
