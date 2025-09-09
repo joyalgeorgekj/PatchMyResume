@@ -1,12 +1,25 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AuthButton from '@/components/forms/AuthButton';
 import { authList } from '@/data/constants/variables';
 import ToHome from '@/components/ui/Auth/ToHome';
+import { useUI } from '@/context/UIContext';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 export default function AuthPage() {
     const [activeTab, setActiveTab] = useState<'login' | 'register'>('register');
+    const { setShowLoader, showLoader } = useUI();
+    const { status } = useSession();
+
+    useEffect(() => {
+        if (showLoader) setShowLoader(false);
+    }, []);
+    
+    useEffect(() => {
+        if (status === 'authenticated') redirect('/user');
+    }, [status]);
 
     return (
         <div className="bg-light flex min-h-screen items-center justify-center px-4">
@@ -37,12 +50,7 @@ export default function AuthPage() {
                 {/* Auth Buttons */}
                 <div className="space-y-3">
                     {authList.map((val, ind) => (
-                        <AuthButton
-                            key={ind}
-                            Icon={val.Icon}
-                            label={val.label}
-                            className={val.className ? val.className : 'bg-light'}
-                        />
+                        <AuthButton key={ind} Icon={val.Icon} label={val.label} />
                     ))}
                 </div>
 
