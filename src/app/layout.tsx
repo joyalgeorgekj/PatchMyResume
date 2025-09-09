@@ -17,9 +17,11 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={`font-mono antialiased`}>
+            <body className='font-mono antialiased' suppressHydrationWarning>
                 <ThemeProvider attribute="class" enableSystem>
-                    <LandingWrapper>{children}</LandingWrapper>
+                    <UIProvider>
+                        <LandingWrapper>{children}</LandingWrapper>
+                    </UIProvider>
                 </ThemeProvider>
             </body>
         </html>
