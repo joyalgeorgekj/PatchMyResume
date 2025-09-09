@@ -78,23 +78,23 @@ export default function Main() {
     useEffect(() => {
         console.log('User Resume Data: ', resumeUserData);
     }, [resumeUserData]);
-    
+
     useEffect(() => {
         console.log('Job Description: ', jobDescription);
     }, [jobDescription]);
 
     useEffect(() => {
-        console.log('AI Suggestions', suggestions);
+        console.log('AI Suggestions: ', suggestions);
     }, [suggestions]);
-    
+
     useEffect(() => {
-        console.log('Final Resume Data', final);
+        console.log('Final Resume Data: ', final);
     }, [final]);
 
     return (
-        <main aria-label="Resume Builder" className="bg-light text-dark">
+        <main aria-label="Resume Builder" className="bg-light text-dark mx-auto max-w-7xl">
             {/* Progress */}
-            <section className="mx-auto max-w-5xl px-6 pt-8">
+            <section className="mx-auto max-w-5xl px-6 py-3 lg:px-12">
                 <header className="mb-6">
                     <h1 className="text-2xl font-bold">Resume Builder</h1>
                     <p className="text-dark-muted/80 mt-1 text-sm">
@@ -120,7 +120,7 @@ export default function Main() {
             </section>
 
             {/* Content */}
-            <section className="mx-auto max-w-5xl px-6 pb-12">
+            <section className="mx-auto max-w-5xl px-6 py-3 lg:px-12">
                 <div className="border-dark-muted/10 bg-light rounded-2xl border p-6 shadow-lg">
                     {step === 1 && (
                         <StepApiModel aiApiModel={aiApiModel} setAiApiModel={setAiApiModel} />
