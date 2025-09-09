@@ -2,7 +2,13 @@ import { AuthListType } from '@/data/constants/variables';
 import { signIn } from 'next-auth/react';
 
 export default function AuthButton({ Icon, label }: AuthListType) {
-    const handleLogin = () => signIn(label.toLowerCase());
+    const {setShowLoader} = useUI();
+
+    const handleLogin = () => {
+        signIn(label.toLowerCase(), { callbackUrl: "/user" })
+        setShowLoader(true);
+    };
+
     return (
         <button
             onClick={handleLogin}
