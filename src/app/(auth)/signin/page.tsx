@@ -23,7 +23,7 @@ export default function AuthPage() {
 
     return (
         <div className="bg-light flex min-h-screen items-center justify-center px-4">
-            <div className="w-full max-w-md rounded-lg border-2 border-primary-muted bg-light-muted p-8 shadow-lg">
+            <div className="border-primary-muted bg-light w-full max-w-md rounded-lg border-2 p-8 shadow-lg">
                 <ToHome />
 
                 {/* Welcome Message */}
@@ -61,7 +61,7 @@ export default function AuthPage() {
                             Already have an account?{' '}
                             <button
                                 onClick={() => setActiveTab('login')}
-                                className="text-dark font-medium underline hover:underline cursor-pointer"
+                                className="text-dark cursor-pointer font-medium underline hover:underline"
                             >
                                 Login
                             </button>
@@ -71,7 +71,7 @@ export default function AuthPage() {
                             Don’t have an account?{' '}
                             <button
                                 onClick={() => setActiveTab('register')}
-                                className="text-dark font-medium underline hover:underline cursor-pointer"
+                                className="text-dark cursor-pointer font-medium underline hover:underline"
                             >
                                 Register
                             </button>
