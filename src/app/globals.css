@@ -129,10 +129,6 @@ select option {
   padding: 0.5rem 1rem;
 }
 
-section {
-    @apply sticky top-0;
-}
-
 input, textarea, select {
     @apply w-full rounded-lg border-2 border-ui-muted bg-light px-4 py-2 text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-2 focus:ring-primary-intense focus:outline-none transition-all text-sm
 }
