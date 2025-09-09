@@ -15,9 +15,13 @@ export default function ProfileAvatar({ session }: { session: Session }) {
                 className="flex items-center gap-2 focus:outline-none"
             >
                 <img
-                    src={session?.user?.image || '/default-avatar.png'}
+                    src={session?.user?.image || '/image/default-avatar.jpg'}
                     alt="Profile"
-                    className='border-base flex w-8 h-8 cursor-pointer items-center justify-center gap-2 rounded-md border-2 text-sm font-medium whitespace-pre text-dark shadow-sm transition-all hover:scale-105'
+                    onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = '/image/default-avatar.jpg';
+                    }}
+                    className="border-base text-dark flex h-8 w-8 cursor-pointer items-center justify-center gap-2 rounded-md border-2 text-sm font-medium whitespace-pre shadow-sm transition-all hover:scale-105"
                 />
             </button>
 
