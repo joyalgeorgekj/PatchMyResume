@@ -74,6 +74,10 @@ export default function Main() {
     };
 
     useEffect(() => {
+        getUserDocument().then((res) => {
+            if (res.model && res.api_key) setAiApiModel({ Model: res.model, API_KEY: res.api_key });
+            if (res.resume_user_data) setResumeUserData(res.resume_user_data);
+        });
         nextStep();
     }, []);
 
