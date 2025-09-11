@@ -9,10 +9,10 @@ import { SessionProvider } from 'next-auth/react';
 export default function LandingWrapper({ children }: Readonly<{ children: ReactNode }>) {
     const hidden = useHiddenRoutes();
     return (
-        <SessionProvider >
+        <>
             {hidden && <Header />}
             {children}
             {hidden && <Footer />}
-        </SessionProvider>
+        </>
     );
 }
