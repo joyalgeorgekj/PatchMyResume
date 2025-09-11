@@ -106,3 +106,18 @@ export interface ResumeDataType {
     project?: ProjectType[];
     achievement?: AchievementType[];
 }
+
+export type OptionsType = {
+    option1: string;
+    option2: string;
+};
+
+export type SuggestionsType = {
+    summary: OptionsType[];
+    experience: OptionsType[];
+    projects: OptionsType[];
+    skills: OptionsType[];
+    education: OptionsType[];
+    languages: OptionsType[];
+    achievement: OptionsType[];
+};
