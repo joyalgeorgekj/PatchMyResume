@@ -1,12 +1,13 @@
 import { useUI } from '@/context/UIContext';
 import { ResumeDataType } from '@/data/constants/types';
 import { ExampleResume, STEPS } from '@/data/constants/variables';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import StepApiModel from './StepApiModel';
 import StepResumeData from './StepResumeData';
 import StepJobDescription from './StepJobDescription';
 import StepFinalPreview from './StepFinalPreview';
 import StepAiSuggestions from './StepAiSuggestions';
+import { createNewUserDocument, getUserDocument } from '@/lib/appwrite';
 
 export type AiDataType = {
     API_KEY: string;
@@ -19,7 +20,7 @@ export default function Main() {
     // data to be collected
     // Api Model
     const [aiApiModel, setAiApiModel] = useState<AiDataType>({
-        API_KEY: 'testn09nlk',
+        API_KEY: '',
         Model: 'gemini-1.5-flash',
     });
     // Resume Data
