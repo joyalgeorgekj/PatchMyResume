@@ -1,5 +1,6 @@
 'use client';
 
+import { SessionProvider } from 'next-auth/react';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 type Toast = { message: string; type?: 'success' | 'error' | 'info' };
@@ -27,7 +28,7 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
 
     return (
         <UIContext.Provider value={{ showLoader, setShowLoader, toast, setToast, alert, setAlert }}>
-            {children}
+            <SessionProvider>{children}</SessionProvider>
 
             {/* Loader */}
             {showLoader && (
@@ -40,17 +41,17 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
             {toast && (
                 <div
                     id="toast-success"
-                    className="fixed right-4 bottom-4 mb-4 flex w-full max-w-sm items-center rounded-lg bg-light-muted p-4 shadow-sm shadow-dark-muted"
+                    className="bg-light-muted shadow-dark-muted fixed right-4 bottom-4 mb-4 flex w-full max-w-sm items-center rounded-lg p-4 shadow-sm"
                     role="alert"
                 >
                     <div
                         className={
                             'inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ' +
                             (toast.type === 'success'
-                                ? 'text-green-500 bg-green-100 dark:bg-green-800 dark:text-green-200'
+                                ? 'bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200'
                                 : toast.type === 'error'
-                                  ? 'text-red-500 bg-red-100 dark:bg-red-800 dark:text-red-200'
-                                  : 'text-yellow-500 bg-yellow-100 dark:bg-yellow-800 dark:text-yellow-200')
+                                  ? 'bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200'
+                                  : 'bg-yellow-100 text-yellow-500 dark:bg-yellow-800 dark:text-yellow-200')
                         }
                     >
                         {toast.type === 'success' ? (
@@ -85,10 +86,10 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
                             </svg>
                         )}
                     </div>
-                    <div className="ms-3 text-sm font-normal text-dark-muted">{toast.message}</div>
+                    <div className="text-dark-muted ms-3 text-sm font-normal">{toast.message}</div>
                     <button
                         type="button"
-                        className="-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-light-muted border border-dark-muted/25 cursor-pointer "
+                        className="bg-light-muted border-dark-muted/25 -mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border"
                         data-dismiss-target="#toast-success"
                         aria-label="Close"
                         onClick={() => setToast(null)}
