@@ -44,6 +44,11 @@ export default function Main() {
                     : setToast({ type: 'error', message: 'API Key and Model is Required' });
                 break;
             case 2:
+                createNewUserDocument({
+                    resume_user_data: resumeUserData,
+                    api_key: aiApiModel.API_KEY,
+                    model: aiApiModel.Model,
+                }).then((res) => setToast({ message: res.message, type: res.type }));
                 resumeUserData
                     ? setStep((prev) => (prev < STEPS.length ? prev + 1 : prev))
                     : setToast({ type: 'error', message: 'Resume Data is Required' });
