@@ -11,8 +11,9 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
-    "@google/generative-ai": "^0.24.1",
+    "@google/genai": "^1.19.0",
     "@prisma/client": "^6.14.0",
+    "appwrite": "^20.0.0",
     "bcryptjs": "^3.0.2",
     "clsx": "^2.1.1",
     "latex.js": "^0.12.6",
