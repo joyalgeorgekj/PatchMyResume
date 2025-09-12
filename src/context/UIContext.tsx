@@ -2,6 +2,7 @@
 
 import { SessionProvider } from 'next-auth/react';
 import { createContext, useContext, useEffect, useState } from 'react';
+import './style.css';
 
 type Toast = { message: string; type?: 'success' | 'error' | 'info' };
 type Alert = { message: string; onConfirm?: () => void; onCancel?: () => void };
@@ -33,7 +34,22 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
             {/* Loader */}
             {showLoader && (
                 <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50">
-                    <div className="h-12 w-12 animate-spin rounded-full border-4 border-white border-t-transparent"></div>
+                    <div id="wifi-loader" className='min-w-7xl'>
+                        <svg className="circle-outer" viewBox="0 0 86 86">
+                            <circle className="back" cx="43" cy="43" r="40"></circle>
+                            <circle className="front" cx="43" cy="43" r="40"></circle>
+                            <circle className="new" cx="43" cy="43" r="40"></circle>
+                        </svg>
+                        <svg className="circle-middle" viewBox="0 0 60 60">
+                            <circle className="back" cx="30" cy="30" r="27"></circle>
+                            <circle className="front" cx="30" cy="30" r="27"></circle>
+                        </svg>
+                        <svg className="circle-inner" viewBox="0 0 34 34">
+                            <circle className="back" cx="17" cy="17" r="14"></circle>
+                            <circle className="front" cx="17" cy="17" r="14"></circle>
+                        </svg>
+                        <div className="text" data-text={loader.message}></div>
+                    </div>
                 </div>
             )}
 
