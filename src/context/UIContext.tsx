@@ -4,12 +4,13 @@ import { SessionProvider } from 'next-auth/react';
 import { createContext, useContext, useEffect, useState } from 'react';
 import './style.css';
 
+type Loader = { active: boolean; message?: string };
 type Toast = { message: string; type?: 'success' | 'error' | 'info' };
 type Alert = { message: string; onConfirm?: () => void; onCancel?: () => void };
 
 interface UIContextType {
-    showLoader: boolean;
-    setShowLoader: (val: boolean) => void;
+    loader: Loader;
+    setLoader: (loader: Loader) => void;
     toast: Toast | null;
     setToast: (toast: Toast | null) => void;
     alert: Alert | null;
@@ -19,7 +20,7 @@ interface UIContextType {
 const UIContext = createContext<UIContextType | null>(null);
 
 export function UIProvider({ children }: { children: React.ReactNode }) {
-    const [showLoader, setShowLoader] = useState(false);
+    const [loader, setLoader] = useState<Loader>({ active: false, message: 'Sample message' });
     const [toast, setToast] = useState<Toast | null>(null);
     const [alert, setAlert] = useState<Alert | null>(null);
 
@@ -28,11 +29,11 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
     }, [toast]);
 
     return (
-        <UIContext.Provider value={{ showLoader, setShowLoader, toast, setToast, alert, setAlert }}>
+        <UIContext.Provider value={{ loader, setLoader, toast, setToast, alert, setAlert }}>
             <SessionProvider>{children}</SessionProvider>
 
             {/* Loader */}
-            {showLoader && (
+            {loader.active && (
                 <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50">
                     <div id="wifi-loader" className='min-w-7xl'>
                         <svg className="circle-outer" viewBox="0 0 86 86">
