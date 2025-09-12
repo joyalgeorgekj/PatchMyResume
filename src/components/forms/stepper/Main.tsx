@@ -1,6 +1,6 @@
 import { useUI } from '@/context/UIContext';
-import { ResumeDataType } from '@/data/constants/types';
-import { ExampleResume, STEPS } from '@/data/constants/variables';
+import { ResumeDataType, SuggestionsType } from '@/data/constants/types';
+import { ExampleResume, JobDescription, STEPS } from '@/data/constants/variables';
 import { useEffect, useState } from 'react';
 import StepApiModel from './StepApiModel';
 import StepResumeData from './StepResumeData';
@@ -8,6 +8,7 @@ import StepJobDescription from './StepJobDescription';
 import StepFinalPreview from './StepFinalPreview';
 import StepAiSuggestions from './StepAiSuggestions';
 import { createNewUserDocument, getUserDocument } from '@/lib/appwrite';
+import { getResumeSuggestions } from '@/lib/ai';
 
 export type AiDataType = {
     API_KEY: string;
@@ -26,9 +27,9 @@ export default function Main() {
     // Resume Data
     const [resumeUserData, setResumeUserData] = useState<ResumeDataType>(ExampleResume);
     // Job Description
-    const [jobDescription, setJobDescription] = useState<string>('');
+    const [jobDescription, setJobDescription] = useState<string>(JobDescription);
     // AI
-    const [suggestions, setSuggestions] = useState({});
+    const [suggestions, setSuggestions] = useState<SuggestionsType | null>(null);
     // Preview
     const [final, setFinal] = useState<ResumeDataType>(resumeUserData);
 
@@ -44,18 +45,27 @@ export default function Main() {
                     : setToast({ type: 'error', message: 'API Key and Model is Required' });
                 break;
             case 2:
-                createNewUserDocument({
-                    resume_user_data: resumeUserData,
-                    api_key: aiApiModel.API_KEY,
-                    model: aiApiModel.Model,
-                }).then((res) => setToast({ message: res.message, type: res.type }));
+                if (resumeUserData) {
+                    createNewUserDocument({
+                        resume_user_data: resumeUserData,
+                        api_key: aiApiModel.API_KEY,
+                        model: aiApiModel.Model,
+                    }).then((res) =>
+                        setToast({ message: 'Message from Step 2' + res.message, type: res.type })
+                    );
+                }
                 resumeUserData
                     ? setStep((prev) => (prev < STEPS.length ? prev + 1 : prev))
                     : setToast({ type: 'error', message: 'Resume Data is Required' });
                 break;
             case 3:
+                if (jobDescription !== '') {
                     setLoader({ message: 'Formatting data', active: true });
 
+                    // Step 1: call AI suggestions
+                    getResumeSuggestions(jobDescription)
+                        .then(async (res) => {
+                            // Update loader stages in sequence
                             setLoader({ active: true, message: 'Sending data to AI' });
                             await new Promise((r) => setTimeout(r, 1000));
 
@@ -65,7 +75,20 @@ export default function Main() {
                             setLoader({ active: true, message: 'Creating Suggestions' });
                             await new Promise((r) => setTimeout(r, 1500));
 
+                            // Done → update UI
+                            setSuggestions(res);
+                            setToast({ message: 'Suggestion has been updated', type: 'success' });
+                            setStep((prev) => (prev < STEPS.length ? prev + 1 : prev));
+                        })
+                        .catch(() => {
+                            setToast({ type: 'error', message: 'Failed to fetch suggestions' });
+                        })
+                        .finally(() => {
                             setLoader({ active: false });
+                        });
+                } else {
+                    setToast({ type: 'error', message: 'Job Description is Required' });
+                }
                 break;
             case 4:
                 suggestions
@@ -87,7 +110,6 @@ export default function Main() {
             if (res.model && res.api_key) setAiApiModel({ Model: res.model, API_KEY: res.api_key });
             if (res.resume_user_data) setResumeUserData(res.resume_user_data);
         });
-        nextStep();
     }, []);
 
     useEffect(() => {
@@ -158,6 +180,8 @@ export default function Main() {
                     )}
                     {step === 4 && (
                         <StepAiSuggestions
+                            suggestions={suggestions}
+                            setSuggestions={setResumeUserData}
                             onGenerate={() => {
                                 setToast({ type: 'success', message: 'Suggestions generated!' });
                             }}
@@ -171,7 +195,7 @@ export default function Main() {
                             type="button"
                             onClick={prevStep}
                             disabled={step === 1}
-                            className="border-dark-muted/30 hover:bg-light-muted rounded-lg border px-4 py-2 text-sm font-medium transition disabled:opacity-50"
+                            className="border-dark-muted/30 hover:bg-light-muted cursor-pointer rounded-lg border px-4 py-2 text-sm font-medium transition disabled:opacity-50"
                         >
                             Back
                         </button>
@@ -180,7 +204,7 @@ export default function Main() {
                             <button
                                 type="button"
                                 onClick={nextStep}
-                                className="bg-primary hover:bg-primary-intense rounded-lg px-4 py-2 text-sm font-medium text-white transition"
+                                className="bg-primary hover:bg-primary-intense cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-white transition"
                             >
                                 Next
                             </button>
@@ -196,7 +220,7 @@ export default function Main() {
                                         message: 'All set! You can export to PDF.',
                                     });
                                 }}
-                                className="bg-accent hover:bg-accent-intense rounded-lg px-4 py-2 text-sm font-medium text-white transition"
+                                className="bg-accent hover:bg-accent-intense cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-white transition"
                             >
                                 Finish
                             </button>
