@@ -3,11 +3,11 @@ import { AuthListType } from '@/data/constants/types';
 import { signIn } from 'next-auth/react';
 
 export default function AuthButton({ Icon, label }: AuthListType) {
-    const {setShowLoader} = useUI();
+    const { setLoader } = useUI();
 
     const handleLogin = () => {
-        signIn(label.toLowerCase(), { callbackUrl: "/user" })
-        setShowLoader(true);
+        signIn(label.toLowerCase(), { callbackUrl: '/user' });
+        setLoader({ active: true, message: 'Opening door please wait a minute' });
     };
 
     return (

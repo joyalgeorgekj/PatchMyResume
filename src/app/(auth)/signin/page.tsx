@@ -10,11 +10,11 @@ import { redirect } from 'next/navigation';
 
 export default function AuthPage() {
     const [activeTab, setActiveTab] = useState<'login' | 'register'>('register');
-    const { setShowLoader, showLoader } = useUI();
+    const { setLoader, loader } = useUI();
     const { status } = useSession();
 
     useEffect(() => {
-        if (showLoader) setShowLoader(false);
+        if (loader) setLoader({active: false});
     }, []);
     
     useEffect(() => {

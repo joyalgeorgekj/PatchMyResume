@@ -10,7 +10,7 @@ import { FiMenu, FiX } from 'react-icons/fi';
 import Image from 'next/image';
 
 export default function Header() {
-    const { setShowLoader } = useUI();
+    const { setLoader } = useUI();
     const { data: session, status } = useSession();
     const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -52,7 +52,7 @@ export default function Header() {
                     ) : (
                         <Link
                             href="/signin"
-                            onClick={() => setShowLoader(true)}
+                            onClick={() => setLoader({active: true, message: ''})}
                             className="bg-primary text-light flex cursor-pointer items-center gap-2 rounded-md border px-4 py-2 text-sm font-medium shadow-sm transition hover:scale-105"
                         >
                             Sign in
@@ -116,7 +116,7 @@ export default function Header() {
                         <Link
                             href="/signin"
                             onClick={() => {
-                                setShowLoader(true);
+                                setLoader({active: true, message: ''});
                                 setDrawerOpen(false);
                             }}
                             className="bg-primary text-light flex cursor-pointer items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium shadow-sm transition hover:scale-105"

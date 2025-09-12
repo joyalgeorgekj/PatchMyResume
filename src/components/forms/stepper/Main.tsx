@@ -15,7 +15,7 @@ export type AiDataType = {
 };
 
 export default function Main() {
-    const { setToast } = useUI();
+    const { setToast, setLoader } = useUI();
     const [step, setStep] = useState<number>(1);
     // data to be collected
     // Api Model
@@ -54,9 +54,18 @@ export default function Main() {
                     : setToast({ type: 'error', message: 'Resume Data is Required' });
                 break;
             case 3:
-                jobDescription !== ''
-                    ? setStep((prev) => (prev < STEPS.length ? prev + 1 : prev))
-                    : setToast({ type: 'error', message: 'Job Description is Required' });
+                    setLoader({ message: 'Formatting data', active: true });
+
+                            setLoader({ active: true, message: 'Sending data to AI' });
+                            await new Promise((r) => setTimeout(r, 1000));
+
+                            setLoader({ active: true, message: 'AI Processing Data' });
+                            await new Promise((r) => setTimeout(r, 1500));
+
+                            setLoader({ active: true, message: 'Creating Suggestions' });
+                            await new Promise((r) => setTimeout(r, 1500));
+
+                            setLoader({ active: false });
                 break;
             case 4:
                 suggestions

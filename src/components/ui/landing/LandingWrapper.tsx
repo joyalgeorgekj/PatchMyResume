@@ -9,16 +9,17 @@ import { useUI } from '@/context/UIContext';
 
 export default function LandingWrapper({ children }: { children: ReactNode }) {
     const hidden = useHiddenRoutes();
-    const { setShowLoader } = useUI();
+    const { setLoader } = useUI();
     const { status } = useSession();
 
-    useEffect(() => {
-        if (status === 'loading') setShowLoader(true);
-        if (status === 'authenticated') setShowLoader(false);
+    useEffect(() => setLoader({ active: true, message: 'Loading UI' }), []);
 
-        const timer = setTimeout(() => setShowLoader(false), 3000);
+    useEffect(() => {
+        if (status === 'authenticated') setLoader({ active: false });
+
+        const timer = setTimeout(() => setLoader({ active: false }), 3000);
         return () => clearTimeout(timer);
-    }, [status, setShowLoader]);
+    }, [status, setLoader]);
 
     return (
         <>
