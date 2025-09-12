@@ -135,7 +135,7 @@ export default function StepResumeData({
                     </section>
 
                     {/* ========== LINKS ========== */}
-                    <section className='pt-4 mt-6 border-t border-dark-muted/25'>
+                    <section className="border-dark-muted/25 mt-6 border-t pt-4">
                         <h2 className="mb-4 text-xl font-semibold">Links</h2>
                         <div className="space-y-3">
                             {resumeUserData.links.map((val, ind) => (
@@ -191,7 +191,7 @@ export default function StepResumeData({
                     </section>
 
                     {/* ========== SUMMARY ========== */}
-                    <section className='pt-4 mt-6 border-t border-dark-muted/25'>
+                    <section className="border-dark-muted/25 mt-6 border-t pt-4">
                         <h2 className="mb-4 text-xl font-semibold">Summary</h2>
                         <textarea
                             wrap="hard"
@@ -210,7 +210,7 @@ export default function StepResumeData({
                     </section>
 
                     {/* ========== SKILLS ========== */}
-                    <section className='pt-4 mt-6 border-t border-dark-muted/25'>
+                    <section className="border-dark-muted/25 mt-6 border-t pt-4">
                         <h2 className="mb-4 text-xl font-semibold">Skills *</h2>
                         <div className="mb-4 flex flex-wrap gap-4">
                             {resumeUserData.skills?.map((skill, index) => (
@@ -254,7 +254,7 @@ export default function StepResumeData({
                     </section>
 
                     {/* ========== EXPERIENCE ========== */}
-                    <section className='pt-4 mt-6 border-t border-dark-muted/25'>
+                    <section className="border-dark-muted/25 mt-6 border-t pt-4">
                         <h2 className="mb-4 text-xl font-semibold">Experience</h2>
                         <div className="space-y-4">
                             {resumeUserData.experience?.map((val, ind) => (
@@ -340,7 +340,7 @@ export default function StepResumeData({
                     {/* ========== PROJECTS, EDUCATION, CERTIFICATIONS, AWARDS, LANGUAGES, PUBLICATIONS ========== */}
                     {/* Repeat same pattern as Experience → card + Add button */}
 
-                    <section className='pt-4 mt-6 border-t border-dark-muted/25'>
+                    <section className="border-dark-muted/25 mt-6 border-t pt-4">
                         <h2 className="mb-4 text-xl font-semibold">Education</h2>
                         <div className="space-y-4">
                             {resumeUserData.education?.map((val, ind) => (
@@ -440,7 +440,7 @@ export default function StepResumeData({
                         </div>
                     </section>
 
-                    <section className='pt-4 mt-6 border-t border-dark-muted/25'>
+                    <section className="border-dark-muted/25 mt-6 border-t pt-4">
                         <h2 className="mb-4 text-xl font-semibold">Projects</h2>
                         <div className="space-y-4">
                             {resumeUserData.project?.map((val, ind) => (
@@ -566,7 +566,7 @@ export default function StepResumeData({
                         </div>
                     </section>
 
-                    <section className='pt-4 mt-6 border-t border-dark-muted/25'>
+                    <section className="border-dark-muted/25 mt-6 border-t pt-4">
                         <h2 className="mb-4 text-xl font-semibold">Achievements</h2>
                         <div className="space-y-4">
                             {resumeUserData.achievement?.map((val, ind) => (
@@ -694,7 +694,7 @@ export default function StepResumeData({
                         </div>
                     </section>
 
-                    <section className='pt-4 mt-6 border-t border-dark-muted/25'>
+                    <section className="border-dark-muted/25 mt-6 border-t pt-4">
                         <h2 className="mb-4 text-xl font-semibold">Language</h2>
                         <div className="space-y-4">
                             {resumeUserData.language?.map((val, ind) => (

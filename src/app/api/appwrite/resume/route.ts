@@ -42,11 +42,7 @@ export async function POST(req: NextRequest) {
             [Query.equal('email', email)]
         );
 
-        const encryptedKey = encrypt(
-            body.api_key,
-            process.env.ENCRYPTION_KEY_PHRASE!,
-            email
-        );
+        const encryptedKey = encrypt(body.api_key, process.env.ENCRYPTION_KEY_PHRASE!, email);
 
         if (existing.documents.length > 0) {
             const doc = existing.documents[0];

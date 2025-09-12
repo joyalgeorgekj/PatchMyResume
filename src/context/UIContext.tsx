@@ -35,7 +35,7 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
             {/* Loader */}
             {loader.active && (
                 <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50">
-                    <div id="wifi-loader" className='min-w-7xl'>
+                    <div id="wifi-loader" className="min-w-7xl">
                         <svg className="circle-outer" viewBox="0 0 86 86">
                             <circle className="back" cx="43" cy="43" r="40"></circle>
                             <circle className="front" cx="43" cy="43" r="40"></circle>

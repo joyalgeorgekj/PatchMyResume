@@ -52,7 +52,7 @@ export default function Header() {
                     ) : (
                         <Link
                             href="/signin"
-                            onClick={() => setLoader({active: true, message: ''})}
+                            onClick={() => setLoader({ active: true, message: '' })}
                             className="bg-primary text-light flex cursor-pointer items-center gap-2 rounded-md border px-4 py-2 text-sm font-medium shadow-sm transition hover:scale-105"
                         >
                             Sign in
@@ -116,7 +116,7 @@ export default function Header() {
                         <Link
                             href="/signin"
                             onClick={() => {
-                                setLoader({active: true, message: ''});
+                                setLoader({ active: true, message: '' });
                                 setDrawerOpen(false);
                             }}
                             className="bg-primary text-light flex cursor-pointer items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium shadow-sm transition hover:scale-105"

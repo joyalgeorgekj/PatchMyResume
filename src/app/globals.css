@@ -32,7 +32,8 @@
     --ui-intense: #bdbdbd;
 }
 
-[data-theme='dark'], .dark {
+[data-theme='dark'],
+.dark {
     /* Primary (brand pink, adjusted for dark bg) */
     --primary: #f06292;
     --primary-muted: #ec407a;
@@ -111,24 +112,25 @@ details > summary::-webkit-details-marker /* Safari */ {
     display: none;
 }
 
-
 /* Move select dropdown arrow and align cursor */
 select {
-  background-image: url("data:image/svg+xml;utf8,<svg fill='%23333' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 1rem;
-  padding-right: 2.5rem; /* space for arrow */
-  cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23333' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem; /* space for arrow */
+    cursor: pointer;
 }
 
 /* Dropdown styling */
 select option {
-  background: var(--color-light);
-  color: var(--color-dark);
-  padding: 0.5rem 1rem;
+    background: var(--color-light);
+    color: var(--color-dark);
+    padding: 0.5rem 1rem;
 }
 
-input, textarea, select {
-    @apply w-full rounded-lg border-2 border-ui-muted bg-light px-4 py-2 text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-2 focus:ring-primary-intense focus:outline-none transition-all text-sm
+input,
+textarea,
+select {
+    @apply border-ui-muted bg-light text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-primary-intense w-full rounded-lg border-2 px-4 py-2 text-sm transition-all focus:ring-2 focus:outline-none;
 }

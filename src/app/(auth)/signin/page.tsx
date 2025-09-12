@@ -14,9 +14,9 @@ export default function AuthPage() {
     const { status } = useSession();
 
     useEffect(() => {
-        if (loader) setLoader({active: false});
+        if (loader) setLoader({ active: false });
     }, []);
-    
+
     useEffect(() => {
         if (status === 'authenticated') redirect('/user');
     }, [status]);

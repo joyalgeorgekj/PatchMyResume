@@ -1,11 +1,17 @@
-import { MODELS } from "@/data/constants/variables";
-import { AiDataType } from "./Main";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { MODELS } from '@/data/constants/variables';
+import { AiDataType } from './Main';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 
-export default function StepApiModel({aiApiModel, setAiApiModel}: {aiApiModel: AiDataType, setAiApiModel: Dispatch<SetStateAction<AiDataType>>}) {
+export default function StepApiModel({
+    aiApiModel,
+    setAiApiModel,
+}: {
+    aiApiModel: AiDataType;
+    setAiApiModel: Dispatch<SetStateAction<AiDataType>>;
+}) {
     useEffect(() => {
-        setAiApiModel(prev => ({...prev, Model: MODELS[0]}))
-    }, [])
+        setAiApiModel((prev) => ({ ...prev, Model: MODELS[0] }));
+    }, []);
     return (
         <section aria-label="Model and API settings">
             <h2 className="text-xl font-semibold">Step 1: Select Model & API Key</h2>
@@ -22,8 +28,10 @@ export default function StepApiModel({aiApiModel, setAiApiModel}: {aiApiModel: A
                         <select
                             id="model"
                             value={aiApiModel.Model}
-                            onChange={(e) => setAiApiModel(prev => ({...prev, Model: e.target.value}))}
-                            className="capitalize border-ui-muted bg-light text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-primary-intense w-full appearance-none rounded-lg border-2 px-4 py-2 pr-10 text-sm transition outline-none focus:ring-2"
+                            onChange={(e) =>
+                                setAiApiModel((prev) => ({ ...prev, Model: e.target.value }))
+                            }
+                            className="border-ui-muted bg-light text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-primary-intense w-full appearance-none rounded-lg border-2 px-4 py-2 pr-10 text-sm capitalize transition outline-none focus:ring-2"
                         >
                             {MODELS.map((m) => (
                                 <option key={m} value={m}>
@@ -42,7 +50,9 @@ export default function StepApiModel({aiApiModel, setAiApiModel}: {aiApiModel: A
                         id="apiKey"
                         type="password"
                         value={aiApiModel.API_KEY}
-                        onChange={(e) => setAiApiModel(prev => ({...prev, API_KEY: e.target.value}))}
+                        onChange={(e) =>
+                            setAiApiModel((prev) => ({ ...prev, API_KEY: e.target.value }))
+                        }
                         placeholder="Enter your API key"
                         className="border-ui-muted bg-light text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-primary-intense w-full rounded-lg border-2 px-4 py-2 text-sm transition outline-none focus:ring-2"
                     />

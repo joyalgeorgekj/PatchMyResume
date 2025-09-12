@@ -5,8 +5,8 @@ export function getResumeSuggestions(jd: string) {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    jd: jd
-                })
+                    jd: jd,
+                }),
             });
 
             if (!res.ok) throw new Error(`Failed: ${res.status}`);

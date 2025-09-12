@@ -1,5 +1,5 @@
 import LandingWrapper from '@/components/ui/landing/LandingWrapper';
-import { ThemeProvider } from 'next-themes'
+import { ThemeProvider } from 'next-themes';
 import type { Metadata } from 'next';
 import './globals.css';
 import { UIProvider } from '@/context/UIContext';
@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className='font-mono antialiased' suppressHydrationWarning>
+            <body className="font-mono antialiased" suppressHydrationWarning>
                 <ThemeProvider attribute="class" enableSystem>
                     <UIProvider>
                         <LandingWrapper>{children}</LandingWrapper>

@@ -81,7 +81,13 @@ export async function POST(req: NextRequest) {
                 resume_user_data: JSON.parse(val.resume_user_data),
             }));
 
-        const ai = new GoogleGenAI({ apiKey: decrypt(existing.documents[0].api_key, process.env.ENCRYPTION_KEY_PHRASE!, email) });
+        const ai = new GoogleGenAI({
+            apiKey: decrypt(
+                existing.documents[0].api_key,
+                process.env.ENCRYPTION_KEY_PHRASE!,
+                email
+            ),
+        });
         console.log(
             PROMPT +
                 `Here is the Resume User Data JSON: ${JSON.stringify(existing.documents[0].resume_user_data)}\n\nThis is the Job Description: ${body.jd}`
@@ -95,7 +101,8 @@ export async function POST(req: NextRequest) {
         });
         console.log(response.text);
         return NextResponse.json(
-        JSON.parse(response.text?.replace(/```json\n?|\n?```/g, '') as string), {status: 200}
+            JSON.parse(response.text?.replace(/```json\n?|\n?```/g, '') as string),
+            { status: 200 }
         );
     } catch (error: any) {
         return NextResponse.json(

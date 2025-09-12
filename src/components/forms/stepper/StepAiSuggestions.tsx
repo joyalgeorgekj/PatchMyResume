@@ -11,10 +11,10 @@ export default function StepAiSuggestions({
     onGenerate: () => void;
 }) {
     const [selected, setSelected] = useState<{ section: string; option: string } | null>(null);
-    useEffect(()=> {
+    useEffect(() => {
         console.log(suggestions);
-    })
-    
+    });
+
     if (suggestions)
         return (
             <div className="space-y-10">
@@ -26,18 +26,22 @@ export default function StepAiSuggestions({
                         <h3 className="text-lg font-medium capitalize">{section}</h3>
                         <div className="flex flex-col gap-4">
                             {options.map((opt, idx) => (
-                                <div className="flex gap-4 h-fit" style={{height: 'fit-content'}} key={idx}>
+                                <div
+                                    className="flex h-fit gap-4"
+                                    style={{ height: 'fit-content' }}
+                                    key={idx}
+                                >
                                     <p>{idx + 1}</p>
                                     <div
                                         key={`${section}-${idx}`}
-                                        className={`rounded-2xl h-fit border p-4 shadow-sm transition ${
+                                        className={`h-fit rounded-2xl border p-4 shadow-sm transition ${
                                             selected?.section === section &&
                                             selected?.option === opt.option1
                                                 ? 'border-secondary bg-secondary-muted/50'
                                                 : 'border-light bg-light-muted'
                                         }`}
                                     >
-                                        <p className="text-dark mb-2 text-sm font-medium whitespace-pre-wrap text-wrap">
+                                        <p className="text-dark mb-2 text-sm font-medium text-wrap whitespace-pre-wrap">
                                             {opt.option1}
                                         </p>
                                         <div className="flex gap-2">
@@ -61,14 +65,14 @@ export default function StepAiSuggestions({
                                     </div>
                                     <div
                                         key={`${section}-${idx + 1}`}
-                                        className={`rounded-2xl h-fit border p-4 shadow-sm transition ${
+                                        className={`h-fit rounded-2xl border p-4 shadow-sm transition ${
                                             selected?.section === section &&
                                             selected?.option === opt.option2
                                                 ? 'border-secondary bg-secondary-muted/50'
                                                 : 'border-light bg-light-muted'
                                         }`}
                                     >
-                                        <p className="text-dark mb-2 text-sm font-medium whitespace-pre-wrap text-wrap">
+                                        <p className="text-dark mb-2 text-sm font-medium text-wrap whitespace-pre-wrap">
                                             {opt.option2}
                                         </p>
                                         <div className="flex gap-2">

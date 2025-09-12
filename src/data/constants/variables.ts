@@ -182,7 +182,6 @@ export const ExampleResume: ResumeDataType = {
     ],
 };
 
-
 export const STEPS = [
     { id: 1, label: 'API & Model' },
     { id: 2, label: 'Resume Data' },
