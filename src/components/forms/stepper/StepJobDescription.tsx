@@ -14,7 +14,6 @@ export default function StepJobDescription({
                 wrap="hard"
                 rows={5}
                 minLength={50}
-                maxLength={500}
                 value={jobDescription}
                 onChange={(e) => setJobDescription(e.target.value)}
                 placeholder="Paste Job Description here..."
