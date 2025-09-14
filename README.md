@@ -223,32 +223,156 @@ export interface ResumeUserDataType {
 
 ## 📂 Project Structure
 
+- ai suggestion API Route returns Suggestion Type
+
 ```
-├── public/
-│   ├── images/          # Logos, posters
-│   └── icons/           # SVG assets
-├── src/
-│   ├── app/             # App Router (Next.js)
-│   │   ├── (auth)/      # Auth routes (signin, user)
-│   │   ├── api/         # Serverless API routes
-│   │   ├── layout.tsx   # Root layout
-│   │   └── page.tsx     # Landing page
-│   ├── components/
-│   │   ├── forms/       # Reusable form inputs, stepper
-│   │   ├── layout/      # Header, Footer, Theme, SessionProvider
-│   │   ├── stepper/     # Stepper UI & logic
-│   │   └── ui/          # Landing page UI + auth components
-│   ├── context/         # UI context
-│   ├── data/            # Types & constants
-│   └── hooks/           # Custom hooks
-├── tests/               # Jest + Playwright tests
-├── eslint.config.mjs    # ESLint
-├── jest.config.js       # Jest config
-├── playwright.config.js # Playwright config
-├── next.config.ts       # Next.js config
-├── postcss.config.mjs   # PostCSS config
-├── tsconfig.json        # TypeScript config
-└── vercel.json          # Vercel deployment config
+src
+├── app
+│   ├── api
+│   │   ├── ai
+│   │   │   └── suggestions
+│   │   │       └── route.ts
+```
+
+- crud appwrite db
+
+```
+src
+├── app
+│   │   ├── appwrite
+│   │   │   └── resume
+│   │   │       └── route.ts
+```
+
+- signin route
+
+```
+src
+├── app
+│   │   └── auth
+│   │       └── [...nextauth]
+│   │           └── route.ts
+```
+
+- signin route and user routes
+
+```
+src
+├── app
+│   ├── (auth)
+```
+
+- form elements like button, steppers, editors forms, etc.
+
+```
+src
+├── components
+│   ├── forms
+│   │   ├── AuthButton.tsx
+│   │   ├── JsonEditor.tsx
+│   │   ├── ResumeForm.tsx
+│   │   └── stepper
+│   │       ├── Main.tsx
+│   │       ├── StepAiSuggestions.tsx
+│   │       ├── StepApiModel.tsx
+│   │       ├── StepFinalPreview.tsx
+│   │       ├── StepJobDescription.tsx
+│   │       └── StepResumeData.tsx
+```
+
+- layout common components
+
+```
+src
+├── components
+│   ├── layout
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   └── ThemeButton.tsx
+```
+
+- common components for main routes
+
+```
+src
+├── components
+│   └── ui
+│       ├── Auth
+│       │   ├── ProfileAvatar.tsx
+│       │   └── ToHome.tsx
+│       └── landing
+│           ├── Feature.tsx
+│           ├── HowItWorks.tsx
+│           ├── LandingWrapper.tsx
+│           └── Main.tsx
+```
+
+- context and its style
+
+```
+src
+├── context
+│   └── UIContext.tsx
+```
+
+- constant datas like prompt, models, example content like Resume data and Job Description, etc.
+
+```
+│   ├── data
+│   │   ├── constants
+│   │   │   ├── types.ts
+│   │   │   └── workflow.ts
+│   │   ├── examples
+│   │   │   ├── jobDescription.ts
+│   │   │   └── resume.ts
+│   │   ├── prompts
+│   │   │   └── atsPrompt.ts
+│   │   └── templates
+```
+
+- custom hooks
+
+```
+src
+├── hooks
+│   └── useHiddenRoutes.tsx
+```
+
+- fucntions common and used in client and server, crypto (encrypt, decrypt) is only used in server and the other 2 used on client to fetch result from its route.
+
+```
+src
+├── lib
+│   ├── ai.ts
+│   ├── appwrite.ts
+│   └── server
+│       └── crypto.ts
+```
+
+- test cases: not yet added.
+
+```
+src
+├── tests
+│   ├── e2e
+│   ├── integration
+│   └── unit
+```
+
+- change in package types from npm library
+
+```
+src
+└── types
+    └── next-auth.d.ts
+```
+
+- styles
+
+```
+src
+├── style.css
+
 ```
 
 ---
