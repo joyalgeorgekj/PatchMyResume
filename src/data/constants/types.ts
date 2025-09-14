@@ -118,6 +118,5 @@ export type SuggestionsType = {
     projects: OptionsType[];
     skills: OptionsType[];
     education: OptionsType[];
-    languages: OptionsType[];
     achievement: OptionsType[];
 };
