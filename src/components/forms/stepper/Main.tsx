@@ -184,13 +184,13 @@ export default function Main() {
                     {step === 4 && (
                         <StepAiSuggestions
                             suggestions={suggestions}
-                            setSuggestions={setResumeUserData}
+                            setFinal={setFinal}
                             onGenerate={() => {
                                 setToast({ type: 'success', message: 'Suggestions generated!' });
                             }}
                         />
                     )}
-                    {step === 5 && <StepFinalPreview />}
+                    {step === 5 && <StepFinalPreview final={final} setFinal={setFinal} />}
 
                     {/* Nav */}
                     <div className="mt-8 flex items-center justify-between">
