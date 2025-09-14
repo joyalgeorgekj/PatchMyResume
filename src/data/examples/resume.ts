@@ -1,4 +1,4 @@
-import { ResumeDataType } from "../constants/types";
+import { ResumeDataType } from '../constants/types';
 
 export const ExampleResume: ResumeDataType = {
     name: 'John Doe',

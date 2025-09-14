@@ -139,7 +139,7 @@ export default function StepAiSuggestions({
                                             <button
                                                 className="border-secondary-muted text-dark shadow-secoborder-secondary-muted flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border-2 px-4 py-2 text-sm font-medium shadow-sm transition hover:scale-95"
                                                 onClick={() => {
-                                                    updateFinal(section, opt.option1, idx)
+                                                    updateFinal(section, opt.option1, idx);
                                                     setSelected((prev) => {
                                                         if (prev[section]) {
                                                             let updated = prev[section];

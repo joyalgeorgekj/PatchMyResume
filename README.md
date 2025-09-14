@@ -96,6 +96,7 @@
     --ui-intense: #444444;
 }
 ```
+
 - Using **CSS variables** for themes:
     - `--primary`, `--secondary`, `--accent`, `--light`, `--dark`, `--ui`
 - Applied with Tailwind like `bg-primary`, `text-dark-muted`, `border-ui`.
@@ -103,6 +104,7 @@
 - **No `dark:` / `light:` classes** → theme handled via vanilla CSS + NextThemes.
 
 ### Breakpoints
+
 ```
 --breakpoint-mobile: 360px
 --breakpoint-tablet: 768px
@@ -110,6 +112,7 @@
 --breakpoint-desktop: 1920px
 --breakpoint-tv: 2560px
 ```
+
 - Custom breakpoints only (not Tailwind defaults).
 
 ### Tailwind Rules
