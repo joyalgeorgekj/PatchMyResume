@@ -19,8 +19,87 @@ export default function StepAiSuggestions({
 }) {
     const [selected, setSelected] = useState<{ section: string; option: string } | null>(null);
     useEffect(() => {
-        console.log(suggestions);
+        console.log(selected);
     });
+
+    function resumeUserDataUpdator<SectionType>(
+        prev: ResumeDataType,
+        sectionKey: keyof ResumeDataType,
+        section: SectionType[],
+        ind: number,
+        key: keyof SectionType,
+        value: SectionType[keyof SectionType]
+    ): ResumeDataType {
+        const updated = section.map((item, i) => (i === ind ? { ...item, [key]: value } : item));
+
+        return { ...prev, [sectionKey]: updated };
+    }
+
+    const updateFinal = (section: string, value: string, ind: number) => {
+        switch (section) {
+            case 'summary':
+                setFinal((prev) => ({ ...prev, summary: value }));
+                break;
+            case 'experience':
+                setFinal((prev) =>
+                    resumeUserDataUpdator<ExperienceType>(
+                        prev,
+                        'experience', // section key
+                        prev.experience, // section array
+                        ind,
+                        'description',
+                        value
+                    )
+                );
+                break;
+            case 'projects':
+                setFinal((prev) => {
+                    if (!prev.project) return prev;
+                    return resumeUserDataUpdator<ProjectType>(
+                        prev,
+                        'project', // section key
+                        prev.project, // section array
+                        ind,
+                        'description',
+                        value
+                    );
+                });
+                break;
+            case 'skills':
+                setFinal((prev) => ({
+                    ...prev,
+                    skills: value.split(', '),
+                }));
+                break;
+            case 'education':
+                setFinal((prev) =>
+                    resumeUserDataUpdator<EducationType>(
+                        prev,
+                        'education', // section key
+                        prev.education, // section array
+                        ind,
+                        'description',
+                        value
+                    )
+                );
+                break;
+            case 'achievement':
+                setFinal((prev) => {
+                    if (!prev.achievement) return prev;
+                    return resumeUserDataUpdator<AchievementType>(
+                        prev,
+                        'achievement', // section key
+                        prev.achievement, // section array
+                        ind,
+                        'description',
+                        value
+                    );
+                });
+                break;
+            default:
+                break;
+        }
+    };
 
     if (suggestions)
         return (
