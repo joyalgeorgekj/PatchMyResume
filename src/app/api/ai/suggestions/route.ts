@@ -1,4 +1,4 @@
-import { getAppwriteClient } from '@/lib/appwrite';
+import { getAppwriteClient } from '@/lib/server/appwrite';
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { Query } from 'node-appwrite';
@@ -57,22 +57,31 @@ export async function POST(req: NextRequest) {
                 email
             ),
         });
+
         console.log(
             PROMPT +
-                `Here is the Resume User Data JSON: ${JSON.stringify(existing.documents[0].resume_user_data)}\n\nThis is the Job Description: ${body.jd}`
+                `- Here is the Resume User Data JSON: ${JSON.stringify(existing.documents[0].resume_user_data)}\n\n- This is the Job Description: ${body.jd}`
         );
 
         const response = await ai.models.generateContent({
             model: existing.documents[0].model,
             contents:
                 PROMPT +
-                `Here is the Resume User Data JSON: ${JSON.stringify(existing.documents[0].resume_user_data)}\n\nThis is the Job Description: ${body.jd}`,
+                `- Here is the Resume User Data JSON: ${JSON.stringify(existing.documents[0].resume_user_data)}\n\n- This is the Job Description: ${body.jd}`,
         });
-        console.log(response.text);
-        return NextResponse.json(
-            JSON.parse(response.text?.replace(/```json\n?|\n?```/g, '') as string),
-            { status: 200 }
-        );
+
+        const raw = response.text || '';
+        const cleaned = cleanJSON(raw);
+
+        let parsed;
+        try {
+            parsed = JSON.parse(cleaned);
+        } catch (e) {
+            console.error('Failed to parse AI JSON:', cleaned);
+            throw e; // or return error response
+        }
+
+        return NextResponse.json(parsed, { status: 200 });
     } catch (error: any) {
         return NextResponse.json(
             { message: error.message, type: 'error' },
