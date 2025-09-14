@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import AuthButton from '@/components/forms/AuthButton';
-import { authList } from '@/data/constants/variables';
-import ToHome from '@/components/ui/Auth/ToHome';
+import ToHome from '@/components/ui/auth/ToHome';
 import { useUI } from '@/context/UIContext';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
+import { authList } from '@/data/constants/workflow';
 
 export default function AuthPage() {
     const [activeTab, setActiveTab] = useState<'login' | 'register'>('register');

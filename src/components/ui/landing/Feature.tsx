@@ -1,4 +1,4 @@
-import { featureList } from '@/data/constants/variables';
+import { featureList } from "@/data/constants/workflow";
 
 export default function Feature() {
     return (

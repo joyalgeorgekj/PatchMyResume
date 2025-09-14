@@ -1,6 +1,5 @@
 import { useUI } from '@/context/UIContext';
 import { ResumeDataType, SuggestionsType } from '@/data/constants/types';
-import { ExampleResume, JobDescription, STEPS } from '@/data/constants/variables';
 import { useEffect, useState } from 'react';
 import StepApiModel from './StepApiModel';
 import StepResumeData from './StepResumeData';
@@ -9,6 +8,10 @@ import StepFinalPreview from './StepFinalPreview';
 import StepAiSuggestions from './StepAiSuggestions';
 import { createNewUserDocument, getUserDocument } from '@/lib/appwrite';
 import { getResumeSuggestions } from '@/lib/ai';
+import { ExampleResume } from '@/data/examples/resume';
+import { JobDescription } from '@/data/examples/jobDescription';
+import { STEPS } from '@/data/constants/workflow';
+import { SUGGESTION } from '@/data/examples/suggestion';
 
 export type AiDataType = {
     API_KEY: string;

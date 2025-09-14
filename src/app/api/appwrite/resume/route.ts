@@ -1,5 +1,5 @@
-import { getAppwriteClient } from '@/lib/appwrite';
-import { decrypt, encrypt } from '@/lib/crypto';
+import { getAppwriteClient } from '@/lib/server/appwrite';
+import { decrypt, encrypt } from '@/lib/server/crypto';
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { ID, Query } from 'node-appwrite';

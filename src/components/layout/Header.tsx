@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useUI } from '@/context/UIContext';
 import ThemeButton from './ThemeButton';
-import ProfileAvatar from '../ui/Auth/ProfileAvatar';
+import ProfileAvatar from '../ui/auth/ProfileAvatar';
 import { FiMenu, FiX } from 'react-icons/fi';
 import Image from 'next/image';
 

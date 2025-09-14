@@ -1,4 +1,4 @@
-import { MODELS } from '@/data/constants/variables';
+import { MODELS } from '@/data/constants/workflow';
 import { AiDataType } from './Main';
 import { Dispatch, SetStateAction, useEffect } from 'react';
 

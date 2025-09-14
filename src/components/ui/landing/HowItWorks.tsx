@@ -1,6 +1,6 @@
 'use client';
 
-import { mainWorkFlowSteps } from '@/data/constants/variables';
+import { mainWorkFlowSteps } from '@/data/constants/workflow';
 import { useState } from 'react';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 

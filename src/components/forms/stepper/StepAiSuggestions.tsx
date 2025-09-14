@@ -1,4 +1,11 @@
-import { ResumeDataType, SuggestionsType } from '@/data/constants/types';
+import {
+    AchievementType,
+    EducationType,
+    ExperienceType,
+    ProjectType,
+    ResumeDataType,
+    SuggestionsType,
+} from '@/data/constants/types';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 export default function StepAiSuggestions({

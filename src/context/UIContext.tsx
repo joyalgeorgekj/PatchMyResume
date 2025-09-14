@@ -2,7 +2,7 @@
 
 import { SessionProvider } from 'next-auth/react';
 import { createContext, useContext, useEffect, useState } from 'react';
-import './style.css';
+import '@/styles/context.css';
 
 type Loader = { active: boolean; message?: string };
 type Toast = { message: string; type?: 'success' | 'error' | 'info' };
