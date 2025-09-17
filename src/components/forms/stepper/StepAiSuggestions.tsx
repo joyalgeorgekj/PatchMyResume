@@ -1,8 +1,8 @@
 import {
-    AchievementType,
-    EducationType,
-    ExperienceType,
-    ProjectType,
+    AchievementTypeZod,
+    EducationTypeZod,
+    ExperienceTypeZod,
+    ProjectTypeZod,
     ResumeDataTypeZod,
     SuggestionsType,
 } from '@/data/constants/types';
@@ -41,21 +41,22 @@ export default function StepAiSuggestions({
                 setFinal((prev) => ({ ...prev, summary: value }));
                 break;
             case 'experience':
-                setFinal((prev) =>
-                    resumeUserDataUpdator<ExperienceType>(
+                setFinal((prev) => {
+                    if (!prev.experience) return prev;
+                    return resumeUserDataUpdator<ExperienceTypeZod>(
                         prev,
                         'experience', // section key
                         prev.experience, // section array
                         ind,
                         'description',
                         value
-                    )
-                );
+                    );
+                });
                 break;
             case 'projects':
                 setFinal((prev) => {
                     if (!prev.project) return prev;
-                    return resumeUserDataUpdator<ProjectType>(
+                    return resumeUserDataUpdator<ProjectTypeZod>(
                         prev,
                         'project', // section key
                         prev.project, // section array
@@ -73,7 +74,7 @@ export default function StepAiSuggestions({
                 break;
             case 'education':
                 setFinal((prev) =>
-                    resumeUserDataUpdator<EducationType>(
+                    resumeUserDataUpdator<EducationTypeZod>(
                         prev,
                         'education', // section key
                         prev.education, // section array
@@ -86,7 +87,7 @@ export default function StepAiSuggestions({
             case 'achievement':
                 setFinal((prev) => {
                     if (!prev.achievement) return prev;
-                    return resumeUserDataUpdator<AchievementType>(
+                    return resumeUserDataUpdator<AchievementTypeZod>(
                         prev,
                         'achievement', // section key
                         prev.achievement, // section array
