@@ -1,3 +1,5 @@
+import { ResumeSchema } from '@/data/constants/types';
+import { MODELS } from '@/data/constants/workflow';
 import { getAppwriteClient } from '@/lib/server/appwrite';
 import { decrypt, encrypt } from '@/lib/server/crypto';
 import { getServerSession } from 'next-auth';
@@ -25,8 +27,8 @@ export async function POST(req: NextRequest) {
     // 1. Validate early
     if (
         typeof body.api_key !== 'string' ||
-        typeof body.model !== 'string' ||
-        typeof body.resume_user_data !== 'object'
+        !MODELS.includes(body.model) ||
+        ResumeSchema.safeParse(body.resume_user_data).error
     ) {
         return NextResponse.json(
             { message: 'Invalid data format', type: 'error' },
