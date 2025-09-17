@@ -14,6 +14,14 @@ function cleanJSON(raw: string): string {
         .trim();
 }
 
+function validateJD(jd: string) {
+    if (jd !== '' && typeof jd === 'string') {
+        return true;
+    }
+
+    return false;
+}
+
 export async function POST(req: NextRequest) {
     const session = await getServerSession();
     const { databases } = getAppwriteClient();
