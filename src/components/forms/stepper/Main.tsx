@@ -6,10 +6,8 @@ import StepResumeData from './StepResumeData';
 import StepJobDescription from './StepJobDescription';
 import StepFinalPreview from './StepFinalPreview';
 import StepAiSuggestions from './StepAiSuggestions';
-import { createNewUserDocument, getUserDocument } from '@/lib/appwrite';
 import { getResumeSuggestions } from '@/lib/ai';
 import { ExampleResume } from '@/data/examples/resume';
-import { JobDescription } from '@/data/examples/jobDescription';
 import { STEPS } from '@/data/constants/workflow';
 import { SUGGESTION } from '@/data/examples/suggestion';
 
@@ -30,7 +28,7 @@ export default function Main() {
     // Resume Data
     const [resumeUserData, setResumeUserData] = useState<ResumeDataTypeZod>(ExampleResume);
     // Job Description
-    const [jobDescription, setJobDescription] = useState<string>(JobDescription);
+    const [jobDescription, setJobDescription] = useState<string>('');
     // AI
     const [suggestions, setSuggestions] = useState<SuggestionsType | null>(null);
     // Preview
@@ -41,11 +39,15 @@ export default function Main() {
         setStep((prev) => prev - 1);
     };
     const nextStep = () => {
+        const goNext = () => setStep((prev) => (prev < STEPS.length ? prev + 1 : prev));
+
         switch (step) {
-            case 1:
-                aiApiModel.API_KEY !== '' && aiApiModel.Model !== ''
-                    ? setStep((prev) => (prev < STEPS.length ? prev + 1 : prev))
-                    : setToast({ type: 'error', message: 'API Key and Model is Required' });
+            case 1: {
+                if (aiApiModel.API_KEY && aiApiModel.Model) {
+                    goNext();
+                } else {
+                    setToast({ type: 'error', message: 'API Key and Model is Required' });
+                }
                 break;
             }
             case 2: {
@@ -64,50 +66,48 @@ export default function Main() {
                     setToast({ type: 'error', message: 'Resume Data is Required' });
                 }
                 break;
-            case 3:
-                if (jobDescription !== '') {
-                    setLoader({ message: 'Formatting data', active: true });
-
-                    // Step 1: call AI suggestions
-                    getResumeSuggestions(jobDescription)
-                        .then(async (res) => {
-                            // Update loader stages in sequence
-                            setLoader({ active: true, message: 'Sending data to AI' });
-                            await new Promise((r) => setTimeout(r, 1000));
-
-                            setLoader({ active: true, message: 'AI Processing Data' });
-                            await new Promise((r) => setTimeout(r, 1500));
-
-                            setLoader({ active: true, message: 'Creating Suggestions' });
-                            await new Promise((r) => setTimeout(r, 1500));
-
-                            // Done → update UI
-                            setSuggestions(res);
-                            setToast({ message: 'Suggestion has been updated', type: 'success' });
-                            setStep((prev) => (prev < STEPS.length ? prev + 1 : prev));
-                        })
-                        .catch(() => {
-                            setToast({ type: 'error', message: 'Failed to fetch suggestions' });
-                        })
-                        .finally(() => {
-                            setLoader({ active: false });
-                        });
-                } else {
+            }
+            case 3: {
+                if (!jobDescription) {
                     setToast({ type: 'error', message: 'Job Description is Required' });
+                    break;
                 }
+
+                setLoader({ active: true, message: 'Formatting data' });
+
+                getResumeSuggestions(jobDescription)
+                    .then(async (res) => {
+                        const messages = [
+                            'Sending data to AI',
+                            'AI Processing Data',
+                            'Creating Suggestions',
+                        ];
+
+                        for (const msg of messages) {
+                            setLoader({ active: true, message: msg });
+                            await new Promise((r) => setTimeout(r, 1200));
+                        }
+
+                        setSuggestions(res);
+                        setToast({ type: 'success', message: 'Suggestion has been updated' });
+                        goNext();
+                    })
+                    .catch(() =>
+                        setToast({ type: 'error', message: 'Failed to fetch suggestions' })
+                    )
+                    .finally(() => setLoader({ active: false }));
                 break;
-            case 4:
-                suggestions
-                    ? setStep((prev) => (prev < STEPS.length ? prev + 1 : prev))
-                    : setToast({ type: 'error', message: 'Pick Suggestions' });
+            }
+            case 4: {
+                suggestions ? goNext() : setToast({ type: 'error', message: 'Pick Suggestions' });
                 break;
-            case 5:
+            }
+            case 5: {
                 resumeUserData
-                    ? setStep((prev) => (prev < STEPS.length ? prev + 1 : prev))
+                    ? goNext()
                     : setToast({ type: 'success', message: 'Data Successfully Extracted' });
                 break;
-            default:
-                break;
+            }
         }
     };
 
