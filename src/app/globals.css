@@ -129,8 +129,26 @@ select option {
     padding: 0.5rem 1rem;
 }
 
-input,
+input:not([type='checkbox']),
 textarea,
 select {
-    @apply border-ui-muted bg-light text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-primary-intense w-full rounded-lg border-2 px-4 py-2 text-sm transition-all focus:ring-2 focus:outline-none;
+    @apply border-ui-muted bg-light text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-primary-intense w-full appearance-none rounded-lg border-2 px-4 py-2 text-sm transition-all focus:ring-2 focus:outline-none;
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+    @apply border-ui-muted bg-light-muted text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-primary-intense w-full appearance-none rounded-lg border-2 px-4 py-2 text-sm transition-all focus:ring-2 focus:outline-none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
