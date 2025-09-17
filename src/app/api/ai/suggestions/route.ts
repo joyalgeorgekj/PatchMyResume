@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
                 `- Here is the Resume User Data JSON: ${JSON.stringify(existing.documents[0].resume_user_data)}\n\n- This is the Job Description: ${body.jd}`,
         });
 
-        const raw = response.text || '';
+        const raw = response.text || '{}';
         const cleaned = cleanJSON(raw);
 
         let parsed;
