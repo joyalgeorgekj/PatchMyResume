@@ -4,9 +4,9 @@ import { SessionProvider } from 'next-auth/react';
 import { createContext, useContext, useEffect, useState } from 'react';
 import '@/styles/context.css';
 
-type Loader = { active: boolean; message?: string };
-type Toast = { message: string; type?: 'success' | 'error' | 'info' };
-type Alert = { message: string; onConfirm?: () => void; onCancel?: () => void };
+export type Loader = { active: boolean; message?: string };
+export type Toast = { message: string; type?: 'success' | 'error' | 'info' };
+export type Alert = { message: string; onConfirm?: () => void; onCancel?: () => void };
 
 interface UIContextType {
     loader: Loader;
