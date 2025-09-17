@@ -10,12 +10,8 @@
     "prettier:src": "prettier --write src/"
   },
   "dependencies": {
-    "@auth/prisma-adapter": "^2.10.0",
     "@google/genai": "^1.19.0",
-    "@prisma/client": "^6.14.0",
     "appwrite": "^20.0.0",
-    "bcryptjs": "^3.0.2",
-    "clsx": "^2.1.1",
     "latex.js": "^0.12.6",
     "lucide-react": "^0.540.0",
     "next": "15.5.0",
@@ -27,10 +23,7 @@
     "react-dom": "19.1.0",
     "react-hook-form": "^7.62.0",
     "react-icons": "^5.5.0",
-    "swr": "^2.3.6",
-    "tailwind-variants": "^2.1.0",
-    "zod": "^4.0.17",
-    "zustand": "^5.0.8"
+    "zod": "^4.0.17"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
