@@ -1,15 +1,15 @@
 'use client';
 
 import { useUI } from '@/context/UIContext';
-import { ResumeDataType } from '@/data/constants/types';
+import { ResumeDataTypeZod } from '@/data/constants/types';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 export default function JsonEditor({
     resumeUserData,
     setResumeUserData,
 }: {
-    resumeUserData: ResumeDataType;
-    setResumeUserData: Dispatch<SetStateAction<ResumeDataType>>;
+    resumeUserData: ResumeDataTypeZod;
+    setResumeUserData: Dispatch<SetStateAction<ResumeDataTypeZod>>;
 }) {
     const [dataText, setDataText] = useState<string>(JSON.stringify(resumeUserData, null, 4));
     const { setToast } = useUI();
