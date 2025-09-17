@@ -2,25 +2,25 @@
 
 import { useUI } from '@/context/UIContext';
 import {
-    AchievementType,
-    EducationType,
-    ExperienceType,
-    LanguageType,
-    LinkType,
-    ProjectType,
-    ResumeDataType,
+    AchievementTypeZod,
+    EducationTypeZod,
+    ExperienceTypeZod,
+    LanguageTypeZod,
+    LinkTypeZod,
+    ProjectTypeZod,
+    ResumeDataTypeZod,
 } from '@/data/constants/types';
 import { Dispatch, SetStateAction, useState } from 'react';
 import JsonEditor from '../JsonEditor';
 
 function resumeUserDataUpdator<SectionType>(
-    prev: ResumeDataType,
-    sectionKey: keyof ResumeDataType,
+    prev: ResumeDataTypeZod,
+    sectionKey: keyof ResumeDataTypeZod,
     section: SectionType[],
     ind: number,
     key: keyof SectionType,
     value: SectionType[keyof SectionType]
-): ResumeDataType {
+): ResumeDataTypeZod {
     const updated = section.map((item, i) => (i === ind ? { ...item, [key]: value } : item));
 
     return { ...prev, [sectionKey]: updated };
@@ -30,8 +30,8 @@ export default function StepResumeData({
     resumeUserData,
     setResumeUserData,
 }: {
-    resumeUserData: ResumeDataType;
-    setResumeUserData: Dispatch<SetStateAction<ResumeDataType>>;
+    resumeUserData: ResumeDataTypeZod;
+    setResumeUserData: Dispatch<SetStateAction<ResumeDataTypeZod>>;
 }) {
     const { setToast } = useUI();
     const [mode, setMode] = useState<'json' | 'form'>('form');
@@ -147,15 +147,7 @@ export default function StepResumeData({
                                 >
                                     <select
                                         defaultValue={val.platform}
-                                        disabled={val.url !== ''}
-                                        className="border-ui-muted bg-light text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-primary-intense w-full appearance-none rounded-lg border-2 px-4 py-2 pr-10 text-sm capitalize transition outline-none focus:ring-2"
-                                    >
-                                        <option value={'github'}>GitHub</option>
-                                        <option value={'linkedin'}>LinkedIn</option>
-                                        <option value={'portfolio'}>Portfolio</option>
-                                        <option value={'custom'}>Other</option>
-                                    </select>
-                                    <input
+                                                resumeUserDataUpdator<LinkTypeZod>(
                                         type="url"
                                         placeholder="Enter URL"
                                         className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
@@ -353,7 +345,7 @@ export default function StepResumeData({
                                         value={val.institute}
                                         onChange={(e) =>
                                             setResumeUserData((prev) =>
-                                                resumeUserDataUpdator<EducationType>(
+                                                resumeUserDataUpdator<EducationTypeZod>(
                                                     prev,
                                                     'education', // section key
                                                     prev.education, // section array
@@ -370,7 +362,7 @@ export default function StepResumeData({
                                         value={val.course}
                                         onChange={(e) =>
                                             setResumeUserData((prev) =>
-                                                resumeUserDataUpdator<EducationType>(
+                                                resumeUserDataUpdator<EducationTypeZod>(
                                                     prev,
                                                     'education', // section key
                                                     prev.education, // section array
@@ -387,7 +379,7 @@ export default function StepResumeData({
                                         value={val.location}
                                         onChange={(e) =>
                                             setResumeUserData((prev) =>
-                                                resumeUserDataUpdator<EducationType>(
+                                                resumeUserDataUpdator<EducationTypeZod>(
                                                     prev,
                                                     'education', // section key
                                                     prev.education, // section array
@@ -406,7 +398,7 @@ export default function StepResumeData({
                                         value={val.description || ''}
                                         onChange={(e) =>
                                             setResumeUserData((prev) =>
-                                                resumeUserDataUpdator<EducationType>(
+                                                resumeUserDataUpdator<EducationTypeZod>(
                                                     prev,
                                                     'education', // section key
                                                     prev.education, // section array
@@ -454,7 +446,7 @@ export default function StepResumeData({
                                         onChange={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.project) return prev;
-                                                return resumeUserDataUpdator<ProjectType>(
+                                                return resumeUserDataUpdator<ProjectTypeZod>(
                                                     prev,
                                                     'project', // section key
                                                     prev.project, // section array
@@ -471,7 +463,7 @@ export default function StepResumeData({
                                         onChange={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.project) return prev;
-                                                return resumeUserDataUpdator<ProjectType>(
+                                                return resumeUserDataUpdator<ProjectTypeZod>(
                                                     prev,
                                                     'project', // section key
                                                     prev.project, // section array
@@ -494,7 +486,7 @@ export default function StepResumeData({
                                         onChange={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.project) return prev;
-                                                return resumeUserDataUpdator<ProjectType>(
+                                                return resumeUserDataUpdator<ProjectTypeZod>(
                                                     prev,
                                                     'project', // section key
                                                     prev.project, // section array
@@ -512,7 +504,7 @@ export default function StepResumeData({
                                         onChange={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.project) return prev;
-                                                return resumeUserDataUpdator<ProjectType>(
+                                                return resumeUserDataUpdator<ProjectTypeZod>(
                                                     prev,
                                                     'project', // section key
                                                     prev.project, // section array
@@ -522,17 +514,7 @@ export default function StepResumeData({
                                                 );
                                             })
                                         }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
-                                    />
-                                    <textarea
-                                        wrap="hard"
-                                        placeholder="Responsibilities (one per line)"
-                                        rows={3}
-                                        value={val.description}
-                                        onChange={(e) =>
-                                            setResumeUserData((prev) => {
-                                                if (!prev.project) return prev;
-                                                return resumeUserDataUpdator<ProjectType>(
+                                                return resumeUserDataUpdator<ProjectTypeZod>(
                                                     prev,
                                                     'project', // section key
                                                     prev.project, // section array
@@ -579,7 +561,7 @@ export default function StepResumeData({
                                         onChange={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.achievement) return prev;
-                                                return resumeUserDataUpdator<AchievementType>(
+                                                return resumeUserDataUpdator<AchievementTypeZod>(
                                                     prev,
                                                     'achievement', // section key
                                                     prev.achievement, // section array
@@ -604,7 +586,7 @@ export default function StepResumeData({
                                         onChange={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.achievement) return prev;
-                                                return resumeUserDataUpdator<AchievementType>(
+                                                return resumeUserDataUpdator<AchievementTypeZod>(
                                                     prev,
                                                     'achievement', // section key
                                                     prev.achievement, // section array
@@ -622,7 +604,7 @@ export default function StepResumeData({
                                         onChange={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.achievement) return prev;
-                                                return resumeUserDataUpdator<AchievementType>(
+                                                return resumeUserDataUpdator<AchievementTypeZod>(
                                                     prev,
                                                     'achievement', // section key
                                                     prev.achievement, // section array
@@ -640,7 +622,7 @@ export default function StepResumeData({
                                         onChange={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.achievement) return prev;
-                                                return resumeUserDataUpdator<AchievementType>(
+                                                return resumeUserDataUpdator<AchievementTypeZod>(
                                                     prev,
                                                     'achievement', // section key
                                                     prev.achievement, // section array
@@ -660,7 +642,7 @@ export default function StepResumeData({
                                         onChange={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.achievement) return prev;
-                                                return resumeUserDataUpdator<AchievementType>(
+                                                return resumeUserDataUpdator<AchievementTypeZod>(
                                                     prev,
                                                     'achievement', // section key
                                                     prev.achievement, // section array
@@ -708,7 +690,7 @@ export default function StepResumeData({
                                             onChange={(e) =>
                                                 setResumeUserData((prev) => {
                                                     if (!prev.achievement) return prev;
-                                                    return resumeUserDataUpdator<LanguageType>(
+                                                    return resumeUserDataUpdator<LanguageTypeZod>(
                                                         prev,
                                                         'language', // section key
                                                         prev.language, // section array
@@ -732,7 +714,7 @@ export default function StepResumeData({
                                             onChange={(e) =>
                                                 setResumeUserData((prev) => {
                                                     if (!prev.language) return prev;
-                                                    return resumeUserDataUpdator<LanguageType>(
+                                                    return resumeUserDataUpdator<LanguageTypeZod>(
                                                         prev,
                                                         'language', // section key
                                                         prev.language, // section array

@@ -3,7 +3,7 @@ import {
     EducationType,
     ExperienceType,
     ProjectType,
-    ResumeDataType,
+    ResumeDataTypeZod,
     SuggestionsType,
 } from '@/data/constants/types';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
@@ -14,7 +14,7 @@ export default function StepAiSuggestions({
     onGenerate,
 }: {
     suggestions: SuggestionsType | null;
-    setFinal: Dispatch<SetStateAction<ResumeDataType>>;
+    setFinal: Dispatch<SetStateAction<ResumeDataTypeZod>>;
     onGenerate: () => void;
 }) {
     const [selected, setSelected] = useState<{ [section: string]: string[] }>({});
@@ -23,13 +23,13 @@ export default function StepAiSuggestions({
     });
 
     function resumeUserDataUpdator<SectionType>(
-        prev: ResumeDataType,
-        sectionKey: keyof ResumeDataType,
+        prev: ResumeDataTypeZod,
+        sectionKey: keyof ResumeDataTypeZod,
         section: SectionType[],
         ind: number,
         key: keyof SectionType,
         value: SectionType[keyof SectionType]
-    ): ResumeDataType {
+    ): ResumeDataTypeZod {
         const updated = section.map((item, i) => (i === ind ? { ...item, [key]: value } : item));
 
         return { ...prev, [sectionKey]: updated };

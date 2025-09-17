@@ -1,5 +1,5 @@
 import { useUI } from '@/context/UIContext';
-import { ResumeDataType, SuggestionsType } from '@/data/constants/types';
+import { ResumeDataTypeZod, ResumeSchema, SuggestionsType } from '@/data/constants/types';
 import { useEffect, useState } from 'react';
 import StepApiModel from './StepApiModel';
 import StepResumeData from './StepResumeData';
@@ -28,13 +28,13 @@ export default function Main() {
         Model: 'gemini-1.5-flash',
     });
     // Resume Data
-    const [resumeUserData, setResumeUserData] = useState<ResumeDataType>(ExampleResume);
+    const [resumeUserData, setResumeUserData] = useState<ResumeDataTypeZod>(ExampleResume);
     // Job Description
     const [jobDescription, setJobDescription] = useState<string>(JobDescription);
     // AI
     const [suggestions, setSuggestions] = useState<SuggestionsType | null>(null);
     // Preview
-    const [final, setFinal] = useState<ResumeDataType>(resumeUserData);
+    const [final, setFinal] = useState<ResumeDataTypeZod>(ExampleResume);
 
     // form control
     const prevStep = () => {
@@ -47,19 +47,22 @@ export default function Main() {
                     ? setStep((prev) => (prev < STEPS.length ? prev + 1 : prev))
                     : setToast({ type: 'error', message: 'API Key and Model is Required' });
                 break;
-            case 2:
-                if (resumeUserData) {
-                    createNewUserDocument({
+            }
+            case 2: {
+                const validation = ResumeSchema.safeParse(resumeUserData);
+                console.log(validation);
+                
+                if (validation.success) {
+                    setUserData({
                         resume_user_data: resumeUserData,
                         api_key: aiApiModel.API_KEY,
                         model: aiApiModel.Model,
-                    }).then((res) =>
-                        setToast({ message: 'Message from Step 2' + res.message, type: res.type })
-                    );
+                    });
+                    goNext();
+                } else {
+                    console.warn(validation.error);
+                    setToast({ type: 'error', message: 'Resume Data is Required' });
                 }
-                resumeUserData
-                    ? setStep((prev) => (prev < STEPS.length ? prev + 1 : prev))
-                    : setToast({ type: 'error', message: 'Resume Data is Required' });
                 break;
             case 3:
                 if (jobDescription !== '') {

@@ -1,8 +1,8 @@
-import { ResumeDataType } from '@/data/constants/types';
+import { ResumeDataTypeZod } from '@/data/constants/types';
 
 export function createNewUserDocument(
     data: Readonly<{
-        resume_user_data: ResumeDataType;
+        resume_user_data: ResumeDataTypeZod;
         api_key: string;
         model: string;
     }>
