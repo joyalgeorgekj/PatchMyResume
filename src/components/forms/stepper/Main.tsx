@@ -9,7 +9,7 @@ import StepAiSuggestions from './StepAiSuggestions';
 import { getResumeSuggestions } from '@/lib/ai';
 import { ExampleResume } from '@/data/examples/resume';
 import { STEPS } from '@/data/constants/workflow';
-import { SUGGESTION } from '@/data/examples/suggestion';
+import { useUserData } from '@/context/UserContext';
 
 export type AiDataType = {
     API_KEY: string;
@@ -18,6 +18,7 @@ export type AiDataType = {
 
 export default function Main() {
     const { setToast, setLoader } = useUI();
+    const { setUserData, userData } = useUserData();
     const [step, setStep] = useState<number>(1);
     // data to be collected
     // Api Model
@@ -112,11 +113,14 @@ export default function Main() {
     };
 
     useEffect(() => {
-        getUserDocument().then((res) => {
-            if (res.model && res.api_key) setAiApiModel({ Model: res.model, API_KEY: res.api_key });
-            if (res.resume_user_data) setResumeUserData(res.resume_user_data);
-        });
-    }, []);
+        if (userData === null) return;
+        if (userData.model && userData.api_key)
+            setAiApiModel({ Model: userData.model, API_KEY: userData.api_key });
+        if (userData.resume_user_data) {
+            setResumeUserData(userData.resume_user_data);
+            setFinal(userData.resume_user_data);
+        }
+    }, [userData]);
 
     useEffect(() => {
         console.log('API and Model: ', aiApiModel);
