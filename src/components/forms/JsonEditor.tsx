@@ -3,6 +3,7 @@
 import { useUI } from '@/context/UIContext';
 import { ResumeDataTypeZod } from '@/data/constants/types';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import Textarea from '../ui/form/Textarea';
 
 export default function JsonEditor({
     resumeUserData,
@@ -32,11 +33,12 @@ export default function JsonEditor({
 
     return (
         <div>
-            <label className="mb-2 block text-sm font-medium">Resume JSON</label>
-            <textarea
+            <label className="mb-2 block text-sm font-medium" htmlFor='json_editor'>Resume JSON</label>
+            <Textarea
+                id="json_editor"
                 rows={14}
-                value={dataText}
-                onChange={(e) => setDataText(e.target.value)}
+                defaultValue={dataText}
+                updator={(e) => setDataText(e.target.value)}
                 className="border-ui-muted bg-light focus:border-primary-intense focus:ring-primary-intense w-full rounded-lg border-2 px-3 py-2 font-mono text-sm transition outline-none focus:ring-2"
             />
             <p className="text-dark-muted/70 mt-2 text-xs">

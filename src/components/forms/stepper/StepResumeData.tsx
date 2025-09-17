@@ -10,8 +10,13 @@ import {
     ProjectTypeZod,
     ResumeDataTypeZod,
 } from '@/data/constants/types';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import JsonEditor from '../JsonEditor';
+import Select from '@/components/ui/form/Select';
+import Input from '@/components/ui/form/Input';
+import Textarea from '@/components/ui/form/Textarea';
+import DateRangePicker from '@/components/ui/form/DatePicker';
+import ArrayInput from '@/components/ui/form/ArrayInput';
 
 function resumeUserDataUpdator<SectionType>(
     prev: ResumeDataTypeZod,
@@ -68,67 +73,82 @@ export default function StepResumeData({
                         <h2 className="mb-4 text-xl font-semibold">Basic Information</h2>
                         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                             <div>
-                                <label className="mb-1 block text-sm font-medium">Name *</label>
-                                <input
-                                    type="text"
-                                    placeholder="Enter name"
-                                    onChange={(e) =>
+                                <label className="mb-1 block text-sm font-medium" htmlFor="name">
+                                    Name *
+                                </label>
+                                <Input
+                                    keyboard="text"
+                                    seoedId={'name'}
+                                    defaultValue={resumeUserData.name}
+                                    id="name"
+                                    required={true}
+                                    updator={(e) =>
                                         setResumeUserData((prev) => ({
                                             ...prev,
                                             name: e.target.value,
                                         }))
                                     }
-                                    required
-                                    value={resumeUserData.name}
-                                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                 />
                             </div>
                             <div>
-                                <label className="mb-1 block text-sm font-medium">Email *</label>
-                                <input
+                                <label className="mb-1 block text-sm font-medium" htmlFor="email">
+                                    Email *
+                                </label>
+                                <Input
+                                    keyboard="email"
+                                    seoedId={'email'}
+                                    defaultValue={resumeUserData.email}
+                                    id="email"
                                     type="email"
-                                    placeholder="Enter email"
-                                    required
-                                    value={resumeUserData.email}
-                                    onChange={(e) =>
+                                    required={true}
+                                    updator={(e) =>
                                         setResumeUserData((prev) => ({
                                             ...prev,
                                             email: e.target.value,
                                         }))
                                     }
-                                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                 />
                             </div>
                             <div>
-                                <label className="mb-1 block text-sm font-medium">Phone *</label>
-                                <input
+                                <label
+                                    className="mb-1 block text-sm font-medium"
+                                    htmlFor="phone_number"
+                                >
+                                    Phone *
+                                </label>
+                                <Input
+                                    seoedId={'phone_number'}
                                     type="tel"
-                                    placeholder="Enter phone number"
-                                    required
-                                    value={resumeUserData.phone}
-                                    onChange={(e) =>
+                                    keyboard='tel'
+                                    id="phone number"
+                                    required={true}
+                                    defaultValue={resumeUserData.phone}
+                                    updator={(e) =>
                                         setResumeUserData((prev) => ({
                                             ...prev,
                                             phone: e.target.value,
                                         }))
                                     }
-                                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                 />
                             </div>
                             <div>
-                                <label className="mb-1 block text-sm font-medium">Location *</label>
-                                <input
-                                    type="text"
-                                    placeholder="Enter location"
+                                <label
+                                    className="mb-1 block text-sm font-medium"
+                                    htmlFor="location"
+                                >
+                                    Location *
+                                </label>
+                                <Input
+                                    seoedId={'location'}
+                                    id="location"
                                     required
-                                    value={resumeUserData.location}
-                                    onChange={(e) =>
+                                    defaultValue={resumeUserData.location}
+                                    updator={(e) =>
                                         setResumeUserData((prev) => ({
                                             ...prev,
                                             location: e.target.value,
                                         }))
                                     }
-                                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                 />
                             </div>
                         </div>
@@ -136,7 +156,7 @@ export default function StepResumeData({
 
                     {/* ========== LINKS ========== */}
                     <section className="border-dark-muted/25 mt-6 border-t pt-4">
-                        <h2 className="mb-4 text-xl font-semibold">Links</h2>
+                        <h2 className="mb-4 text-xl font-semibold">Links*</h2>
                         <div className="space-y-3">
                             {resumeUserData.links.map((val, ind) => (
                                 <div
@@ -145,15 +165,39 @@ export default function StepResumeData({
                                     }
                                     key={ind}
                                 >
-                                    <select
+                                    <Select
+                                        id={"platform_"+ind}
                                         defaultValue={val.platform}
-                                                resumeUserDataUpdator<LinkTypeZod>(
-                                        type="url"
-                                        placeholder="Enter URL"
-                                        className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
-                                        onChange={(e) =>
+                                        updator={(e) =>
                                             setResumeUserData((prev) =>
-                                                resumeUserDataUpdator<LinkType>(
+                                                resumeUserDataUpdator<LinkTypeZod>(
+                                                    prev,
+                                                    'links', // section key
+                                                    prev.links, // section array
+                                                    ind,
+                                                    'platform',
+                                                    e.target.value
+                                                )
+                                            )
+                                        }
+                                        options={[
+                                            'github',
+                                            'linkedin',
+                                            'portfolio',
+                                            'twitter',
+                                            'dribbble',
+                                            'behance',
+                                            'other',
+                                        ]}
+                                    />
+                                    <Input
+                                        seoedId={val.platform + '_url_' + ind}
+                                        type="url"
+                                        id="URL"
+                                        keyboard='url'
+                                        updator={(e) =>
+                                            setResumeUserData((prev) =>
+                                                resumeUserDataUpdator<LinkTypeZod>(
                                                     prev,
                                                     'links', // section key
                                                     prev.links, // section array
@@ -163,7 +207,7 @@ export default function StepResumeData({
                                                 )
                                             )
                                         }
-                                        value={val.url ? val.url : ''}
+                                        defaultValue={val.url ? val.url : ''}
                                     />
                                     <button
                                         type="button"
@@ -174,6 +218,18 @@ export default function StepResumeData({
                                 </div>
                             ))}
                             <button
+                                onClick={() =>
+                                    setResumeUserData((prev) => ({
+                                        ...prev,
+                                        links: [
+                                            ...prev.links,
+                                            {
+                                                platform: 'github',
+                                                url: '',
+                                            },
+                                        ],
+                                    }))
+                                }
                                 type="button"
                                 className="border-light-muted rounded-md border px-3 py-2 text-sm hover:scale-105"
                             >
@@ -184,20 +240,17 @@ export default function StepResumeData({
 
                     {/* ========== SUMMARY ========== */}
                     <section className="border-dark-muted/25 mt-6 border-t pt-4">
-                        <h2 className="mb-4 text-xl font-semibold">Summary</h2>
-                        <textarea
-                            wrap="hard"
-                            rows={5}
-                            minLength={50}
-                            maxLength={500}
-                            value={resumeUserData.summary}
-                            onChange={(e) =>
+                        <h2 className="mb-4 text-xl font-semibold">Summary*</h2>
+                        <Textarea
+                            id="summary"
+                            rows={7}
+                            defaultValue={resumeUserData.summary}
+                            updator={(e) =>
                                 setResumeUserData((prev) => ({ ...prev, summary: e.target.value }))
                             }
                             placeholder="Write a short summary about yourself..."
                             required
-                            className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm shadow-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
-                        ></textarea>
+                        ></Textarea>
                         <p className="text-dark-muted mt-1 text-xs">Min 50 chars, Max 500 chars</p>
                     </section>
 
@@ -206,10 +259,9 @@ export default function StepResumeData({
                         <h2 className="mb-4 text-xl font-semibold">Skills *</h2>
                         <div className="mb-4 flex flex-wrap gap-4">
                             {resumeUserData.skills?.map((skill, index) => (
-                                <span
-                                    className="shadow-dark-muted/15 cursor-pointer rounded-xs px-2 py-0 text-xs shadow-xs"
+                                <ArrayInput
                                     key={index}
-                                    onClick={(e) => {
+                                    updator={(e) => {
                                         setResumeUserData((prev) => ({
                                             ...prev,
                                             skills: prev.skills.filter(
@@ -222,128 +274,44 @@ export default function StepResumeData({
                                             message: `Removed Skill: ${e.currentTarget.innerText}`,
                                         });
                                     }}
-                                >
-                                    {skill}
-                                </span>
+                                    value={skill}
+                                />
                             ))}
                         </div>
-                        <input
+                        <Input
+                            seoedId={'skills'}
                             type="text"
-                            placeholder="Enter skills (comma separated)"
-                            value={resumeUserData.skills?.join(', ')}
-                            onChange={(e) =>
+                            id="skills (comma separated)"
+                            defaultValue={resumeUserData.skills?.join(', ')}
+                            updator={(e) =>
                                 setResumeUserData((prev) => ({
                                     ...prev,
                                     skills: e.target.value.split(', '),
                                 }))
                             }
                             required
-                            className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm shadow-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                         />
                         <p className="text-dark-muted mt-3 text-xs">
                             Tip: Click on skill tags to remove skill
                         </p>
                     </section>
 
-                    {/* ========== EXPERIENCE ========== */}
-                    <section className="border-dark-muted/25 mt-6 border-t pt-4">
-                        <h2 className="mb-4 text-xl font-semibold">Experience</h2>
-                        <div className="space-y-4">
-                            {resumeUserData.experience?.map((val, ind) => (
-                                <div
-                                    className="border-light-muted space-y-3 rounded-lg border p-4 shadow-sm"
-                                    key={ind}
-                                >
-                                    <input
-                                        placeholder="Company"
-                                        value={val.company}
-                                        onChange={(e) =>
-                                            setResumeUserData((prev) =>
-                                                resumeUserDataUpdator<ExperienceType>(
-                                                    prev,
-                                                    'experience', // section key
-                                                    prev.experience, // section array
-                                                    ind,
-                                                    'company',
-                                                    e.target.value
-                                                )
-                                            )
-                                        }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
-                                    />
-                                    <input
-                                        placeholder="Job Title"
-                                        value={val.title}
-                                        onChange={(e) =>
-                                            setResumeUserData((prev) =>
-                                                resumeUserDataUpdator<ExperienceType>(
-                                                    prev,
-                                                    'experience', // section key
-                                                    prev.experience, // section array
-                                                    ind,
-                                                    'title',
-                                                    e.target.value
-                                                )
-                                            )
-                                        }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
-                                    />
-                                    <textarea
-                                        wrap="hard"
-                                        placeholder="Responsibilities (one per line)"
-                                        rows={3}
-                                        value={val.description}
-                                        onChange={(e) =>
-                                            setResumeUserData((prev) =>
-                                                resumeUserDataUpdator<ExperienceType>(
-                                                    prev,
-                                                    'experience', // section key
-                                                    prev.experience, // section array
-                                                    ind,
-                                                    'description',
-                                                    e.target.value
-                                                )
-                                            )
-                                        }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm whitespace-pre focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
-                                    />
-                                    <p className="text-dark-muted text-xs">
-                                        Tip: Use{' '}
-                                        <code className="bg-light-muted text-dark-intense p-1">{`[Enter][Dash][Space]`}</code>{' '}
-                                        to make the sentence a bullet-point
-                                    </p>
-                                    <button
-                                        type="button"
-                                        className="text-sm text-red-600 hover:underline"
-                                    >
-                                        Remove
-                                    </button>
-                                </div>
-                            ))}
-                            <button
-                                type="button"
-                                className="border-light-muted rounded-md border px-3 py-2 text-sm hover:scale-105"
-                            >
-                                + Add Experience
-                            </button>
-                        </div>
-                    </section>
-
                     {/* ========== PROJECTS, EDUCATION, CERTIFICATIONS, AWARDS, LANGUAGES, PUBLICATIONS ========== */}
                     {/* Repeat same pattern as Experience → card + Add button */}
 
                     <section className="border-dark-muted/25 mt-6 border-t pt-4">
-                        <h2 className="mb-4 text-xl font-semibold">Education</h2>
+                        <h2 className="mb-4 text-xl font-semibold">Education*</h2>
                         <div className="space-y-4">
                             {resumeUserData.education?.map((val, ind) => (
                                 <div
                                     className="border-light-muted space-y-3 rounded-lg border p-4 shadow-sm"
                                     key={ind}
                                 >
-                                    <input
-                                        placeholder="Institute"
-                                        value={val.institute}
-                                        onChange={(e) =>
+                                    <Input
+                                        seoedId={'institute_' + ind}
+                                        id="Institute"
+                                        defaultValue={val.institute}
+                                        updator={(e) =>
                                             setResumeUserData((prev) =>
                                                 resumeUserDataUpdator<EducationTypeZod>(
                                                     prev,
@@ -355,12 +323,12 @@ export default function StepResumeData({
                                                 )
                                             )
                                         }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                     />
-                                    <input
-                                        placeholder="Course"
-                                        value={val.course}
-                                        onChange={(e) =>
+                                    <Input
+                                        seoedId={'course' + ind}
+                                        id="Course"
+                                        defaultValue={val.course}
+                                        updator={(e) =>
                                             setResumeUserData((prev) =>
                                                 resumeUserDataUpdator<EducationTypeZod>(
                                                     prev,
@@ -372,12 +340,12 @@ export default function StepResumeData({
                                                 )
                                             )
                                         }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                     />
-                                    <input
-                                        placeholder="Location"
-                                        value={val.location}
-                                        onChange={(e) =>
+                                    <Input
+                                        seoedId={'education_location_' + ind}
+                                        id="Location"
+                                        defaultValue={val.location}
+                                        updator={(e) =>
                                             setResumeUserData((prev) =>
                                                 resumeUserDataUpdator<EducationTypeZod>(
                                                     prev,
@@ -389,14 +357,17 @@ export default function StepResumeData({
                                                 )
                                             )
                                         }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                     />
-                                    <textarea
-                                        wrap="hard"
-                                        placeholder="Responsibilities (one per line)"
-                                        rows={3}
-                                        value={val.description || ''}
-                                        onChange={(e) =>
+                                    <DateRangePicker
+                                        start={true}
+                                        current={true}
+                                        end={true}
+                                        uniqueSectionID={'education_date_' + ind}
+                                    />
+                                    <Textarea
+                                        id={'education_description' + ind}
+                                        defaultValue={val.description}
+                                        updator={(e) =>
                                             setResumeUserData((prev) =>
                                                 resumeUserDataUpdator<EducationTypeZod>(
                                                     prev,
@@ -408,7 +379,6 @@ export default function StepResumeData({
                                                 )
                                             )
                                         }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm whitespace-pre focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                     />
                                     <p className="text-dark-muted text-xs">
                                         Tip: Use{' '}
@@ -424,6 +394,21 @@ export default function StepResumeData({
                                 </div>
                             ))}
                             <button
+                                onClick={() =>
+                                    setResumeUserData((prev) => ({
+                                        ...prev,
+                                        education: [
+                                            ...prev.education,
+                                            {
+                                                institute: '',
+                                                course: '',
+                                                description: '',
+                                                location: '',
+                                                startDate: new Date(),
+                                            },
+                                        ],
+                                    }))
+                                }
                                 type="button"
                                 className="border-light-muted rounded-md border px-3 py-2 text-sm hover:scale-105"
                             >
@@ -440,10 +425,11 @@ export default function StepResumeData({
                                     className="border-light-muted space-y-3 rounded-lg border p-4 shadow-sm"
                                     key={ind}
                                 >
-                                    <input
-                                        placeholder="Project Name"
-                                        value={val.name}
-                                        onChange={(e) =>
+                                    <Input
+                                        seoedId={'project_name_' + ind}
+                                        id="Project Name"
+                                        defaultValue={val.name}
+                                        updator={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.project) return prev;
                                                 return resumeUserDataUpdator<ProjectTypeZod>(
@@ -456,11 +442,16 @@ export default function StepResumeData({
                                                 );
                                             })
                                         }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                     />
-                                    <select
-                                        defaultValue={val.type}
-                                        onChange={(e) =>
+                                    <Select
+                                        id={"project_type_"+ind}
+                                        options={[
+                                            'personal',
+                                            'academic',
+                                            'professional',
+                                            'open-source',
+                                        ]}
+                                        updator={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.project) return prev;
                                                 return resumeUserDataUpdator<ProjectTypeZod>(
@@ -473,17 +464,13 @@ export default function StepResumeData({
                                                 );
                                             })
                                         }
-                                        className="border-ui-muted bg-light text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-primary-intense w-full appearance-none rounded-lg border-2 px-4 py-2 pr-10 text-sm capitalize transition outline-none focus:ring-2"
-                                    >
-                                        <option value={'personal'}>personal</option>
-                                        <option value={'academic'}>academic</option>
-                                        <option value={'professional'}>professional</option>
-                                        <option value={'open-source'}>open-source</option>
-                                    </select>
-                                    <input
-                                        placeholder="Code Link"
-                                        value={val.code_link}
-                                        onChange={(e) =>
+                                        defaultValue={val.type}
+                                    />
+                                    <Input
+                                        seoedId={'code_link_' + ind}
+                                        id="Code Link"
+                                        defaultValue={val.code_link}
+                                        updator={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.project) return prev;
                                                 return resumeUserDataUpdator<ProjectTypeZod>(
@@ -496,12 +483,12 @@ export default function StepResumeData({
                                                 );
                                             })
                                         }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                     />
-                                    <input
-                                        placeholder="Preview Link"
-                                        value={val.preview_link}
-                                        onChange={(e) =>
+                                    <Input
+                                        seoedId={'preview_link_' + ind}
+                                        id="Preview Link"
+                                        defaultValue={val.preview_link || ''}
+                                        updator={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.project) return prev;
                                                 return resumeUserDataUpdator<ProjectTypeZod>(
@@ -514,6 +501,75 @@ export default function StepResumeData({
                                                 );
                                             })
                                         }
+                                    />
+                                    <div
+                                        className={
+                                            val.tech_stack.length !== 0
+                                                ? 'mb-4 flex flex-wrap gap-4'
+                                                : 'hidden'
+                                        }
+                                    >
+                                        {val.tech_stack.map((skill, index) => (
+                                            <ArrayInput
+                                                key={index}
+                                                updator={(e) => {
+                                                    setResumeUserData((prev) => {
+                                                        if (!prev.project) return prev;
+                                                        return resumeUserDataUpdator<ProjectTypeZod>(
+                                                            prev,
+                                                            'project', // section key
+                                                            prev.project, // section array
+                                                            ind,
+                                                            'preview_link',
+                                                            val.tech_stack.filter(
+                                                                (val, ind) =>
+                                                                    index !== ind && val !== ''
+                                                            )
+                                                        );
+                                                    });
+
+                                                    setToast({
+                                                        type: 'info',
+                                                        message: `Removed Skill: ${e.currentTarget.innerText}`,
+                                                    });
+                                                }}
+                                                value={skill}
+                                            />
+                                        ))}
+                                    </div>
+                                    <Input
+                                        seoedId={'project_techstack_' + ind}
+                                        type="text"
+                                        id="skills (comma separated)"
+                                        defaultValue={val.tech_stack?.join(', ')}
+                                        updator={(e) =>
+                                            setResumeUserData((prev) => {
+                                                if (!prev.project) return prev;
+
+                                                console.log(e.target.value);
+
+                                                let data = e.target.value.split(', ');
+                                                return resumeUserDataUpdator<ProjectTypeZod>(
+                                                    prev,
+                                                    'project', // section key
+                                                    prev.project, // section array
+                                                    ind,
+                                                    'tech_stack',
+                                                    data
+                                                );
+                                            })
+                                        }
+                                        required
+                                    />
+                                    <p className="text-dark-muted mt-1 text-xs">
+                                        Tip: Click on skill tags to remove skill
+                                    </p>
+                                    <Textarea
+                                        id={'project_description_' + ind}
+                                        defaultValue={val.description}
+                                        updator={(e) =>
+                                            setResumeUserData((prev) => {
+                                                if (!prev.project) return prev;
                                                 return resumeUserDataUpdator<ProjectTypeZod>(
                                                     prev,
                                                     'project', // section key
@@ -524,7 +580,6 @@ export default function StepResumeData({
                                                 );
                                             })
                                         }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm whitespace-pre focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                     />
                                     <p className="text-dark-muted text-xs">
                                         Tip: Use{' '}
@@ -540,10 +595,180 @@ export default function StepResumeData({
                                 </div>
                             ))}
                             <button
+                                onClick={() =>
+                                    setResumeUserData((prev) => {
+                                        if (prev.project === undefined)
+                                            return {
+                                                ...prev,
+                                                project: [
+                                                    {
+                                                        name: '',
+                                                        description: '',
+                                                        code_link: '',
+                                                        tech_stack: [],
+                                                        type: 'personal',
+                                                    },
+                                                ],
+                                            };
+                                        return {
+                                            ...prev,
+                                            project: [
+                                                ...prev.project,
+                                                {
+                                                    name: '',
+                                                    description: '',
+                                                    code_link: '',
+                                                    tech_stack: [],
+                                                    type: 'personal',
+                                                },
+                                            ],
+                                        };
+                                    })
+                                }
                                 type="button"
                                 className="border-light-muted rounded-md border px-3 py-2 text-sm hover:scale-105"
                             >
                                 + Add Project
+                            </button>
+                        </div>
+                    </section>
+
+                    {/* ========== EXPERIENCE ========== */}
+                    <section className="border-dark-muted/25 mt-6 border-t pt-4">
+                        <h2 className="mb-4 text-xl font-semibold">Experience</h2>
+                        <div className="space-y-4">
+                            {resumeUserData.experience?.map((val, ind) => (
+                                <div
+                                    className="border-light-muted space-y-3 rounded-lg border p-4 shadow-sm"
+                                    key={ind}
+                                >
+                                    <Input
+                                        seoedId={'company_name_' + ind}
+                                        id="Company"
+                                        defaultValue={val.company}
+                                        updator={(e) =>
+                                            setResumeUserData((prev) => {
+                                                if (!prev.experience) return prev;
+                                                return resumeUserDataUpdator<ExperienceTypeZod>(
+                                                    prev,
+                                                    'experience', // section key
+                                                    prev.experience, // section array
+                                                    ind,
+                                                    'company',
+                                                    e.target.value
+                                                );
+                                            })
+                                        }
+                                    />
+                                    <Select
+                                        id={"experience_type_"+ind}
+                                        updator={(e: ChangeEvent<HTMLSelectElement>) =>
+                                            setResumeUserData((prev) => {
+                                                if (!prev.experience) return prev;
+                                                return resumeUserDataUpdator<ExperienceTypeZod>(
+                                                    prev,
+                                                    'experience', // section key
+                                                    prev.experience, // section array
+                                                    ind,
+                                                    'workType',
+                                                    e.target.value
+                                                );
+                                            })
+                                        }
+                                        defaultValue={val.workType}
+                                        options={['regular', 'freelance', 'volunteer']}
+                                    />
+                                    <Input
+                                        seoedId={'job_title_' + ind}
+                                        id="Job Title"
+                                        defaultValue={val.title}
+                                        updator={(e) =>
+                                            setResumeUserData((prev) => {
+                                                if (!prev.experience) return prev;
+                                                return resumeUserDataUpdator<ExperienceTypeZod>(
+                                                    prev,
+                                                    'experience', // section key
+                                                    prev.experience, // section array
+                                                    ind,
+                                                    'title',
+                                                    e.target.value
+                                                );
+                                            })
+                                        }
+                                    />
+                                    <DateRangePicker
+                                        start={true}
+                                        current={true}
+                                        end={true}
+                                        uniqueSectionID={'experience_date_' + ind}
+                                    />
+                                    <Textarea
+                                        id={'experience_description_' + ind}
+                                        defaultValue={val.description}
+                                        updator={(e) =>
+                                            setResumeUserData((prev) => {
+                                                if (!prev.experience) return prev;
+                                                return resumeUserDataUpdator<ExperienceTypeZod>(
+                                                    prev,
+                                                    'experience', // section key
+                                                    prev.experience, // section array
+                                                    ind,
+                                                    'description',
+                                                    e.target.value
+                                                );
+                                            })
+                                        }
+                                    />
+                                    <p className="text-dark-muted text-xs">
+                                        Tip: Use{' '}
+                                        <code className="bg-light-muted text-dark-intense p-1">{`[Enter][Dash][Space]`}</code>{' '}
+                                        to make the sentence a bullet-point
+                                    </p>
+                                    <button
+                                        type="button"
+                                        className="text-sm text-red-600 hover:underline"
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
+                            ))}
+                            <button
+                                onClick={() =>
+                                    setResumeUserData((prev) => {
+                                        if (prev.experience === undefined)
+                                            return {
+                                                ...prev,
+                                                experience: [
+                                                    {
+                                                        company: '',
+                                                        description: '',
+                                                        location: '',
+                                                        startDate: new Date(),
+                                                        title: '',
+                                                        workType: 'regular',
+                                                    },
+                                                ],
+                                            };
+                                        return {
+                                            ...prev,
+                                            experience: [
+                                                ...prev.experience,
+                                                {
+                                                    company: '',
+                                                    description: '',
+                                                    location: '',
+                                                    startDate: new Date(),
+                                                    title: '',
+                                                    workType: 'regular',
+                                                },
+                                            ],
+                                        };
+                                    })
+                                }
+                                type="button"
+                                className="border-light-muted rounded-md border px-3 py-2 text-sm hover:scale-105"
+                            >
+                                + Add Experience
                             </button>
                         </div>
                     </section>
@@ -556,9 +781,18 @@ export default function StepResumeData({
                                     className="border-light-muted space-y-3 rounded-lg border p-4 shadow-sm"
                                     key={ind}
                                 >
-                                    <select
+                                    <Select
+                                        id={"achievement_type_"+ind}
+                                        options={[
+                                            'certificate',
+                                            'award',
+                                            'publication',
+                                            'honor',
+                                            'scholarship',
+                                            'other',
+                                        ]}
                                         defaultValue={val.type}
-                                        onChange={(e) =>
+                                        updator={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.achievement) return prev;
                                                 return resumeUserDataUpdator<AchievementTypeZod>(
@@ -571,19 +805,12 @@ export default function StepResumeData({
                                                 );
                                             })
                                         }
-                                        className="border-ui-muted bg-light text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-primary-intense w-full appearance-none rounded-lg border-2 px-4 py-2 pr-10 text-sm capitalize transition outline-none focus:ring-2"
-                                    >
-                                        <option value={'certificate'}>certificate</option>
-                                        <option value={'award'}>award</option>
-                                        <option value={'publication'}>publication</option>
-                                        <option value={'honor'}>honor</option>
-                                        <option value={'scholarship'}>scholarship</option>
-                                        <option value={'other'}>other</option>
-                                    </select>
-                                    <input
-                                        placeholder="Project Name"
-                                        value={val.name}
-                                        onChange={(e) =>
+                                    />
+                                    <Input
+                                        seoedId={'achievement_name_' + ind}
+                                        id="Achievement Name"
+                                        defaultValue={val.name}
+                                        updator={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.achievement) return prev;
                                                 return resumeUserDataUpdator<AchievementTypeZod>(
@@ -596,12 +823,12 @@ export default function StepResumeData({
                                                 );
                                             })
                                         }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                     />
-                                    <input
-                                        placeholder="Code Link"
-                                        value={val.issuer}
-                                        onChange={(e) =>
+                                    <Input
+                                        seoedId={'issuer_' + ind}
+                                        id="Issuer"
+                                        defaultValue={val.issuer}
+                                        updator={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.achievement) return prev;
                                                 return resumeUserDataUpdator<AchievementTypeZod>(
@@ -614,12 +841,12 @@ export default function StepResumeData({
                                                 );
                                             })
                                         }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                     />
-                                    <input
-                                        placeholder="Preview Link"
-                                        value={val.url}
-                                        onChange={(e) =>
+                                    <Input
+                                        seoedId={'url_' + ind}
+                                        id="URL"
+                                        defaultValue={val.url}
+                                        updator={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.achievement) return prev;
                                                 return resumeUserDataUpdator<AchievementTypeZod>(
@@ -632,14 +859,15 @@ export default function StepResumeData({
                                                 );
                                             })
                                         }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                     />
-                                    <textarea
-                                        wrap="hard"
-                                        placeholder="Responsibilities (one per line)"
-                                        rows={3}
-                                        value={val.description}
-                                        onChange={(e) =>
+                                    <DateRangePicker
+                                        start={true}
+                                        uniqueSectionID={'achievement_date_' + ind}
+                                    />
+                                    <Textarea
+                                        id={'achievement_description' + ind}
+                                        defaultValue={val.description}
+                                        updator={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.achievement) return prev;
                                                 return resumeUserDataUpdator<AchievementTypeZod>(
@@ -652,7 +880,6 @@ export default function StepResumeData({
                                                 );
                                             })
                                         }
-                                        className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm whitespace-pre focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                     />
                                     <p className="text-dark-muted text-xs">
                                         Tip: Use{' '}
@@ -668,6 +895,38 @@ export default function StepResumeData({
                                 </div>
                             ))}
                             <button
+                                onClick={() =>
+                                    setResumeUserData((prev) => {
+                                        if (prev.achievement === undefined)
+                                            return {
+                                                ...prev,
+                                                achievement: [
+                                                    {
+                                                        url: '',
+                                                        issuer: '',
+                                                        description: '',
+                                                        name: '',
+                                                        startDate: new Date(),
+                                                        type: 'certificate',
+                                                    },
+                                                ],
+                                            };
+                                        return {
+                                            ...prev,
+                                            achievement: [
+                                                ...prev.achievement,
+                                                {
+                                                    url: '',
+                                                    issuer: '',
+                                                    description: '',
+                                                    name: '',
+                                                    startDate: new Date(),
+                                                    type: 'certificate',
+                                                },
+                                            ],
+                                        };
+                                    })
+                                }
                                 type="button"
                                 className="border-light-muted rounded-md border px-3 py-2 text-sm hover:scale-105"
                             >
@@ -685,9 +944,17 @@ export default function StepResumeData({
                                     key={ind}
                                 >
                                     <div className="grid grid-cols-2 gap-4">
-                                        <select
+                                        <Select
+                                            id={"proficiency_"+ind}
+                                            options={[
+                                                'native',
+                                                'fluent',
+                                                'professional',
+                                                'intermediate',
+                                                'basic',
+                                            ]}
                                             defaultValue={val.proficiency}
-                                            onChange={(e) =>
+                                            updator={(e) =>
                                                 setResumeUserData((prev) => {
                                                     if (!prev.achievement) return prev;
                                                     return resumeUserDataUpdator<LanguageTypeZod>(
@@ -700,18 +967,12 @@ export default function StepResumeData({
                                                     );
                                                 })
                                             }
-                                            className="border-ui-muted bg-light text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-primary-intense w-full appearance-none rounded-lg border-2 px-4 py-2 pr-10 text-sm capitalize transition outline-none focus:ring-2"
-                                        >
-                                            <option value={'native'}>native</option>
-                                            <option value={'fluent'}>fluent</option>
-                                            <option value={'professional'}>professional</option>
-                                            <option value={'intermediate'}>intermediate</option>
-                                            <option value={'basic'}>basic</option>
-                                        </select>
-                                        <input
-                                            placeholder="Preview Link"
-                                            value={val.language}
-                                            onChange={(e) =>
+                                        />
+                                        <Input
+                                            seoedId={'language_'+ind}
+                                            id={"language_"+ind}
+                                            defaultValue={val.language}
+                                            updator={(e) =>
                                                 setResumeUserData((prev) => {
                                                     if (!prev.language) return prev;
                                                     return resumeUserDataUpdator<LanguageTypeZod>(
@@ -724,7 +985,6 @@ export default function StepResumeData({
                                                     );
                                                 })
                                             }
-                                            className="border-light-muted w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
                                         />
                                     </div>
                                     <button
@@ -736,10 +996,34 @@ export default function StepResumeData({
                                 </div>
                             ))}
                             <button
+                                onClick={() =>
+                                    setResumeUserData((prev) => {
+                                        if (prev.language === undefined)
+                                            return {
+                                                ...prev,
+                                                language: [
+                                                    {
+                                                        language: '',
+                                                        proficiency: 'basic',
+                                                    },
+                                                ],
+                                            };
+                                        return {
+                                            ...prev,
+                                            language: [
+                                                ...prev.language,
+                                                {
+                                                    language: '',
+                                                    proficiency: 'basic',
+                                                },
+                                            ],
+                                        };
+                                    })
+                                }
                                 type="button"
                                 className="border-light-muted rounded-md border px-3 py-2 text-sm hover:scale-105"
                             >
-                                + Add Achievements
+                                + Add Language
                             </button>
                         </div>
                     </section>
