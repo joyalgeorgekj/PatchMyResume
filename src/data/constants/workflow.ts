@@ -1,6 +1,6 @@
 import { FaApple, FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { AuthListType, FeatureList, MainWorkFlowSteps, ResumeDataTypeZod } from './types';
+import { AuthListType, FeatureList, MainWorkFlowSteps } from './types';
 
 export const authList: AuthListType[] = [
     {
