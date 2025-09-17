@@ -15,11 +15,11 @@ export default function ProfileAvatar({ session }: { session: Session }) {
                 className="flex items-center gap-2 focus:outline-none"
             >
                 <img
-                    src={session?.user?.image || '/image/default-avatar.jpg'}
+                    src={session?.user?.image || '/image/default_avatar.jpg'}
                     alt="Profile"
                     onError={(e) => {
                         e.currentTarget.onerror = null;
-                        e.currentTarget.src = '/image/default-avatar.jpg';
+                        e.currentTarget.src = '/image/default_avatar.jpg';
                     }}
                     className="border-base text-dark flex h-8 w-8 cursor-pointer items-center justify-center gap-2 rounded-md border-2 text-sm font-medium whitespace-pre shadow-sm transition-all hover:scale-105"
                 />
