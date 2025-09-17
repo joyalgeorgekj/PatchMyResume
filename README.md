@@ -1,6 +1,6 @@
-# PatchMyResume - AI-assisted resume tailoring tool
-
----
+<p align="center">
+    <a href="https://appwrite.io" target="_blank"><img src="./public/image/banner.png" style="width:100%" alt="PatchMyResume banner, with logo and text saying "Build Like a Team of Hundreds"></a>
+</p>
 
 ## 🚀 How It Works (Data Flow & Handling)
 
