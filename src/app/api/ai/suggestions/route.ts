@@ -36,6 +36,18 @@ export async function POST(req: NextRequest) {
     }
     const email = session.user.email;
 
+    if (validateJD(body.jd) === false) {
+        return NextResponse.json(
+            {
+                message: 'Invalid data registered',
+                type: 'info',
+            },
+            {
+                status: 200,
+            }
+        );
+    }
+
     try {
         const existing = await databases.listDocuments(
             process.env.APPWRITE_DB_ID!,
