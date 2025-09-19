@@ -1,8 +1,8 @@
 import LandingWrapper from '@/components/ui/landing/LandingWrapper';
+import { UIProvider } from '@/context/UIContext';
 import { ThemeProvider } from 'next-themes';
 import type { Metadata } from 'next';
 import './globals.css';
-import { UIProvider } from '@/context/UIContext';
 
 export const metadata: Metadata = {
     title: 'PatchMyResume',
