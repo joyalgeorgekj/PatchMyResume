@@ -30,6 +30,8 @@ export default function Main() {
     const [resumeUserData, setResumeUserData] = useState<ResumeDataTypeZod>(ExampleResume);
     // Job Description
     const [jobDescription, setJobDescription] = useState<string>('');
+    // Job Description
+    const [userPref, setUserPref] = useState<string>('');
     // AI
     const [suggestions, setSuggestions] = useState<SuggestionsType | null>(null);
     // Preview
@@ -127,6 +129,10 @@ export default function Main() {
     }, [aiApiModel]);
 
     useEffect(() => {
+        console.log('AI Pref: ', userPref);
+    }, [userPref]);
+
+    useEffect(() => {
         console.log('User Resume Data: ', resumeUserData);
     }, [resumeUserData]);
 
@@ -184,6 +190,8 @@ export default function Main() {
                     )}
                     {step === 3 && (
                         <StepJobDescription
+                            setUserPref={setUserPref}
+                            userPref={userPref}
                             jobDescription={jobDescription}
                             setJobDescription={setJobDescription}
                         />

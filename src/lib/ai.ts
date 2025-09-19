@@ -1,4 +1,4 @@
-export function getResumeSuggestions(jd: string) {
+export function getResumeSuggestions(jd: string, userPref?: string) {
     async function routeFetch() {
         try {
             const res = await fetch('/api/ai/suggestions', {
@@ -6,6 +6,7 @@ export function getResumeSuggestions(jd: string) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     jd: jd,
+                    userPref: userPref
                 }),
             });
 
