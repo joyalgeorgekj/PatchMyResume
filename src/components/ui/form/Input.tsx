@@ -7,7 +7,8 @@ function Input({
     seoedId,
     required=false,
     type='text',
-    keyboard='text'
+    keyboard='text',
+    className=''
 }: {
     defaultValue: string;
     updator: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -15,7 +16,8 @@ function Input({
     seoedId: string;
     required?: boolean;
     type?: HTMLInputTypeAttribute;
-    keyboard?: "email" | "search" | "tel" | "text" | "url" | "none" | "numeric" | "decimal" 
+    keyboard?: "email" | "search" | "tel" | "text" | "url" | "none" | "numeric" | "decimal";
+    className?: string;
 }) {
     return (
         <input
@@ -28,6 +30,7 @@ function Input({
             required={required || false}
             inputMode={keyboard}
             value={defaultValue}
+            className={className}
         />
     );
 }
