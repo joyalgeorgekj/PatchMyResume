@@ -138,7 +138,7 @@ select {
 input:disabled,
 textarea:disabled,
 select:disabled {
-    @apply border-ui-muted bg-light-muted text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-primary-intense w-full appearance-none rounded-lg border-2 px-4 py-2 text-sm transition-all focus:ring-2 focus:outline-none;
+    @apply cursor-not-allowed border-ui-muted bg-light-muted text-dark placeholder-dark-muted focus:border-primary-intense focus:ring-primary-intense w-full appearance-none rounded-lg border-2 px-4 py-2 text-sm transition-all focus:ring-2 focus:outline-none;
 }
 
 /* Chrome, Safari, Edge, Opera */
