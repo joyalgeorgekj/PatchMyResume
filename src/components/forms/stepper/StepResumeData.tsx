@@ -31,6 +31,21 @@ function resumeUserDataUpdator<SectionType>(
     return { ...prev, [sectionKey]: updated };
 }
 
+function resumeUserDataRemover(
+    prev: ResumeDataTypeZod,
+    section: keyof ResumeDataTypeZod,
+    ind: number
+): ResumeDataTypeZod {
+    if (Array.isArray(prev[section]) && prev[section]) {
+        const updated = prev[section];
+        return {
+            ...prev,
+            [section]: updated.filter((_, index) => index !== ind),
+        };
+    }
+    return prev;
+}
+
 export default function StepResumeData({
     resumeUserData,
     setResumeUserData,
@@ -119,7 +134,7 @@ export default function StepResumeData({
                                 <Input
                                     seoedId={'phone_number'}
                                     type="tel"
-                                    keyboard='tel'
+                                    keyboard="tel"
                                     id="phone number"
                                     required={true}
                                     defaultValue={resumeUserData.phone}
@@ -166,7 +181,7 @@ export default function StepResumeData({
                                     key={ind}
                                 >
                                     <Select
-                                        id={"platform_"+ind}
+                                        id={'platform_' + ind}
                                         defaultValue={val.platform}
                                         updator={(e) =>
                                             setResumeUserData((prev) =>
@@ -194,7 +209,7 @@ export default function StepResumeData({
                                         seoedId={val.platform + '_url_' + ind}
                                         type="url"
                                         id="URL"
-                                        keyboard='url'
+                                        keyboard="url"
                                         updator={(e) =>
                                             setResumeUserData((prev) =>
                                                 resumeUserDataUpdator<LinkTypeZod>(
@@ -210,6 +225,11 @@ export default function StepResumeData({
                                         defaultValue={val.url ? val.url : ''}
                                     />
                                     <button
+                                        onClick={() =>
+                                            setResumeUserData((prev) =>
+                                                resumeUserDataRemover(prev, 'links', ind)
+                                            )
+                                        }
                                         type="button"
                                         className="rounded-md border border-red-500 px-3 py-2 text-sm text-red-600 transition hover:scale-105"
                                     >
@@ -386,6 +406,11 @@ export default function StepResumeData({
                                         to make the sentence a bullet-point
                                     </p>
                                     <button
+                                        onClick={() =>
+                                            setResumeUserData((prev) =>
+                                                resumeUserDataRemover(prev, 'education', ind)
+                                            )
+                                        }
                                         type="button"
                                         className="text-sm text-red-600 hover:underline"
                                     >
@@ -444,7 +469,7 @@ export default function StepResumeData({
                                         }
                                     />
                                     <Select
-                                        id={"project_type_"+ind}
+                                        id={'project_type_' + ind}
                                         options={[
                                             'personal',
                                             'academic',
@@ -587,6 +612,11 @@ export default function StepResumeData({
                                         to make the sentence a bullet-point
                                     </p>
                                     <button
+                                        onClick={() =>
+                                            setResumeUserData((prev) =>
+                                                resumeUserDataRemover(prev, 'project', ind)
+                                            )
+                                        }
                                         type="button"
                                         className="text-sm text-red-600 hover:underline"
                                     >
@@ -661,7 +691,7 @@ export default function StepResumeData({
                                         }
                                     />
                                     <Select
-                                        id={"experience_type_"+ind}
+                                        id={'experience_type_' + ind}
                                         updator={(e: ChangeEvent<HTMLSelectElement>) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.experience) return prev;
@@ -725,6 +755,11 @@ export default function StepResumeData({
                                         to make the sentence a bullet-point
                                     </p>
                                     <button
+                                        onClick={() =>
+                                            setResumeUserData((prev) =>
+                                                resumeUserDataRemover(prev, 'experience', ind)
+                                            )
+                                        }
                                         type="button"
                                         className="text-sm text-red-600 hover:underline"
                                     >
@@ -782,7 +817,7 @@ export default function StepResumeData({
                                     key={ind}
                                 >
                                     <Select
-                                        id={"achievement_type_"+ind}
+                                        id={'achievement_type_' + ind}
                                         options={[
                                             'certificate',
                                             'award',
@@ -888,6 +923,11 @@ export default function StepResumeData({
                                     </p>
                                     <button
                                         type="button"
+                                        onClick={() =>
+                                            setResumeUserData((prev) =>
+                                                resumeUserDataRemover(prev, 'achievement', ind)
+                                            )
+                                        }
                                         className="text-sm text-red-600 hover:underline"
                                     >
                                         Remove
@@ -945,7 +985,7 @@ export default function StepResumeData({
                                 >
                                     <div className="grid grid-cols-2 gap-4">
                                         <Select
-                                            id={"proficiency_"+ind}
+                                            id={'proficiency_' + ind}
                                             options={[
                                                 'native',
                                                 'fluent',
@@ -969,8 +1009,8 @@ export default function StepResumeData({
                                             }
                                         />
                                         <Input
-                                            seoedId={'language_'+ind}
-                                            id={"language_"+ind}
+                                            seoedId={'language_' + ind}
+                                            id={'language_' + ind}
                                             defaultValue={val.language}
                                             updator={(e) =>
                                                 setResumeUserData((prev) => {
@@ -989,6 +1029,11 @@ export default function StepResumeData({
                                     </div>
                                     <button
                                         type="button"
+                                        onClick={() =>
+                                            setResumeUserData((prev) =>
+                                                resumeUserDataRemover(prev, 'language', ind)
+                                            )
+                                        }
                                         className="text-sm text-red-600 hover:underline"
                                     >
                                         Remove
@@ -1034,3 +1079,5 @@ export default function StepResumeData({
         </form>
     );
 }
+
+console.log('Writing 1000+ lines of code is good or not?');
