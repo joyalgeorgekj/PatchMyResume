@@ -22,13 +22,18 @@ export default function Header() {
                 {/* Brand */}
                 <Link href="/" className="text-primary flex items-center gap-2 font-bold">
                     <Image
-                        src={'/image/1.png'}
+                        src={'/image/logo.png'}
                         alt="logo"
-                        className="rounded-full"
-                        width={40}
-                        height={40}
+                        className='my-auto drop-shadow-dark-muted/75 drop-shadow-md'
+                        height={60}
+                        width={60}
                     />
-                    <span className="text-lg">PatchMyResume</span>
+                    <h1 className="text-dark text-base/4 pt-2">
+                        PatchMy <br />
+                        <span className="text-primary">Resume</span>
+                        <p className='text-[10px] text-dark uppercase'>AI-Assisted ——— ATS OPTIMIZED</p>
+                    </h1>
+                    <br />
                 </Link>
 
                 {/* Desktop Nav */}
