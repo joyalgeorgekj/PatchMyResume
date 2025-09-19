@@ -78,16 +78,11 @@ export async function POST(req: NextRequest) {
             ),
         });
 
-        console.log(
-            PROMPT +
-                `- Here is the Resume User Data JSON: ${JSON.stringify(existing.documents[0].resume_user_data)}\n\n- This is the Job Description: ${body.jd}`
-        );
-
         const response = await ai.models.generateContent({
             model: existing.documents[0].model,
             contents:
                 PROMPT +
-                `- Here is the Resume User Data JSON: ${JSON.stringify(existing.documents[0].resume_user_data)}\n\n- This is the Job Description: ${body.jd}`,
+                `- Here is the Resume User Data JSON: ${JSON.stringify(existing.documents[0].resume_user_data)}\n\n- This is the Job Description: ${body.jd}\n\n- User Preference: ${validateJD(body.userPref) ? body.userPref : ''}`,
         });
 
         const raw = response.text || '{}';
