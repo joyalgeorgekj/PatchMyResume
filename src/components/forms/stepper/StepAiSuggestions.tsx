@@ -6,7 +6,7 @@ import {
     ResumeDataTypeZod,
     SuggestionsType,
 } from '@/data/constants/types';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 export default function StepAiSuggestions({
     suggestions,
@@ -18,9 +18,6 @@ export default function StepAiSuggestions({
     onGenerate: () => void;
 }) {
     const [selected, setSelected] = useState<{ [section: string]: string[] }>({});
-    useEffect(() => {
-        console.log('selected', Object.keys(selected)[0]);
-    });
 
     function resumeUserDataUpdator<SectionType>(
         prev: ResumeDataTypeZod,
@@ -114,7 +111,7 @@ export default function StepAiSuggestions({
                         <div className="flex flex-col gap-4">
                             {options.length === 0 ? (
                                 <div
-                                    className="flex justify-center items-center w-full aspect-[4/1] border-dashed border-2 border-dark-muted/50 rounded-4xl capitalize"
+                                    className="border-dark-muted/50 flex aspect-[4/1] w-full items-center justify-center rounded-4xl border-2 border-dashed capitalize"
                                     style={{ height: 'fit-content' }}
                                     key={ind}
                                 >
@@ -130,13 +127,13 @@ export default function StepAiSuggestions({
                                         <p>{idx + 1}</p>
                                         <div
                                             className={`h-fit rounded-2xl border p-4 shadow-sm transition ${
-                                                section === Object.keys(selected)[ind] &&
+                                                Object.keys(selected).includes(section) &&
                                                 selected[section][idx] === opt.option1
                                                     ? 'border-secondary'
                                                     : 'border-light bg-light-muted'
                                             }`}
                                         >
-                                            {section === Object.keys(selected)[ind] &&
+                                            {Object.keys(selected).includes(section) &&
                                                 selected[section][idx] === opt.option1 && (
                                                     <span className="border-dark-muted/45 bg-light text-dark inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium">
                                                         Selected
@@ -181,13 +178,13 @@ export default function StepAiSuggestions({
                                         </div>
                                         <div
                                             className={`h-fit rounded-2xl border p-4 shadow-sm transition ${
-                                                section === Object.keys(selected)[ind] &&
+                                                Object.keys(selected).includes(section) &&
                                                 selected[section][idx] === opt.option2
                                                     ? 'border-secondary'
                                                     : 'border-light bg-light-muted'
                                             }`}
                                         >
-                                            {section === Object.keys(selected)[ind] &&
+                                            {Object.keys(selected).includes(section) &&
                                                 selected[section][idx] === opt.option2 && (
                                                     <span className="border-dark-muted/45 bg-light text-dark inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium">
                                                         Selected
