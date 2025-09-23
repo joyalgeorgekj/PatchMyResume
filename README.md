@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://appwrite.io" target="_blank"><img src="./public/image/banner.png" style="width:100%" alt="PatchMyResume banner, with logo and text saying "Build Like a Team of Hundreds"></a>
+    <a href="https://patchmyresume.joyalgeorgekj.com" target="_blank"><img src="./public/image/banner.png" width="830px" height="290px" alt="PatchMyResume banner, with logo and text saying "AI-Assisted and ATS Friendly"></a>
 </p>
 
 ## 🚀 How It Works (Data Flow & Handling)
@@ -10,7 +10,6 @@
 
 2. **Backend**
     - Resume data stored in **Appwrite DB** (per user, tied to their account).
-    - **Prisma** used for **development only** (schema + type safety).
     - No custom sections/items (for now) → strictly controlled schema.
 
 3. **AI Integration**
@@ -132,7 +131,7 @@ export interface ResumeUserDataType {
     phone: string;
     location: string;
     links: {
-        publisher:
+        platform:
             | 'github'
             | 'linkedin'
             | 'portfolio'
