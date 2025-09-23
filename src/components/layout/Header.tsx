@@ -14,7 +14,7 @@ export default function Header() {
     const { data: session, status } = useSession();
     const [drawerOpen, setDrawerOpen] = useState(false);
 
-    const navLinks = session ? [{ href: '/user', label: 'Dashboard' }] : [];
+    const navLinks = status === 'authenticated' ? [{ href: '/user', label: 'Dashboard' }] : [];
 
     return (
         <header className="border-dark-muted/10 bg-light/90 sticky top-0 z-40 border-b backdrop-blur-md">
