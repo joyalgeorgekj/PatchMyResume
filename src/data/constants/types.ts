@@ -202,7 +202,7 @@ export const ResumeSchema = z.object({
     summary: z.string().min(2),
     location: z.string().min(2),
     phone: z.union([z.string().regex(/^[0-9+()\-\s]+$/), z.literal('')]),
-    links: z.array(LinkTypeSchema),
+    links: z.array(LinkTypeSchema).max(3),
     skills: z.array(z.string().min(2)),
     education: z.array(EducationTypeSchema),
     language: z.array(LanguageTypeSchema),
@@ -238,10 +238,10 @@ export type OptionsType = {
 };
 
 export type SuggestionsType = {
-    summary: OptionsType[];
-    experience: OptionsType[];
-    projects: OptionsType[];
-    skills: OptionsType[];
-    education: OptionsType[];
-    achievement: OptionsType[];
+    summary?: OptionsType[];
+    experience?: OptionsType[];
+    projects?: OptionsType[];
+    skills?: OptionsType[];
+    education?: OptionsType[];
+    achievement?: OptionsType[];
 };
