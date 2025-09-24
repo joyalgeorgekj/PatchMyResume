@@ -10,6 +10,7 @@ import { getResumeSuggestions } from '@/lib/ai';
 import { ExampleResume } from '@/data/examples/resume';
 import { STEPS } from '@/data/constants/workflow';
 import { useUserData } from '@/context/UserContext';
+import { generateResume } from '@/lib/template';
 
 export type AiDataType = {
     API_KEY: string;
@@ -78,7 +79,7 @@ export default function Main() {
 
                 setLoader({ active: true, message: 'Formatting data' });
 
-                getResumeSuggestions(jobDescription)
+                getResumeSuggestions(jobDescription, userPref)
                     .then(async (res) => {
                         const messages = [
                             'Sending data to AI',
@@ -106,6 +107,7 @@ export default function Main() {
                 break;
             }
             case 5: {
+                generateResume(final);
                 resumeUserData
                     ? goNext()
                     : setToast({ type: 'success', message: 'Data Successfully Extracted' });
@@ -218,7 +220,7 @@ export default function Main() {
                             Back
                         </button>
 
-                        {step < STEPS.length && (
+                        {step <= STEPS.length && (
                             <button
                                 type="button"
                                 onClick={nextStep}
@@ -228,7 +230,7 @@ export default function Main() {
                             </button>
                         )}
 
-                        {step === STEPS.length && (
+                        {/* {step === STEPS.length && (
                             <button
                                 type="button"
                                 onClick={() => {
@@ -242,7 +244,7 @@ export default function Main() {
                             >
                                 Finish
                             </button>
-                        )}
+                        )} */}
                     </div>
                 </div>
             </section>
