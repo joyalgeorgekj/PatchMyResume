@@ -95,9 +95,11 @@ export async function POST(req: NextRequest) {
             console.error('Failed to parse AI JSON:', cleaned);
             throw e; // or return error response
         }
-
+        console.log(parsed);
+        
         return NextResponse.json(parsed, { status: 200 });
     } catch (error: any) {
+        console.log(error);
         return NextResponse.json(
             { message: error.message, type: 'error' },
             { status: error.status || 500 }
