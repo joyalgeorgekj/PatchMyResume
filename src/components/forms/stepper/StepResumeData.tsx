@@ -880,7 +880,7 @@ export default function StepResumeData({
                                     <Input
                                         seoedId={'url_' + ind}
                                         id="URL"
-                                        defaultValue={val.url}
+                                        defaultValue={val.url || ''}
                                         updator={(e) =>
                                             setResumeUserData((prev) => {
                                                 if (!prev.achievement) return prev;
