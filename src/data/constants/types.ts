@@ -190,7 +190,7 @@ export const ProjectTypeSchema = z.object({
 export const AchievementTypeSchema = z.object({
     type: TypesOfAchievementEnum,
     description: z.string().min(2),
-    url: z.string().min(2),
+    url: z.string().optional(),
     name: z.string().min(2),
     issuer: z.string().min(2),
     date: dateSchema.optional(),
