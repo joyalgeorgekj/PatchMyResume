@@ -53,7 +53,13 @@ export const drawParagraph = (
                     font: style.font,
                     color: style.color,
                 });
-
+                [page, cursorY] = cursorController({
+                    currentY: cursorY,
+                    margin: marginBottom,
+                    page: page,
+                    pdf: doc,
+                    space: lineHeight,
+                });
                 cursorY -= lineHeight;
                 line = word;
 
@@ -77,7 +83,14 @@ export const drawParagraph = (
                     font: style.font,
                     color: style.color,
                 });
-                cursorY -= lineHeight;
+
+                [page, cursorY] = cursorController({
+                    currentY: cursorY,
+                    margin: marginBottom,
+                    page: page,
+                    pdf: doc,
+                    space: lineHeight / 1.5,
+                });
 
                 // Page break check
                 if (cursorY < marginBottom) {
@@ -89,7 +102,13 @@ export const drawParagraph = (
         });
 
         // Extra gap between paragraphs
-        cursorY -= lineHeight / 2;
+        [page, cursorY] = cursorController({
+            currentY: cursorY,
+            margin: marginBottom,
+            page: page,
+            pdf: doc,
+            space: lineHeight / 2,
+        });
     });
 
     return [page, cursorY];
@@ -103,9 +122,16 @@ export const createSectionHeading = (
     topMargin: number,
     width: number,
     leftMargin: number,
-    title: string
+    title: string,
+    pdf: PDFDocument
 ) => {
-    trackerY -= font.heightAtSize(topMargin) + 1.4;
+    [page, trackerY] = cursorController({
+        currentY: trackerY,
+        margin: topMargin,
+        page: page,
+        pdf: pdf,
+        space: 8,
+    });
 
     page.drawText(title, {
         x: leftMargin,
@@ -114,7 +140,13 @@ export const createSectionHeading = (
         font: font,
     });
 
-    trackerY -= 6;
+    [page, trackerY] = cursorController({
+        currentY: trackerY,
+        margin: topMargin,
+        page: page,
+        pdf: pdf,
+        space: 6,
+    });
 
     page.drawLine({
         start: {
@@ -128,8 +160,13 @@ export const createSectionHeading = (
         thickness: 1,
     });
 
-    trackerY -= font.heightAtSize(size);
-    return trackerY;
+    return cursorController({
+        currentY: trackerY,
+        margin: topMargin,
+        page: page,
+        pdf: pdf,
+        space: font.heightAtSize(size),
+    });
 };
 
 export const formatDate = (date: string | Date) => {
@@ -139,7 +176,31 @@ export const formatDate = (date: string | Date) => {
 
         return formated;
     } catch (error) {
-        console.warn('formatDate: ' + error);
-        return 'present';
+        if (date.toString().toLowerCase() !== 'present') console.warn('formatDate: ' + error);
+        return toCamelCase('present');
     }
+};
+
+export const toCamelCase = (str: string) => {
+    let formated = str.split('');
+    formated[0] = formated[0].toUpperCase();
+    return formated.join('');
+};
+
+export const cursorController = ({
+    pdf,
+    page,
+    currentY,
+    space,
+    margin,
+}: {
+    pdf: PDFDocument;
+    page: PDFPage;
+    currentY: number;
+    space: number;
+    margin: number;
+}): [PDFPage, number] => {
+    if (currentY + space <= margin)
+        return [pdf.addPage([page.getWidth(), page.getHeight()]), page.getHeight() - margin];
+    return [page, currentY - space];
 };
