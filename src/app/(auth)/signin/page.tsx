@@ -35,6 +35,16 @@ export default function AuthPage() {
                         <p className="text-dark-muted mb-6 text-center text-sm">
                             Join us today! It's quick and easy.
                         </p>
+                        <p className="text-dark-muted mb-6 text-center text-xs">
+                            *By becoming a user you are agreeing to the{' '}
+                            <a
+                                href="https://patchmyresume.joyalgeorgekj.com/termsandconditions"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                terms and conditions
+                            </a>
+                        </p>
                     </>
                 ) : (
                     <>
@@ -43,6 +53,16 @@ export default function AuthPage() {
                         </h2>
                         <p className="text-dark-muted mb-6 text-center text-sm">
                             Login to continue to your account.
+                        </p>
+                        <p className="text-dark-muted mb-6 text-center text-xs">
+                            *Make sure you are following and agree to the{' '}
+                            <a
+                                href="https://patchmyresume.joyalgeorgekj.com/termsandconditions"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                terms and conditions
+                            </a>
                         </p>
                     </>
                 )}
