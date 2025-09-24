@@ -20,18 +20,24 @@ export default function Header() {
         <header className="border-dark-muted/10 bg-light/90 sticky top-0 z-40 border-b backdrop-blur-md">
             <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-12">
                 {/* Brand */}
-                <Link href="/" className="text-primary flex items-center gap-2 font-bold">
+                <Link
+                    href="/"
+                    className="text-primary flex items-center gap-2 font-bold"
+                    onClick={() => setLoader({ active: true, message: 'Loading Home Route' })}
+                >
                     <Image
                         src={'/image/logo.png'}
                         alt="logo"
-                        className='my-auto drop-shadow-dark-muted/75 drop-shadow-md'
+                        className="drop-shadow-dark-muted/75 my-auto drop-shadow-md"
                         height={60}
                         width={60}
                     />
-                    <h1 className="text-dark text-base/4 pt-2">
+                    <h1 className="text-dark pt-2 text-base/4">
                         PatchMy <br />
                         <span className="text-primary">Resume</span>
-                        <p className='text-[10px] text-dark uppercase'>AI-Assisted ——— ATS OPTIMIZED</p>
+                        <p className="text-dark text-[10px] uppercase">
+                            AI-Assisted ——— ATS OPTIMIZED
+                        </p>
                     </h1>
                     <br />
                 </Link>
@@ -42,6 +48,7 @@ export default function Header() {
                         <Link
                             key={href}
                             href={href}
+                            onClick={() => setLoader({ active: true, message: 'Loading User Route' })}
                             className="hover:text-primary transition-colors"
                         >
                             {label}
