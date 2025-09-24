@@ -14,10 +14,8 @@ const eslintConfig = [
     {
         ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**', 'next-env.d.ts'],
         rules: {
-            // Turn strict errors into warnings (won’t block build)
-            '@typescript-eslint/no-explicit-any': 'off',
-            'prefer-const': 'warn',
-            '@typescript-eslint/no-unused-vars': 'warn',
+            'react/no-unescaped-entities': 'off',
+            '@next/next/no-page-custom-font': 'off',
         },
     },
 ];
