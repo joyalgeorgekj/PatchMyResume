@@ -1,411 +1,242 @@
 <p align="center">
-    <a href="https://patchmyresume.joyalgeorgekj.com" target="_blank"><img src="./public/image/banner.png" width="830px" height="290px" alt="PatchMyResume banner, with logo and text saying "AI-Assisted and ATS Friendly"></a>
+  <a href="https://patchmyresume.joyalgeorgekj.com" target="_blank">
+    <img src="./public/image/banner.png" width="830px" height="290px" alt="PatchMyResume banner, with logo and text saying 'AI-Assisted and ATS Friendly'">
+  </a>
 </p>
 
-## 🚀 How It Works (Data Flow & Handling)
-
-1. **User Input**
-    - Resume data (`ResumeUserDataType`) → structured JSON
-    - Job description → plain text
-
-2. **Backend**
-    - Resume data stored in **Appwrite DB** (per user, tied to their account).
-    - No custom sections/items (for now) → strictly controlled schema.
-
-3. **AI Integration**
-    - Job description processed → keywords extracted.
-    - Resume data + keywords → sent to **Google AI (Gemini)**.
-    - AI returns multiple rewritten suggestions per section.
-
-4. **User Review**
-    - Users choose which AI suggestions to keep.
-    - Suggestions update resume preview dynamically.
-
-5. **Export**
-    - Final tailored resume preview → export as ATS-optimized format.
+<h1 style="text-align: center;">
+PatchMyResume
+</h1>
+<p style="text-align: center;">
+<span style="font-weight: 500; font-size: 20px;">AI-assisted, ATS-friendly resume builder.</span>  <br>
+Tailor your resume to specific job descriptions with the power of Google Gemini AI — you stay in control by choosing which AI suggestions to keep.
+</P>
 
 ---
 
-## 🎨 Design & Styling
+## 🗺️ Table of Contents
 
-### Color System
-
-```
-:root {
-    /* Primary (brand color) */
-    --primary: #e91e63; /* Default (pink, strong brand) */
-    --primary-muted: #f48fb1; /* Muted pink */
-    --primary-intense: #c2185b; /* Deep/intense pink */
-
-    /* Secondary (complements primary, purple-ish) */
-    --secondary: #673ab7;
-    --secondary-muted: #b39ddb;
-    --secondary-intense: #4527a0;
-
-    /* Accent (contrasts both, teal-ish) */
-    --accent: #009688;
-    --accent-muted: #80cbc4;
-    --accent-intense: #00695c;
-
-    /* Light (backgrounds/text in dark mode) */
-    --light: #fafafa;
-    --light-muted: #f0f0f0;
-    --light-intense: #ffffff;
-
-    /* Dark (text in light mode / dark bg in dark mode) */
-    --dark: #212121;
-    --dark-muted: #424242;
-    --dark-intense: #000000;
-
-    /* UI (borders, dividers, subtle contrast) */
-    --ui: #e0e0e0;
-    --ui-muted: #eeeeee;
-    --ui-intense: #bdbdbd;
-}
-
-[data-theme='dark'], .dark {
-    /* Primary (brand pink, adjusted for dark bg) */
-    --primary: #f06292;
-    --primary-muted: #ec407a;
-    --primary-intense: #ff80ab;
-
-    /* Secondary (purple adjusted for dark bg) */
-    --secondary: #9575cd;
-    --secondary-muted: #7e57c2;
-    --secondary-intense: #b388ff;
-
-    /* Accent (teal adjusted for dark bg) */
-    --accent: #4db6ac;
-    --accent-muted: #26a69a;
-    --accent-intense: #64ffda;
-
-    /* Light (light gray text on dark bg) */
-    --dark: #e0e0e0;
-    --dark-muted: #bdbdbd;
-    --dark-intense: #ffffff;
-
-    /* Dark (dark bg variants) */
-    --light: #121212;
-    --light-muted: #1e1e1e;
-    --light-intense: #000000;
-
-    /* UI (dividers, subtle borders) */
-    --ui: #2c2c2c;
-    --ui-muted: #333333;
-    --ui-intense: #444444;
-}
-```
-
-- Using **CSS variables** for themes:
-    - `--primary`, `--secondary`, `--accent`, `--light`, `--dark`, `--ui`
-- Applied with Tailwind like `bg-primary`, `text-dark-muted`, `border-ui`.
-- **No Tailwind default colors** (e.g., `blue-400`).
-- **No `dark:` / `light:` classes** → theme handled via vanilla CSS + NextThemes.
-
-### Breakpoints
-
-```
---breakpoint-mobile: 360px
---breakpoint-tablet: 768px
---breakpoint-laptop: 1280px
---breakpoint-desktop: 1920px
---breakpoint-tv: 2560px
-```
-
-- Custom breakpoints only (not Tailwind defaults).
-
-### Tailwind Rules
-
-- Defaults applied to `input`, `textarea`, `select` with `@apply`.
-- Custom dropdown arrow, hidden `details` markers.
-- Minimal, professional, consistent look.
+1.  [🚀 Features & How It Works](#-features--how-it-works)
+2.  [🧑‍💻 Getting Started (Installation)](#-getting-started-installation)
+3.  [🛠️ Tech Stack](#-tech-stack)
+4.  [🤝 Contribution & Guidance](#-contribution--guidance)
+5.  [🔒 Security & Data Handling](#-security--data-handling)
+6.  [📂 Project Structure](#-project-structure)
+7.  [📌 Roadmap](#-roadmap)
+8.  [📝 License](#-license)
 
 ---
 
-## 📊 Resume Data Structure
+## 🚀 Features & How It Works
 
-```ts
-export interface ResumeUserDataType {
-    name: string;
-    email: string;
-    phone: string;
-    location: string;
-    links: {
-        platform:
-            | 'github'
-            | 'linkedin'
-            | 'portfolio'
-            | 'twitter'
-            | 'dribbble'
-            | 'behance'
-            | 'other';
-        url: string;
-    }[];
-    skills: string[];
-    experience: {
-        company: string;
-        title: string;
-        location: string;
-        startDate: Date;
-        endDate?: Date | 'present';
-        workType: 'regular' | 'freelance' | 'volunteer';
-        description: string;
-    }[];
-    education: {
-        institute: string;
-        course: string;
-        location: string;
-        grade?: {
-            value: string;
-            scale?: 'GPA' | 'Percentage' | 'CGPA' | 'Other';
-        };
-        startDate: Date;
-        endDate?: Date | 'present';
-    }[];
-    language: {
-        language: string;
-        proficiency: 'native' | 'fluent' | 'professional' | 'intermediate' | 'basic';
-    }[];
-    summary?: string;
-    project?: {
-        name: string;
-        type: 'personal' | 'academic' | 'professional' | 'open-source';
-        code_link: string;
-        preview_link: string;
-        tech_stack: string[];
-        description: string;
-    }[];
-    achievement?: {
-        type: 'certificate' | 'award' | 'publication' | 'honor' | 'scholarship' | 'other';
-        description: string;
-        url: string;
-        name: string;
-        issuer: string;
-        date?: Date;
-    }[];
-}
-```
+PatchMyResume focuses on leveraging AI to create perfectly tailored resumes, maximizing your chances against Applicant Tracking Systems (ATS).
 
-- **Dates** stored as separate fields: `startDate`, `endDate`.
-- **Descriptions** accept inline bullet points with `\n- ` for AI + ATS parsing.
-- **No custom sections/items** — only predefined fields (future feature).
+### Key Features
+
+* **AI-Driven Tailoring:** Uses **Google Gemini** to analyze job descriptions and rewrite your resume sections for keyword matching and relevance.
+* **ATS-Optimized Export:** Generates clean, structured PDF resumes that are easily parsed by ATS software using **PDF-LIB**.
+* **Structured Data First:** Collects data using a strict, predefined schema to ensure consistency and quality.
+* **User-Owned AI:** You provide your own API key, giving you control over usage and ensuring your data privacy.
+* **Theming:** Full **Light/Dark** mode support powered by NextThemes.
+
+### How It Works (The Workflow)
+
+1.  **API Key/Model Setup:** You securely provide your Gemini API Key and select your preferred model.
+2.  **Input:** You provide your structured **Resume Data** and the target **Job Description**.
+3.  **AI Processing:** Your data and the job description are sent to the **Google AI (Gemini)** model. Keywords are extracted, and multiple rewritten suggestions are generated for relevant sections (like experience descriptions).
+4.  **User Review:** You review the AI suggestions and dynamically choose which ones to apply to your resume.
+5.  **Export:** The final, tailored resume is exported as a clean, **ATS-friendly PDF**.
 
 ---
 
-## 🧭 UI/UX, SEO, Security, Best Practices
+## 🧑‍💻 Getting Started (Installation)
 
-### UI/UX
+Ready to start patching? Follow these steps to set up the project locally.
 
-- ATS-first, minimal design.
-- No unnecessary sections (e.g., hobbies, interests).
-- Users can edit structured fields & optional free text.
-- Always-preview-before-export approach.
+### Prerequisites
 
-### SEO
+You'll need the following installed:
 
-- Proper `<form>` semantics + `<label>` usage.
-- Optimized meta tags, OpenGraph, sitemap.
-- Goal: rank even on subdomains (community-focused).
+* **Node.js** (v18.x or later)
+* **npm** or **yarn**
+* An **Appwrite** instance (Local or Cloud)
+* A **Google Gemini API Key** (for development/testing the AI feature)
 
-### Security
+### Step-by-Step Setup
 
-- Appwrite handles authentication & database storage.
-- NextAuth for session management.
-- API keys **hashed & stored securely** (never exposed).
-- Validation everywhere (even non-critical fields).
-- Fake session check with IP binding.
+1.  **Clone the Repository:**
+    ```bash
+    git clone [https://github.com/your-username/patchmyresume.git](https://github.com/your-username/patchmyresume.git)
+    cd patchmyresume
+    ```
 
-### Best Practices
+2.  **Install Dependencies:**
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
 
-- No rate limiting (users provide their own API keys).
-- AI prompt sanitization not required (user-owned keys).
-- Consistent error handling with toasts + inline messages.
+3.  **Set Up Environment Variables:** 
+
+    Create a file named `.env` in the root directory and populate it with your credentials. (Refernce `example.env`)
+    
+    *Note: Appwrite setup is required. Refer to the Appwrite docs for schema details matching the `ResumeUserDataType`.*
+
+4.  **Run the Development Server:**
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    ```
+
+    Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Framework** | **Next.js** (App Router) | React framework for routing and server components. |
+| **AI** | **Google AI API (Gemini)** | Core engine for resume rewriting and tailoring. |
+| **Database/Auth** | **Appwrite** | Backend for user and structured resume data storage. |
+| **Auth** | **NextAuth** | Session management and authentication layer. |
+| **Styling** | **TailwindCSS** | Utility-first CSS framework (Customized). |
+| **PDF Generation** | **PDF-LIB** | Generating clean, ATS-friendly PDF documents. |
+| **Language** | **TypeScript** | Statically typed codebase for better stability. |
+| **Testing** | **Jest** + **Playwright** | Unit, integration, and end-to-end testing. |
+| **Theming** | **NextThemes** | Seamless light/dark mode implementation. |
+| **Tooling** | **ZOD, Prettier, VS Code** | Schema validation, code formatting, and development environment. |
+
+---
+
+## 🤝 Contribution & Guidance
+
+We're excited to welcome contributions! Whether you're fixing a bug, suggesting a new feature, or improving documentation, your help is valued.
+
+### Contribution Guidelines
+
+Please read our detailed **[patchmyresume.md](./patchmyresume.md)** for:
+
+* Detailed project philosophy and goals.
+* Instructions for setting up your development environment.
+* Specific conventions for code, commits, and pull requests.
+
+### Quick Start Guide for Developers
+
+1.  **Coding Style:** We strictly follow **TypeScript** and use **Prettier** for formatting. Ensure your code is formatted before committing.
+2.  **Design System:**
+    * **No Tailwind Default Colors:** Stick to the predefined **CSS Variables** (e.g., `--primary`, `--secondary`).
+    * **No `dark:` classes:** Theming is handled globally via vanilla CSS variables and the `[data-theme='dark']` selector.
+3.  **Testing:** We use `jest.config.js` for unit/integration tests and `playwright.config.js` for E2E tests. New features should include relevant test cases.
+
+---
+
+## 🔒 Security & Data Handling
+
+We prioritize user security and data privacy. For detailed security policies and vulnerability reporting, please see **[security.md](./security.md)**.
+
+### Security Principles
+
+* **API Key Protection:** The user's provided Gemini API key is **hashed** (`src/lib/server/crypto.ts`) and stored securely. It is only used server-side (`src/lib/server/appwrite.ts`).
+* **User-Owned Key:** Users are responsible for their own API usage. This is a deliberate design choice for security and cost control.
+* **Authentication:** Robust session management via **NextAuth** and dedicated user routes (`src/app/(auth)/user/page.tsx`).
+
+### Data Flow & Storage
+
+| Data Point | Storage Location | Sharing Policy | Notes |
+| :--- | :--- | :--- | :--- |
+| **User Resume Data** | Appwrite DB & Session Storage | **Private** | Stored securely, accessible only by the logged-in user. |
+| **User API Key (Gemini)** | Appwrite DB (Hashed) | **Private** | Hashed and used server-side only to access the Gemini API. |
+| **Job Description** | Session/Local | **Not Saved** | Used temporarily for a single AI tailoring request. |
+| **AI Suggestions** | Session/Local | **Not Saved** | Discarded after the user makes their selection/moves on. |
+| **Final PDF Resume** | Local User Device | **Not Stored** | Generated client-side (`src/lib/pdfHelpers.ts`) and never stored on our servers. |
 
 ---
 
 ## 📂 Project Structure
 
-- ai suggestion API Route returns Suggestion Type
+The project follows a clean, module-based structure using the Next.js App Router.
+
+````
+
+├── .gitignore
+├── jest.config.js                  \# Jest configuration for unit/integration tests
+├── LICENSE
+├── next.config.ts
+├── package.json
+├── playwright.config.js            \# Playwright configuration for E2E tests
+├── public                          \# Static assets (images, icons)
+│   └── image
+│       ├── banner.png              \# Project banner
+├── README.md
+├── security.md                     \# Detailed security policy and reporting guide
+├── src
+│   ├── app                         \# Next.js App Router root
+│   │   ├── api                     \# API Routes
+│   │   │   ├── ai/.../route.ts     \# AI suggestions endpoint
+│   │   │   ├── appwrite/.../route.ts \# Resume CRUD endpoint
+│   │   │   └── auth/.../route.ts   \# NextAuth catch-all route
+│   │   ├── (auth)                  \# Grouped authentication routes
+│   │   │   ├── signin/page.tsx     \# Sign-in page
+│   │   │   └── user/page.tsx       \# User profile/dashboard page
+│   │   ├── globals.css             \# Global styles and Tailwind imports
+│   │   └── page.tsx                \# Home/Landing page
+│   ├── components
+│   │   ├── forms                   \# Main form logic and components
+│   │   │   └── stepper             \# Core workflow components (steps)
+│   │   ├── layout                  \# Header, Footer, and common layout
+│   │   ├── resume                  \# Components for rendering the resume preview
+│   │   └── ui                      \# General UI elements
+│   │       ├── auth                \# Auth-related UI (ProfileAvatar, ToHome)
+│   │       └── form                \# Reusable form elements (Input, Select, DatePicker)
+│   │       └── landing             \# Landing page components
+│   ├── context                     \# React Contexts
+│   │   ├── UIContext.tsx           \# UI state, theme, and toast management
+│   │   └── UserContext.tsx         \# User state and data
+│   ├── data                        \# Static data, constants, and AI prompts
+│   │   ├── constants/...           \# Types and workflow configurations
+│   │   ├── examples/...            \# Sample data for development/demo
+│   │   ├── prompts/atsPrompt.ts    \# The prompt template for Gemini
+│   │   └── templates               \# Resume PDF template structure
+│   ├── hooks                       \# Custom React hooks
+│   ├── lib                         \# Utility functions
+│   │   ├── ai.ts                   \# Client-side AI utilities
+│   │   ├── appwrite.ts             \# Client-side Appwrite utilities
+│   │   ├── pdfHelpers.ts           \# Functions for PDF creation with PDF-LIB
+│   │   ├── server                  \# Server-only utilities
+│   │   │   └── crypto.ts           \# API key hashing/decryption
+│   │   └── template.ts             \# Template selection and data mapping logic
+│   ├── styles/context.css          \# Context-specific styles (e.g., custom CSS variables)
+│   ├── tests                       \# Placeholder for all test types
+│   └── types                       \# Type definitions
 
 ```
-src
-├── app
-│   ├── api
-│   │   ├── ai
-│   │   │   └── suggestions
-│   │   │       └── route.ts
-```
-
-- crud appwrite db
-
-```
-src
-├── app
-│   │   ├── appwrite
-│   │   │   └── resume
-│   │   │       └── route.ts
-```
-
-- signin route
-
-```
-src
-├── app
-│   │   └── auth
-│   │       └── [...nextauth]
-│   │           └── route.ts
-```
-
-- signin route and user routes
-
-```
-src
-├── app
-│   ├── (auth)
-```
-
-- form elements like button, steppers, editors forms, etc.
-
-```
-src
-├── components
-│   ├── forms
-│   │   ├── AuthButton.tsx
-│   │   ├── JsonEditor.tsx
-│   │   ├── ResumeForm.tsx
-│   │   └── stepper
-│   │       ├── Main.tsx
-│   │       ├── StepAiSuggestions.tsx
-│   │       ├── StepApiModel.tsx
-│   │       ├── StepFinalPreview.tsx
-│   │       ├── StepJobDescription.tsx
-│   │       └── StepResumeData.tsx
-```
-
-- layout common components
-
-```
-src
-├── components
-│   ├── layout
-│   │   ├── Footer.tsx
-│   │   ├── Header.tsx
-│   │   └── ThemeButton.tsx
-```
-
-- common components for main routes
-
-```
-src
-├── components
-│   └── ui
-│       ├── Auth
-│       │   ├── ProfileAvatar.tsx
-│       │   └── ToHome.tsx
-│       └── landing
-│           ├── Feature.tsx
-│           ├── HowItWorks.tsx
-│           ├── LandingWrapper.tsx
-│           └── Main.tsx
-```
-
-- context and its style
-
-```
-src
-├── context
-│   └── UIContext.tsx
-```
-
-- constant datas like prompt, models, example content like Resume data and Job Description, etc.
-
-```
-│   ├── data
-│   │   ├── constants
-│   │   │   ├── types.ts
-│   │   │   └── workflow.ts
-│   │   ├── examples
-│   │   │   ├── jobDescription.ts
-│   │   │   └── resume.ts
-│   │   ├── prompts
-│   │   │   └── atsPrompt.ts
-│   │   └── templates
-```
-
-- custom hooks
-
-```
-src
-├── hooks
-│   └── useHiddenRoutes.tsx
-```
-
-- fucntions common and used in client and server, crypto (encrypt, decrypt) is only used in server and the other 2 used on client to fetch result from its route.
-
-```
-src
-├── lib
-│   ├── ai.ts
-│   ├── appwrite.ts
-│   └── server
-│       └── crypto.ts
-```
-
-- test cases: not yet added.
-
-```
-src
-├── tests
-│   ├── e2e
-│   ├── integration
-│   └── unit
-```
-
-- change in package types from npm library
-
-```
-src
-└── types
-    └── next-auth.d.ts
-```
-
-- styles
-
-```
-src
-├── style.css
-
-```
-
----
-
-## ⚙️ Tech Stack
-
-- **Framework**: Next.js (App Router)
-- **Database/Auth**: Appwrite
-- **Auth**: NextAuth
-- **Theme**: NextThemes
-- **AI**: Google AI API (Gemini)
-- **Testing**: Jest + Playwright
-- **Deployment**: Vercel
-- **Dev Tooling**: Prisma (development only)
-- **Styling**: TailwindCSS (with custom rules, no external component libraries)
 
 ---
 
 ## 📌 Roadmap
 
-- [x] Resume import/export (JSON → ATS-ready)
-- [x] AI rewriting (Gemini)
-- [x] Multiple AI suggestions per section
-- [x] User-controlled preview builder
-- [x] Theming (light/dark/system)
-- [ ] Future: Custom sections/items
-- [ ] Future: More AI model support
-- [ ] Future: Resume template library
+This project is actively maintained. Here's a look at what's complete and what's next.
+
+### Completed (v1.0 Launch)
+
+* [x] Resume import/export (JSON $\to$ ATS-ready PDF)
+* [x] AI rewriting and tailoring (Google Gemini)
+* [x] Multiple AI suggestions per section for user choice
+* [x] User-controlled, dynamic resume preview builder
+* [x] Theming (light/dark/system)
+
+### Future Development
+
+* [ ] **Custom Sections/Items:** Allow users to define their own resume sections (e.g., certifications, publications) beyond the strict schema.
+* [ ] **More AI Model Support:** Integrate other LLM providers (e.g., OpenAI, Claude) for user choice.
+* [ ] **Resume Template Library:** Provide a selection of professional resume design templates.
+* [ ] **Testing Implementation:** Full coverage with Jest (`src/tests/unit`, `integration`) and Playwright (`src/tests/e2e`).
 
 ---
 
 ## 📝 License
 
-Community-focused, free to use and extend. License TBD.
+This project is open-source and community-focused. You are free to use and extend it under the **MIT License**.
