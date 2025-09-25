@@ -1,81 +1,120 @@
-# Security Guidelines
+# 🔒 Security Policy & Guidelines
 
-This document outlines the security precautions implemented in this project.  
-Please review carefully if you are contributing or deploying this application.
-
----
-
-## 🔐 Data Storage
-
-- **API Key**
-  - Encrypted before storing in Appwrite Database.
-  - Decrypted only in-memory when required for API requests.
-  - Never exposed in plaintext.
-
-- **Model**
-  - Stored in Appwrite Database as plain string.
-  - Used to select the AI model for requests.
-
-- **Resume User Data**
-  - Stored in Appwrite Database as stringified JSON.
-  - Only accessible by the authenticated user.
+This document describes the **security measures**, **responsible usage policies**, and **reporting procedures** for PatchMyResume.  
+Please review these carefully if you are deploying or contributing to this project.
 
 ---
 
-## 🌐 API Security
+## 📜 Security Principles
 
-- All API routes are served over **HTTPS**.
-- **Rate limiting** applied:
-  - Max 3 requests per minute per user for AI calls.
-  - Global limit applied per IP to prevent abuse.
-- **Authentication required** for protected routes:
-  - Resume CRUD operations.
-  - AI request endpoints.
+PatchMyResume is designed with the following global standards in mind:
+
+- **Privacy by Design** – We minimize stored data and avoid persisting unnecessary user information.  
+- **OWASP Best Practices** – API, authentication, and session handling follow OWASP security recommendations.  
+- **Data Ownership** – Users own their API keys and resume data.  
+- **Transparency** – Clear terms and warnings are displayed before AI usage.  
+- **Responsible Disclosure** – Security issues must be reported privately before public discussion.
+
+---
+
+## 🔐 Data Storage & Handling
+
+| Data Type | Storage Location | Security Measures | Retention Policy |
+|-----------|-----------------|-------------------|-----------------|
+| **Gemini API Key** | Appwrite DB (hashed) | Secure hash + server-side only | Never exposed in plaintext |
+| **AI Model Choice** | Appwrite DB | Plain string for model selection | Retained until user changes it |
+| **Resume User Data** | Appwrite DB (stringified JSON) | User-only access via Appwrite Auth | Permanent until user deletes |
+| **Job Description** | In-memory (session/local only) | Never saved to DB | Cleared after request |
+| **AI Suggestions** | In-memory (session/local only) | Never stored | Cleared after session |
+| **Final PDF** | Client device only | Generated locally via PDF-LIB | Never uploaded or stored |
+
+---
+
+## 🌐 API & Backend Security
+
+- **Transport Layer**  
+  - All routes served exclusively over **HTTPS**.  
+  - CSRF protection enabled for session-based requests.  
+
+- **Authentication & Authorization**  
+  - Powered by **NextAuth + Appwrite**.  
+  - Protected routes (resume CRUD, AI requests) require valid sessions.  
+  - Access tokens are scoped and time-limited.  
+
+- **Rate Limiting**  
+  - AI requests: **3 requests/minute per user**.  
+  - Global per-IP limit to prevent abuse.  
+  - Repeated violations trigger temporary bans.  
+
+- **Error Responses**  
+  - Generic error messages returned (to avoid information leaks).  
+  - No internal stack traces exposed in production.  
 
 ---
 
 ## 🛡️ User Account Security
 
-- **IP Logging**
-  - Each login stores `user_id + ip + timestamp`.
-  - New IP logins trigger an email notification to the user.
+- **Login Activity Logging**  
+  - Each login stores: `user_id + ip + timestamp`.  
+  - New IP logins trigger email notification.  
 
-- **Session Protection**
-  - Tokens and sessions are validated via Appwrite.
-  - Expired or invalid sessions are denied access.
+- **Session Protection**  
+  - Session tokens validated server-side.  
+  - Expired/invalid sessions are denied automatically.  
+  - No long-lived tokens without refresh cycles.  
+
+- **Password Security**  
+  - Managed fully by Appwrite (secure hashing, salted).  
+  - Project does **not** implement custom password storage.  
 
 ---
 
 ## ⚠️ Usage Warnings
 
-- **AI Requests**
-  - Users provide their own API keys.
-  - Costs are incurred by the user directly with the AI provider.
-  - Application is **not responsible** for any charges.
+- **API Key Ownership**  
+  - Users provide their **own Google Gemini API Key**.  
+  - All costs are billed directly to the user’s Google account.  
+  - The project and maintainers are **not responsible** for usage charges.  
 
-- **Terms & Conditions**
-  - Displayed before first AI call.
-  - Users must agree before continuing.
-  - Consent is required via checkbox confirmation.
+- **Terms & Consent**  
+  - Terms are displayed before first AI request.  
+  - Continuing with the workflow means you agree to it.  
 
 ---
 
-## 🚧 DDoS & Abuse Prevention
+## 🚧 Abuse & DDoS Prevention
 
-- Rate limiting in place (per user and per IP).
-- Public routes restricted to read-only operations.
-- Protected routes require authentication.
-- Requests are monitored and suspicious activity is logged.
+- Rate limiting applied at both **user** and **IP** levels.  
+- Public routes restricted to **read-only**.  
+- Authenticated routes require valid sessions.  
+- Suspicious requests are logged and may be blocked.  
+
+---
+
+## 📢 Reporting Security Issues
+
+We take security seriously.  
+If you discover a vulnerability or security concern:
+
+1. **Do NOT disclose publicly** in Discussions or PRs.  
+2. Open a **GitHub Issue** with the label **`security`**.  
+3. Provide a clear description (steps to reproduce, impact, and suggested fix if possible).  
+
+We will review and patch issues as quickly as possible.  
 
 ---
 
 ## ✅ Summary
 
-This project uses:
-- Encrypted API key storage.
-- Strict route and API restrictions.
-- Rate limiting and DDoS protection.
-- User login monitoring and alerts.
-- Transparent terms and warnings for AI usage.
+PatchMyResume follows a **secure-by-default** approach:
 
-These measures provide a **secure baseline** for development and deployment.
+- ✅ API keys hashed & stored securely  
+- ✅ User data private to account owner  
+- ✅ HTTPS, rate limiting, and auth enforced  
+- ✅ AI requests never persist sensitive info  
+- ✅ Transparent terms & consent before AI usage  
+- ✅ Responsible disclosure via GitHub Issues (`security` label)  
+
+These measures provide a **global standard security baseline** for development, contribution, and deployment.
+
+> If you wish to not provide any data to us, feel free to host locally by following the Installation Guide in [Readme.md](./README.md)!
