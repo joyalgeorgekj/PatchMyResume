@@ -93,14 +93,14 @@ PatchMyResume is designed with the following global standards in mind:
 
 ## 📢 Reporting Security Issues
 
-We take security seriously.  
-If you discover a vulnerability or security concern:
+We take security seriously. If you discover a vulnerability or security concern:
 
-1. **Do NOT disclose publicly** in Discussions or PRs.  
-2. Open a **GitHub Issue** with the label **`security`**.  
-3. Provide a clear description (steps to reproduce, impact, and suggested fix if possible).  
+1. **Use the official Private Vulnerability Reporting channel.**
+2. On the repository main page, click the **Security** tab, then **Report a vulnerability**.
+3. **Do NOT disclose publicly** in Discussions, PRs, or public Issues.
+4. Provide a clear description (steps to reproduce, impact, and suggested fix if possible).
 
-We will review and patch issues as quickly as possible.  
+We will review and patch issues as quickly as possible, collaborating privately via the GitHub Advisory process.
 
 ---
 
