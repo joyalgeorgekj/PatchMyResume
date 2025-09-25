@@ -5,6 +5,20 @@ By participating, you agree to uphold this Code of Conduct to foster a welcoming
 
 ---
 
+## 🗺️ Table of Contents (Added for clarity)
+
+1.  [🤝 Our Pledge](#our-pledge)
+2.  [🌟 Our Standards](#our-standards)
+3.  [🛡️ Enforcement Responsibilities](#enforcement-responsibilities)
+4.  [🚩 Reporting Misconduct](#reporting-misconduct)
+5.  [📌 Scope](#scope)
+6.  [✅ Attribution](#attribution)
+7.  [🌱 Commitment](#commitment)
+
+---
+
+<a name="our-pledge" id="our-pledge"></a>
+
 ## 🤝 Our Pledge
 
 In the interest of fostering an open and welcoming environment, we pledge to:
@@ -15,6 +29,8 @@ In the interest of fostering an open and welcoming environment, we pledge to:
 - Create a collaborative and safe environment where knowledge sharing is prioritized.
 
 ---
+
+<a name="our-standards" id="our-standards"></a>
 
 ## 🌟 Our Standards
 
@@ -36,6 +52,8 @@ In the interest of fostering an open and welcoming environment, we pledge to:
 
 ---
 
+<a name="enforcement-responsibilities" id="enforcement-responsibilities"></a>
+
 ## 🛡️ Enforcement Responsibilities
 
 - Project maintainers are responsible for clarifying the standards of acceptable behavior.  
@@ -44,15 +62,20 @@ In the interest of fostering an open and welcoming environment, we pledge to:
 
 ---
 
+<a name="reporting-misconduct" id="reporting-misconduct"></a>
+
 ## 🚩 Reporting Misconduct
 
 If you witness or are subject to unacceptable behavior:
 
-1. Report the incident privately via a **GitHub Issue** labeled `conduct` (for non-sensitive cases).  
-2. For sensitive issues, contact the maintainers directly through their GitHub profile or via email (if listed).  
-3. All reports will be reviewed and investigated confidentially.  
+1. **Use the Private GitHub Reporting Channel.**
+2. **For all issues (including sensitive ones), click the 'Security' tab and select 'Report a vulnerability'.** This creates a private Draft Security Advisory.
+3. If the report is non-sensitive conduct related (e.g., inappropriate public comments), you may also contact the maintainers directly through their GitHub profile.
+4. All reports will be reviewed and investigated confidentially.  
 
 ---
+
+<a name="scope" id="scope"></a>
 
 ## 📌 Scope
 
@@ -64,11 +87,15 @@ This Code of Conduct applies to:
 
 ---
 
+<a name="attribution" id="attribution"></a>
+
 ## ✅ Attribution
 
 This Code of Conduct is adapted from the **[Contributor Covenant v2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html)**, a widely adopted standard for open-source communities.
 
 ---
+
+<a name="commitment" id="commitment"></a>
 
 ## 🌱 Commitment
 

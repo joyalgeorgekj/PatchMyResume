@@ -6,14 +6,18 @@ This document outlines the coding standards, file conventions, and contribution 
 
 ## 🗺️ Table of Contents
 
-1.  [🛠️ Tools & Environment](#-tools--environment)
-2.  [📂 File Structure & Naming](#-file-structure--naming)
-3.  [✍️ Code Style & Conventions](#-code-style--conventions)
-4.  [🎨 Styling Conventions (TailwindCSS)](#-styling-conventions-tailwindcss)
-5.  [🔄 Contribution Workflow & Commits](#-contribution-workflow--commits)
-6.  [🔐 Security & Environment Variables](#-security--environment-variables)
+1.  [🛠️ Tools & Environment](#tools-environment)
+2.  [📂 File Structure & Naming](#file-structure-naming)
+3.  [✍️ Code Style & Conventions](#code-style-conventions)
+4.  [🎨 Styling Conventions (TailwindCSS)](#styling-conventions-tailwindcss)
+5.  [🔄 Contribution Workflow & Commits](#contribution-workflow-commits)
+6.  [🔐 Security & Environment Variables](#security-environment-variables)
+
+
+
 
 ---
+<a name="tools-environment" id="tools-environment"></a>
 
 ## 1. 🛠️ Tools & Environment
 
@@ -27,6 +31,8 @@ This document outlines the coding standards, file conventions, and contribution 
 * **Linting:** Follow the linting rules enforced by the project setup.
 
 ---
+
+<a name="file-structure-naming" id="file-structure-naming"></a>
 
 ## 2. 📂 File Structure & Naming
 
@@ -63,6 +69,8 @@ This document outlines the coding standards, file conventions, and contribution 
     3.  Local Utilities/Types (Hooks, Libs, Data, Styles)
 
 ---
+
+<a name="code-style-conventions" id="code-style-conventions"></a>
 
 ## 3. ✍️ Code Style & Conventions
 
@@ -102,6 +110,8 @@ This document outlines the coding standards, file conventions, and contribution 
 
 ---
 
+<a name="styling-conventions-tailwindcss" id="styling-conventions-tailwindcss"></a>
+
 ## 4. 🎨 Styling Conventions (TailwindCSS)
 
 ### 4.1 Custom Theme Colors
@@ -134,6 +144,8 @@ This document outlines the coding standards, file conventions, and contribution 
 
 ---
 
+<a name="contribution-workflow-commits" id="contribution-workflow-commits"></a>
+
 ## 5. 🔄 Contribution Workflow & Commits
 
 ### 5.1 Branching
@@ -150,12 +162,15 @@ This document outlines the coding standards, file conventions, and contribution 
 | **`feat:`** | A new feature or major addition. | `feat: implement PDF-LIB for export` |
 | **`fix:`** | A bug fix. | `fix: correct Appwrite response handling` |
 | **`docs:`** | Changes to documentation only. | `docs: update README with new section` |
+| **`ai:`** | Changes to AI model logic, prompts, or model selection. | `ai: refine ATS prompt for better keyword matching` |
 | **`style:`** | Formatting, missing semi-colons, whitespace. | `style: reorder tailwind classes in button` |
 | **`refactor:`** | Code restructure without changing behavior. | `refactor: move form inputs to dedicated ui folder` |
 | **`test:`** | Adding or correcting tests. | `test: add e2e test for signin flow` |
 | **`chore:`** | Maintenance tasks, config, dependency updates. | `chore: update next.config and package-lock` |
 
 ---
+
+<a name="security-environment-variables" id="security-environment-variables"></a>
 
 ## 6. 🔐 Security & Environment Variables
 
@@ -168,4 +183,4 @@ This document outlines the coding standards, file conventions, and contribution 
 ### 6.2 Sensitive Data
 
 * User API keys must be handled server-side (`src/lib/server/crypto.ts`) and **hashed** before database storage.
-* For detailed security practices, refer to **[security.md](./security.md)**.
+* For detailed security practices, refer to the **[Security Policy](./security.md)** and report vulnerabilities using the **private reporting channel** (Security tab $\rightarrow$ Report a vulnerability).

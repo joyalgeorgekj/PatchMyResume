@@ -5,6 +5,21 @@ Please review these carefully if you are deploying or contributing to this proje
 
 ---
 
+## 🗺️ Table of Contents
+
+1.  [📜 Security Principles](#security-principles)
+2.  [🔐 Data Storage & Handling](#data-storage-handling)
+3.  [🌐 API & Backend Security](#api-backend-security)
+4.  [🛡️ User Account Security](#user-account-security)
+5.  [⚠️ Usage Warnings](#usage-warnings)
+6.  [🚧 Abuse & DDoS Prevention](#abuse-ddos-prevention)
+7.  [📢 Reporting Security Issues](#reporting-security-issues)
+8.  [✅ Summary](#summary)
+
+---
+
+<a name="security-principles" id="security-principles"></a>
+
 ## 📜 Security Principles
 
 PatchMyResume is designed with the following global standards in mind:
@@ -16,6 +31,8 @@ PatchMyResume is designed with the following global standards in mind:
 - **Responsible Disclosure** – Security issues must be reported privately before public discussion.
 
 ---
+
+<a name="data-storage-handling" id="data-storage-handling"></a>
 
 ## 🔐 Data Storage & Handling
 
@@ -29,6 +46,8 @@ PatchMyResume is designed with the following global standards in mind:
 | **Final PDF** | Client device only | Generated locally via PDF-LIB | Never uploaded or stored |
 
 ---
+
+<a name="api-backend-security" id="api-backend-security"></a>
 
 ## 🌐 API & Backend Security
 
@@ -52,6 +71,8 @@ PatchMyResume is designed with the following global standards in mind:
 
 ---
 
+<a name="user-account-security" id="user-account-security"></a>
+
 ## 🛡️ User Account Security
 
 - **Login Activity Logging**  
@@ -69,6 +90,8 @@ PatchMyResume is designed with the following global standards in mind:
 
 ---
 
+<a name="usage-warnings" id="usage-warnings"></a>
+
 ## ⚠️ Usage Warnings
 
 - **API Key Ownership**  
@@ -82,6 +105,8 @@ PatchMyResume is designed with the following global standards in mind:
 
 ---
 
+<a name="abuse-ddos-prevention" id="abuse-ddos-prevention"></a>
+
 ## 🚧 Abuse & DDoS Prevention
 
 - Rate limiting applied at both **user** and **IP** levels.  
@@ -90,6 +115,8 @@ PatchMyResume is designed with the following global standards in mind:
 - Suspicious requests are logged and may be blocked.  
 
 ---
+
+<a name="reporting-security-issues" id="reporting-security-issues"></a>
 
 ## 📢 Reporting Security Issues
 
@@ -103,6 +130,8 @@ We take security seriously. If you discover a vulnerability or security concern:
 We will review and patch issues as quickly as possible, collaborating privately via the GitHub Advisory process.
 
 ---
+
+<a name="summary" id="summary"></a>
 
 ## ✅ Summary
 

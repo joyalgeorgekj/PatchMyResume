@@ -1,13 +1,13 @@
 <div align="center">
-	<br>
-	<br>
+  <br>
+  <br>
     <picture>
       <source media="(prefers-color-scheme: light)" srcset="./src/assets/images/light.png">
       <source media="(prefers-color-scheme: dark)" srcset="./src/assets/images/dark.png">
       <img src="./src/assets/images/dark.png" alt="react-bits logo" width="1000">
     </picture>
-	<br>
-	<br>
+  <br>
+  <br>
 </div>
 
 <p align="center" style="margin: 0; padding: 0;">
@@ -43,16 +43,17 @@
 
 ## 🗺️ Table of Contents
 
-1.  [🚀 Features & How It Works](#-features--how-it-works)
-2.  [🧑‍💻 Getting Started (Installation)](#-getting-started-installation)
-3.  [🛠️ Tech Stack](#-tech-stack)
-4.  [🤝 Contribution & Guidance](#-contribution--guidance)
-5.  [🔒 Security & Data Handling](#-security--data-handling)
-6.  [📂 Project Structure](#-project-structure)
-7.  [📌 Roadmap](#-roadmap)
-8.  [📝 License](#-license)
+1.  [🚀 Features & How It Works](#features--how-it-works)
+2.  [🧑‍💻 Getting Started (Installation)](#getting-started-installation)
+3.  [🛠️ Tech Stack](#tech-stack)
+4.  [🤝 Contribution & Guidance](#contribution-guidance)
+5.  [🔒 Security & Data Handling](#security-data-handling)
+6.  [📂 Project Structure](#project-structure)
+7.  [📌 Roadmap](#roadmap)
+8.  [📝 License](#license)
 
 ---
+<a name="features--how-it-works" id="features--how-it-works"></a>
 
 ## 🚀 Features & How It Works
 
@@ -75,6 +76,7 @@ PatchMyResume focuses on leveraging AI to create perfectly tailored resumes, max
 5.  **Export:** The final, tailored resume is exported as a clean, **ATS-friendly PDF**.
 
 ---
+<a name="getting-started-installation" id="getting-started-installation"></a>
 
 ## 🧑‍💻 Getting Started (Installation)
 
@@ -85,7 +87,7 @@ Ready to start patching? Follow these steps to set up the project locally.
 You'll need the following installed:
 
 - **Node.js** (v18.x or later)
-- **npm** or **yarn**
+- **npm**, **pnpm** or **yarn**
 - An **Appwrite** instance (Local or Cloud)
 - A **Google Gemini API Key** (for development/testing the AI feature)
 
@@ -94,110 +96,68 @@ You'll need the following installed:
 1.  **Clone the Repository:**
 
     ```bash
-    git clone [https://github.com/your-username/patchmyresume.git](https://github.com/your-username/patchmyresume.git)
+    git clone [https://github.com/Joyal-George-KJ/PatchMyResume.git](https://github.com/Joyal-George-KJ/PatchMyResume.git)
     cd patchmyresume
     ```
 
-2.  **Install Dependencies:**
+2.  **Install Dependencies (using pnpm):**
 
     ```bash
-    npm install
-    # or
-    yarn install
+    pnpm install
     ```
 
 3.  **Set Up Environment Variables:**
 
-    Create a file named `.env` in the root directory and populate it with your credentials. (Refernce `example.env`)
+    Create a file named `.env` in the root directory and populate it with your credentials. (Refer to `example.env.local` or the Appwrite documentation for required variables.)
 
     _Note: Appwrite setup is required. Refer to the Appwrite docs for schema details matching the `ResumeUserDataType`._
 
 4.  **Run the Development Server:**
 
     ```bash
-    npm run dev
-    # or
-    yarn dev
+    pnpm dev
     ```
 
     Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
 ---
 
+<a name="tech-stack" id="tech-stack"></a>
+
 ## 🛠️ Tech Stack
 
-### **Framework**
+PatchMyResume is built on a modern, secure, and performant stack.
 
-  <a href="https://www.google.com/search?q=nextjs+react+nodejs">
-    <img src="https://skillicons.dev/icons?i=nextjs,react,nodejs" />
-  </a>
+### Core Architecture
 
-### **Database**
+| Category | Tools | Purpose |
+| :--- | :--- | :--- |
+| **Framework** | <img src="https://skillicons.dev/icons?i=nextjs,react,ts,nodejs" /> | Next.js (App Router), React, TypeScript, Node.js. |
+| **Styling** | <img src="https://skillicons.dev/icons?i=tailwind" /> | Tailwind CSS for utility-first styling. |
+| **Database/Auth** | <img src="https://skillicons.dev/icons?i=appwrite" /> | Appwrite for Backend-as-a-Service (BaaS), handling data storage and sessions. |
+| **Generative AI** | <img src="https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white" /> | Google Gemini API for resume tailoring and suggestions. |
 
-  <a href="https://appwrite.io">
-    <img src="https://skillicons.dev/icons?i=appwrite" />
-  </a>
+### Development & DevOps
 
-### **Styling**
+| Category | Tools | Notes |
+| :--- | :--- | :--- |
+| **Package Manager** | <img src="https://skillicons.dev/icons?i=pnpm,npm,yarn" /> | pnpm (Recommended) for fast, efficient dependency management. |
+| **Testing** | <img src="https://skillicons.dev/icons?i=jest" /> | Jest for unit testing; Playwright is configured for End-to-End (E2E) testing. |
+| **Deployment** | <img src="https://img.shields.io/badge/Vercel-black?style=for-the-badge&logo=vercel" /> | Deployed via Vercel for continuous integration and hosting. |
+| **Version Control** | <img src="https://skillicons.dev/icons?i=git,github" /> | Git and GitHub for collaborative development. |
 
-  <a href="https://www.google.com/search?q=css+tailwind">
-    <img src="https://skillicons.dev/icons?i=css,tailwind" />
-  </a>
+### Auth Providers
 
-### **Version Control**
+The application supports authentication via popular third-party services using **NextAuth**:
 
-  <a href="https://www.google.com/search?q=git+github">
-    <img src="https://skillicons.dev/icons?i=git,github" />
-  </a>
-
-### **Markup Languages**
-
-  <a href="https://www.google.com/search?q=html+htmx+md">
-    <img src="https://skillicons.dev/icons?i=html,htmx,md" />
-  </a>
-
-### **Programming Languages**
-
-  <a href="https://www.google.com/search?q=js+ts">
-    <img src="https://skillicons.dev/icons?i=js,ts" />
-  </a>
-  
-### **Testing**
-  <a href="https://www.google.com/search?q=jest">
-    <img src="https://skillicons.dev/icons?i=jest" />
-  </a>
-
-### **Auth**
-
-  <a href="https://www.google.com/search?q=linkedin">
-    <img src="https://skillicons.dev/icons?i=linkedin,google,github" />
-  </a>
-
-### **Supported OS**
-
-  <a href="https://www.google.com/search?q=linux+windows+apple">
-    <img src="https://skillicons.dev/icons?i=linux,windows,apple" />
-  </a>
-
-### **Package Manager**
-
-  <a href="https://www.google.com/search?q=npm+pnpm+yarn">
-    <img src="https://skillicons.dev/icons?i=npm,pnpm,yarn" />
-  </a>
-
-### **Browse Support**
-
-  <a href="https://www.google.com/search?q=chrome+firefox+edge">
-    Chrome
-  </a> | 
-  <a href="https://www.google.com/search?q=chrome+firefox+edge">
-    Firefox
-  </a> | 
-  <a href="https://www.google.com/search?q=chrome+firefox+edge">
-    Edge
-  </a>
+<p align="left">
+    <img src="https://skillicons.dev/icons?i=linkedin,github" />
+    <img src="https://img.shields.io/badge/Google-white?style=for-the-badge&logo=google&logoColor=Black" />
+</p>
 
 ---
+
+<a name="contribution-guidance" id="contribution-guidance"></a>
 
 ## 🤝 Contribution & Guidance
 
@@ -221,9 +181,16 @@ Please read our detailed **[Contribution Guidelines](./CONTRIBUTING.md)** for:
 
 ---
 
+<a name="security-data-handling" id="security-data-handling"></a>
+
 ## 🔒 Security & Data Handling
 
 We prioritize user security and data privacy. For detailed security policies and vulnerability reporting, please see **[security.md](./security.md)**.
+
+### ⚠️ IMPORTANT: Private Vulnerability Reporting
+
+If you find a security vulnerability, **DO NOT** create a public GitHub Issue. Please report it privately using the designated channel:
+- Navigate to the **Security** tab of this repository and click **"Report a vulnerability"** to create a private Draft Security Advisory.
 
 ### Security Principles
 
@@ -235,13 +202,15 @@ We prioritize user security and data privacy. For detailed security policies and
 
 | Data Point                | Storage Location              | Sharing Policy | Notes                                                                            |
 | :------------------------ | :---------------------------- | :------------- | :------------------------------------------------------------------------------- |
-| **User Resume Data**      | Appwrite DB & Session Storage | **Private**    | Stored securely, accessible only by the logged-in user.                          |
-| **User API Key (Gemini)** | Appwrite DB (Hashed)          | **Private**    | Hashed and used server-side only to access the Gemini API.                       |
-| **Job Description**       | Session/Local                 | **Not Saved**  | Used temporarily for a single AI tailoring request.                              |
-| **AI Suggestions**        | Session/Local                 | **Not Saved**  | Discarded after the user makes their selection/moves on.                         |
-| **Final PDF Resume**      | Local User Device             | **Not Stored** | Generated client-side (`src/lib/pdfHelpers.ts`) and never stored on our servers. |
+| **User Resume Data** | Appwrite DB & Session Storage | **Private** | Stored securely, accessible only by the logged-in user.                          |
+| **User API Key (Gemini)** | Appwrite DB (Hashed)          | **Private** | Hashed and used server-side only to access the Gemini API.                       |
+| **Job Description** | Session/Local                 | **Not Saved** | Used temporarily for a single AI tailoring request.                              |
+| **AI Suggestions** | Session/Local                 | **Not Saved** | Discarded after the user makes their selection/moves on.                         |
+| **Final PDF Resume** | Local User Device             | **Not Stored** | Generated client-side (`src/lib/pdfHelpers.ts`) and never stored on our servers. |
 
 ---
+
+<a name="project-structure" id="project-structure"></a>
 
 ## 📂 Project Structure
 
@@ -304,6 +273,8 @@ PatchMyResume
 
 ---
 
+<a name="roadmap" id="roadmap"></a>
+
 ## 📌 Roadmap
 
 This project is actively maintained. Here's a look at what's complete and what's next.
@@ -324,6 +295,8 @@ This project is actively maintained. Here's a look at what's complete and what's
 - [ ] **Testing Implementation:** Full coverage with Jest (`src/tests/unit`, `integration`) and Playwright (`src/tests/e2e`).
 
 ---
+
+<a name="license" id="license"></a>
 
 ## 📝 License
 
