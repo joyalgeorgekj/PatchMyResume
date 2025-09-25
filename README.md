@@ -80,7 +80,7 @@ You'll need the following installed:
 3.  **Set Up Environment Variables:** 
 
     Create a file named `.env` in the root directory and populate it with your credentials. (Refernce `example.env`)
-    
+
     *Note: Appwrite setup is required. Refer to the Appwrite docs for schema details matching the `ResumeUserDataType`.*
 
 4.  **Run the Development Server:**
@@ -212,7 +212,8 @@ The project follows a clean, module-based structure using the Next.js App Router
 │   ├── tests                       \# Placeholder for all test types
 │   └── types                       \# Type definitions
 
-```
+
+````
 
 ---
 
