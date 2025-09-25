@@ -5,10 +5,6 @@ blank_issues_enabled: false
 
 # Custom links to direct users to other resources
 contact_links:
-  - name: 🔐 Report a Security Vulnerability
-    url: https://github.com/Joyal-George-KJ/PatchMyResume/security/policy
-    about: Please report security vulnerabilities privately via our defined security policy.
-
   - name: 💬 Ask a Quick Question / Get Support
     url: https://github.com/Joyal-George-KJ/PatchMyResume/discussions
     about: If your query is not a bug or feature, please use Discussions or another support channel.
