@@ -1,0 +1,41 @@
+# .github/ISSUE_TEMPLATE/chore.yml
+name: "🧹 Chore/Dependencies"
+description: Administrative tasks, dependency updates, and environment configuration.
+title: "[CHORE]: "
+labels: ["type:chore", "status:triage", "priority:low"]
+assignees: ["Joyal-George-KJ"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Tasks for dependency management, build configuration, secrets, or other non-code-changing administrative work.
+
+  - type: dropdown
+    id: chore-type
+    attributes:
+      label: 🛠️ Type of Chore
+      options:
+        - deps (Dependency update/security patch)
+        - area:infra (Vercel, CI/CD, deployment config)
+        - area:auth (NextAuth setup/keys/secrets)
+        - area:tests (Testing configuration only)
+        - area:docs (Administrative doc change, e.g., LICENSE)
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Task Details (REQUIRED)
+      description: What specific change is needed? (e.g., "Update package X from 1.0.0 to 1.1.0," or "Add Vercel environment variable Y.")
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: duplicate-check
+    attributes:
+      label: Duplicate Check
+      description: Have you searched our existing issues to ensure this is not a duplicate?
+      options:
+        - label: I have checked the existing issues and this is not a duplicate.
+          required: true

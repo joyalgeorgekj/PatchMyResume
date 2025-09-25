@@ -1,0 +1,51 @@
+name: "🧠 AI/Model Logic"
+description: "Issues related to prompt engineering, Gemini API calls, or AI feature behavior."
+title: "[AI]: "
+labels: ["area:ai", "type:enhancement", "status:triage"]
+assignees: ["Joyal-George-KJ"]
+body:
+  - type: checkboxes
+    id: duplicate-check
+    attributes:
+      label: Duplicate Check
+      description: Have you searched our existing issues to ensure this is not a duplicate?
+      options:
+        - label: I have checked the existing issues and this is not a duplicate.
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for tasks involving model integration, prompt tuning, cost optimization, or new AI-driven features.
+
+  - type: dropdown
+    id: ai-area
+    attributes:
+      label: 📍 Area of AI System Affected
+      description: Which part of the AI logic does this task relate to?
+      options:
+        - src/data/prompts/ (Prompt engineering/tuning)
+        - src/lib/ai.ts (Client-side logic/handling)
+        - app/api/ai/... (Server-side API route)
+        - Cost/Rate Limiting
+        - New Feature
+    validations:
+      required: true
+
+  - type: textarea
+    id: task-description
+    attributes:
+      label: 📝 Task Description and Goals (REQUIRED)
+      description: Clearly describe the change needed. If its a prompt change, provide the new or modified prompt here.
+      placeholder: The ATS prompt needs to be updated to emphasize specific verb use.
+    validations:
+      required: true
+
+  - type: textarea
+    id: success-metrics
+    attributes:
+      label: ✅ Definition of Success
+      description: How will we know this AI task is complete and successful (e.g., "Latency is reduced by 10%" or "Model output uses format X consistently")?
+    validations:
+      required: true
+

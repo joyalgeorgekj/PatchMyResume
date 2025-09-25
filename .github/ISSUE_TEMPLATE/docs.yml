@@ -1,0 +1,52 @@
+name: "📖 Documentation / Content"
+description: "Report missing, incorrect, or confusing documentation."
+title: "[DOCS]: "
+labels: ["type:docs", "status:triage", "priority:low"]
+assignees: ["Joyal-George-KJ"]
+body:
+  - type: checkboxes
+    id: duplicate-check
+    attributes:
+      label: Duplicate Check
+      description: Have you searched our existing issues to ensure this is not a duplicate?
+      options:
+        - label: I have checked the existing issues and this is not a duplicate.
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        Help us keep the documentation accurate and helpful! This includes READMEs, security policies, comments, and external guides.
+
+  - type: dropdown
+    id: doc-area
+    attributes:
+      label: 📍 Area of Documentation
+      description: Where is the missing/incorrect content located?
+      options:
+        - README.md
+        - CONTRIBUTING.md
+        - Code Comments / JSDoc
+        - Security Policy (security.md)
+        - External Guides/Wikis
+        - Other (specify in context)
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Detailed Description (REQUIRED)
+      description: Explain what is confusing, what is missing, or why the current documentation is incorrect.
+      placeholder: The section on NextAuth configuration is outdated and uses a deprecated environment variable.
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: ✨ Suggested Improvement
+      description: Briefly suggest how the documentation could be improved or corrected.
+    validations:
+      required: false
+

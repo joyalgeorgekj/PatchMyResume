@@ -1,0 +1,70 @@
+name: "✨ Feature Request"
+description: "Suggest a new feature or improvement"
+title: "[FEAT]: "
+labels: ["type:feature", "status:triage"]
+assignees: ["Joyal-George-KJ"]
+body:
+  - type: checkboxes
+    id: duplicate-check
+    attributes:
+      label: Duplicate Check
+      description: Have you searched our existing issues to ensure this is not a duplicate?
+      options:
+        - label: I have checked the existing issues and this is not a duplicate.
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggest a new feature! Please provide as much detail as possible.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 🚀 Feature Description (REQUIRED)
+      description: Describe the feature youd like to implement. What is the expected behavior and where in the application should it appear?
+      placeholder: Describe your feature here...
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: ✅ Acceptance Criteria (REQUIRED)
+      description: List the specific, testable conditions that must be met for this feature to be considered complete. Use a checkbox list format.
+      value: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: 💡 Motivation and User Value
+      description: Why is this feature needed, and what value does it add to the user experience? (e.g., "This feature allows users to X, which solves problem Y.")
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: priority_suggestion
+    attributes:
+      label: 📊 Suggested Priority (Optional)
+      description: Based on your view, how urgent is this feature? (Maintainers will confirm the final label.)
+      options:
+        - priority:low (Nice-to-have improvement)
+        - priority:medium (Important but not urgent)
+        - priority:high (High-impact feature)
+        - priority:critical (Showstopper/Release blocker)
+      default: 0
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 📎 Additional Context
+      description: Links to related issues, screenshots, mockups, or suggested technologies.
+    validations:
+      required: false
+

@@ -1,0 +1,51 @@
+name: "🧪 Test Coverage/Flakiness"
+description: "Add new tests, update existing test suites, or fix flaky tests."
+title: "[TEST]: "
+labels: ["type:test", "status:triage", "priority:medium"]
+assignees: ["Joyal-George-KJ"]
+body:
+  - type: checkboxes
+    id: duplicate-check
+    attributes:
+      label: Duplicate Check
+      description: Have you searched our existing issues to ensure this is not a duplicate?
+      options:
+        - label: I have checked the existing issues and this is not a duplicate.
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for tasks related to Jest (unit/integration) and Playwright (E2E) test suites.
+
+  - type: dropdown
+    id: test-suite
+    attributes:
+      label: 🛠️ Testing Framework
+      options:
+        - Jest (Unit or Integration tests, src/tests)
+        - Playwright (E2E tests, user flows)
+        - Testing Infrastructure/Config (jest.config.js, playwright.config.js)
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: 📝 Scope and Goal (REQUIRED)
+      description: What specific code or user journey needs testing, or what existing test needs fixing? Reference the files or user path.
+      placeholder: |
+        Goal: Achieve 100% coverage on src/lib/pdfHelpers.ts.
+        OR
+        Fix the flaky Sign-in and navigate E2E test.
+    validations:
+      required: true
+
+  - type: textarea
+    id: criteria
+    attributes:
+      label: ✅ Acceptance Criteria
+      description: The measure of success (e.g., "New tests are added and pass on CI," or "Flaky test passes 10 consecutive times locally").
+      validations:
+        required: true
+

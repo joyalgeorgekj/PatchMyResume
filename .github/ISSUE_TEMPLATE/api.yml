@@ -1,0 +1,49 @@
+name: "🌐 API/Backend/Appwrite"
+description: "Issues for API routes, CRUD operations, database changes, or server logic."
+title: "[API]: "
+labels: ["area:api", "area:backend", "status:triage"]
+assignees: ["Joyal-George-KJ"]
+body:
+  - type: checkboxes
+    id: duplicate-check
+    attributes:
+      label: Duplicate Check
+      description: Have you searched our existing issues to ensure this is not a duplicate?
+      options:
+        - label: I have checked the existing issues and this is not a duplicate.
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for changes to server-side code, database schemas, Appwrite interactions, or authentication logic.
+
+  - type: dropdown
+    id: api-area
+    attributes:
+      label: 📍 Area of Backend Affected
+      options:
+        - app/api/... (New/Existing API route)
+        - src/lib/appwrite.ts (Database connection/CRUD)
+        - Authentication (NextAuth, user sessions)
+        - Security (e.g., rate limiting, input validation)
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Description of Task (REQUIRED)
+      description: Explain the required change, including endpoint names, affected database collections, or security policies.
+      placeholder: Need to add a validation layer to the POST /api/resume route to ensure all fields are present.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: ✅ Acceptance Criteria
+      description: Define the server-side test or behavior that confirms the change is correct.
+      validations:
+        required: true
+

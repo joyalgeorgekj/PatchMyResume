@@ -1,0 +1,51 @@
+name: "🧹 Refactor, Test, or Chore"
+description: "Suggest improvements to code quality, testing infrastructure, or non-feature development tasks."
+title: "[REFACTOR]: "
+labels: ["type:refactor", "status:triage", "priority:medium"]
+assignees: ["Joyal-George-KJ"]
+body:
+  - type: checkboxes
+    id: duplicate-check
+    attributes:
+      label: Duplicate Check
+      description: Have you searched our existing issues to ensure this is not a duplicate?
+      options:
+        - label: I have checked the existing issues and this is not a duplicate.
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for internal code cleanup, performance tweaks, testing improvements, or build process adjustments that do not add user-facing features.
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: 🛠️ Type of Improvement
+      description: Select the category that best fits this task.
+      options:
+        - type:refactor (Code cleanup, better architecture)
+        - type:test (Adding/improving unit/E2E tests)
+        - type:performance (Optimization, speed improvements)
+        - type:chore (CI/CD, dependencies, administrative work)
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Task Description and Scope (REQUIRED)
+      description: Clearly define the files or area of the codebase this task affects, and the specific goal (e.g., "Refactor all usages of the old date helper in src/lib/ to use date-fns.").
+      placeholder: Be specific about the code changes.
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: 💡 Why is this task needed?
+      description: Explain the value of this task (e.g., better security, reduced bundle size, making code easier to test).
+    validations:
+      required: true
+

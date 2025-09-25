@@ -1,0 +1,56 @@
+# .github/ISSUE_TEMPLATE/ui.yml
+name: "🎨 UI/UX and Design"
+description: Issues related to visual design, frontend components, styling, and user flow.
+title: "[UI/UX]: "
+labels: ["area:ui", "type:design", "status:triage"]
+assignees: ["Joyal-George-KJ"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This template is for frontend-only tasks: visual bugs, component creation, or UX improvements.
+
+  - type: dropdown
+    id: ui-area
+    attributes:
+      label: 📍 Location/Component Affected
+      description: Which part of the application is this change focused on?
+      options:
+        - Landing Page (page.tsx)
+        - Stepper Form components (src/components/forms/stepper)
+        - Resume Preview (src/components/resume)
+        - UI components (src/components/ui/)
+        - Global Styling/Theming
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Description of UI Change (REQUIRED)
+      description: Detail the visual change, new component, or UX flow adjustment required. Reference specific Tailwind classes or component names if possible.
+      placeholder: The DatePicker component is rendering off-screen on mobile devices.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: responsive
+    attributes:
+      label: 📏 Responsive Design Check
+      description: Does this task require checking responsiveness on specific screen sizes?
+      options:
+        - Yes, must be mobile-first
+        - Yes, must support desktop/tablet
+        - No, not applicable
+      default: 0
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: duplicate-check
+    attributes:
+      label: Duplicate Check
+      description: Have you searched our existing issues to ensure this is not a duplicate?
+      options:
+        - label: I have checked the existing issues and this is not a duplicate.
+          required: true
