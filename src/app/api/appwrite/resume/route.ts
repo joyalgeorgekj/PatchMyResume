@@ -110,6 +110,22 @@ export async function GET() {
         return Response({ message: 'Unauthorized Access: Login to access!', type: 'error' }, 401);
     }
 
+    const { success, limit, remaining, reset } = await ratelimit.limit(session.user.id);
+
+    if (!success) {
+        const retryAfter = Math.ceil(reset / 1000);
+        console.log({
+            status: 429,
+            headers: {
+                'X-RateLimit-Limit': limit.toString(),
+                'X-RateLimit-Remaining': remaining.toString(),
+                'Retry-After': retryAfter.toString(),
+            },
+        });
+
+        return Response({ error: 'Too many requests, slow down!' }, 429);
+    }
+
     const { databases } = getAppwriteClient();
     const email = session.user.email;
 
