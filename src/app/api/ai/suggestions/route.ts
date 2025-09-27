@@ -1,10 +1,12 @@
 import { getAppwriteClient } from '@/lib/server/appwrite';
 import { getServerSession } from 'next-auth';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { Query } from 'node-appwrite';
 import { GoogleGenAI } from '@google/genai';
 import { decrypt } from '@/lib/server/crypto';
 import { PROMPT } from '@/data/prompts/atsPrompt';
+import { Response } from '@/lib/server/response';
+import { ratelimit } from '@/lib/server/rateLimiter';
 
 function cleanJSON(raw: string): string {
     return raw
@@ -28,23 +30,40 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     if (!session?.user?.email) {
-        return NextResponse.json({
-            message: 'Unauthorized Access: Login to access!',
-            status: 401,
-            type: 'error',
-        });
+        return Response(
+            {
+                message: 'Unauthorized Access: Login to access!',
+                status: 401,
+                type: 'error',
+            },
+            401
+        );
     }
     const email = session.user.email;
 
+    const { success, limit, remaining, reset } = await ratelimit.limit(session.user.id);
+
+    if (!success) {
+        const retryAfter = Math.ceil(reset / 1000);
+        console.log({
+            status: 429,
+            headers: {
+                'X-RateLimit-Limit': limit.toString(),
+                'X-RateLimit-Remaining': remaining.toString(),
+                'Retry-After': retryAfter.toString(),
+            },
+        });
+
+        return Response({ error: 'Too many requests, slow down!' }, 429);
+    }
+
     if (validateJD(body.jd) === false) {
-        return NextResponse.json(
+        return Response(
             {
                 message: 'Invalid data registered',
                 type: 'info',
             },
-            {
-                status: 200,
-            }
+            200
         );
     }
 
@@ -55,14 +74,12 @@ export async function POST(req: NextRequest) {
             [Query.equal('email', email)]
         );
         if (existing.documents.length === 0)
-            return NextResponse.json(
+            return Response(
                 {
                     message: "User collection doesn't exist!",
                     type: 'info',
                 },
-                {
-                    status: 409,
-                }
+                409
             );
         if (existing.documents.length > 0)
             existing.documents = existing.documents.map((val) => ({
@@ -96,13 +113,10 @@ export async function POST(req: NextRequest) {
             throw e; // or return error response
         }
         console.log(parsed);
-        
-        return NextResponse.json(parsed, { status: 200 });
+
+        return Response(parsed, 200);
     } catch (error: any) {
         console.log(error);
-        return NextResponse.json(
-            { message: error.message, type: 'error' },
-            { status: error.status || 500 }
-        );
+        return Response({ message: error.message, type: 'error' }, Number(error.status) || 500);
     }
 }
