@@ -22,11 +22,11 @@
     <img src="https://img.shields.io/badge/Vercel-black?style=for-the-badge&logo=vercel" />
 </p>
 
-<p align="center" style="margin: 0; padding: 0;">
-    <img alt="GitHub License" src="https://img.shields.io/github/license/Joyal-George-KJ/PatchMyResume?style=for-the-badge">
-    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Joyal-George-KJ/PatchMyResume?style=for-the-badge">
-    <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Joyal-George-KJ/PatchMyResume?style=for-the-badge">
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Joyal-George-KJ/PatchMyResume?style=for-the-badge">
+<p align="center">
+    <img alt="GitHub License" src="https://img.shields.io/github/license/joyal-george-kj/patchmyresume?style=for-the-badge">
+    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/joyal-george-kj/patchmyresume?style=for-the-badge">
+    <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/joyal-george-kj/patchmyresume?style=for-the-badge">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/joyal-george-kj/patchmyresume?style=for-the-badge">
 </p>
 
 <p align="center" style="margin: 0; padding: 0;">
