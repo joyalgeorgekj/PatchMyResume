@@ -23,10 +23,10 @@
 </p>
 
 <p align="center" style="margin: 0; padding: 0;">
-    <img src="https://img.shields.io/github/license/Joyal-George-KJ/PatchMyResume?style=for-the-badge">
-    <img src="https://img.shields.io/github/languages/Joyal-George-KJ/PatchMyResume?style=for-the-badge">
-    <img src="https://img.shields.io/github/commit-activity/m/Joyal-George-KJ/PatchMyResume?style=for-the-badge">
-    <img src="https://img.shields.io/github/stars/Joyal-George-KJ/PatchMyResume?style=for-the-badge">
+    <img alt="GitHub License" src="https://img.shields.io/github/license/Joyal-George-KJ/PatchMyResume?style=for-the-badge">
+    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Joyal-George-KJ/PatchMyResume?style=for-the-badge">
+    <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Joyal-George-KJ/PatchMyResume?style=for-the-badge">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Joyal-George-KJ/PatchMyResume?style=for-the-badge">
 </p>
 
 <p align="center" style="margin: 0; padding: 0;">
