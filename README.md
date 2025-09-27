@@ -28,7 +28,7 @@
 
 <p align="center" style="margin: 0; padding: 0;">
     <a href="https://patchmyresume.joyalgeorgekj.com">
-        <img alt="Live Demo" src="https://img.shields.io/badge/%F0%9F%8C%90-Live_Demo-blue?style=for-the-badge">
+        <img alt="Live Demo" src="https://img.shields.io/badge/%F0%9F%8C%90-Live-blue?style=for-the-badge">
     </a>
     <a href="#-getting-started-installation">
         <img alt="Install Guide" src="https://img.shields.io/badge/%E2%9A%A1-Install-orange?style=for-the-badge">
