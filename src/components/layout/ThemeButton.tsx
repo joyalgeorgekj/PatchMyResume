@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { FaCircleHalfStroke } from 'react-icons/fa6';
 
-export default function ThemeButton() {
+export default function ThemeButton({ className }: { className?: string }) {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
@@ -16,7 +16,11 @@ export default function ThemeButton() {
     return (
         <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="shadow-dark/25 text-dark/50 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full shadow transition hover:scale-105"
+            className={
+                'shadow-dark/25 text-dark/50 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full shadow transition hover:scale-105' +
+                ' ' +
+                className
+            }
         >
             {theme === 'dark' ? <FaMoon /> : theme === 'light' ? <FaSun /> : <FaCircleHalfStroke />}
         </button>

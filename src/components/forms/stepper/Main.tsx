@@ -57,7 +57,7 @@ export default function Main() {
             case 2: {
                 const validation = ResumeSchema.safeParse(resumeUserData);
                 console.log(validation);
-                
+
                 if (validation.success) {
                     setUserData({
                         resume_user_data: resumeUserData,
@@ -163,7 +163,7 @@ export default function Main() {
 
                 {/* Stepper indicator */}
                 <nav aria-label="Progress" className="mb-8">
-                    <ol className="flex items-center justify-between">
+                    <ol className="hidden items-center justify-between md:flex">
                         {STEPS.map((val) => (
                             <li key={val.id} className="flex-1 text-center">
                                 <div

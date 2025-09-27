@@ -14,8 +14,8 @@ export default function StepApiModel({
     }, []);
     return (
         <section aria-label="Model and API settings">
-            <h2 className="text-xl font-semibold">Step 1: Select Model & API Key</h2>
-            <p className="text-dark-muted/80 mt-1 text-sm">
+            <h2 className="text-base md:text-xl font-semibold">Step 1: Select Model & API Key</h2>
+            <p className="text-dark-muted/80 mt-1 text-xs md:text-sm">
                 Choose a Gemini model and API key. You can get it from{' '}
                 <a
                     href="https://aistudio.google.com/apikey"
