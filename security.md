@@ -34,16 +34,15 @@ PatchMyResume is designed with the following global standards in mind:
 
 <a name="data-storage-handling" id="data-storage-handling"></a>
 
-## 🔐 Data Storage & Handling
+### Data Flow & Storage
 
-| Data Type            | Storage Location               | Security Measures                  | Retention Policy               |
-| -------------------- | ------------------------------ | ---------------------------------- | ------------------------------ |
-| **Gemini API Key**   | Appwrite DB (hashed)           | Secure hash + server-side only     | Never exposed in plaintext     |
-| **AI Model Choice**  | Appwrite DB                    | Plain string for model selection   | Retained until user changes it |
-| **Resume User Data** | Appwrite DB (stringified JSON) | User-only access via Appwrite Auth | Permanent until user deletes   |
-| **Job Description**  | In-memory (session/local only) | Never saved to DB                  | Cleared after request          |
-| **AI Suggestions**   | In-memory (session/local only) | Never stored                       | Cleared after session          |
-| **Final PDF**        | Client device only             | Generated locally via PDF-LIB      | Never uploaded or stored       |
+| Data Point                | Storage Location              | Sharing Policy | Notes                                                                            |
+| :------------------------ | :---------------------------- | :------------- | :------------------------------------------------------------------------------- |
+| **User Resume Data**      | Appwrite DB & Session Storage | **Private**    | Stored securely, accessible only by the logged-in user.                          |
+| **User API Key (Gemini)** | Appwrite DB (Hashed)          | **Private**    | Hashed and used server-side only to access the Gemini API.                       |
+| **Job Description**       | State                         | **Not Saved**  | Used temporarily for a single AI tailoring request.                              |
+| **AI Suggestions**        | State                         | **Not Saved**  | Discarded after the user makes their selection/moves on.                         |
+| **Final PDF Resume**      | Local User Device             | **Not Stored** | Generated client-side (`src/lib/pdfHelpers.ts`) and never stored on our servers. |
 
 ---
 
@@ -61,8 +60,8 @@ PatchMyResume is designed with the following global standards in mind:
     - Access tokens are scoped and time-limited.
 
 - **Rate Limiting**
-    - AI requests: **3 requests/minute per user**.
-    - Global per-IP limit to prevent abuse.
+    - AI requests: **10 requests/minute per user**.
+    - Global per-IP/user limit to prevent abuse.
     - Repeated violations trigger temporary bans.
 
 - **Error Responses**
