@@ -8,6 +8,7 @@ import ThemeButton from './ThemeButton';
 import ProfileAvatar from '../ui/auth/ProfileAvatar';
 import { FiMenu, FiX } from 'react-icons/fi';
 import Image from 'next/image';
+import { FaGithub } from 'react-icons/fa';
 
 export default function Header() {
     const { setLoader } = useUI();
@@ -61,12 +62,22 @@ export default function Header() {
                 {/* Desktop Actions */}
                 <div className="hidden items-center gap-3 md:flex">
                     <ThemeButton />
+                    <p className="text-center">
+                        <Link
+                            href="https://github.com/joyal-george-kj/patchmyresume"
+                            target="_blank"
+                        >
+                            <span className="bg-light text-dark shadow-dark/35 text-shadow-primary inline-flex items-center gap-3 rounded px-3 py-1.5 capitalize shadow transition hover:scale-95">
+                                <FaGithub /> Star us on GitHub
+                            </span>
+                        </Link>
+                    </p>
                     {status === 'authenticated' ? (
                         <ProfileAvatar session={session!} />
                     ) : (
                         <Link
                             href="/signin"
-                            onClick={() => setLoader({ active: true, message: '' })}
+                            onClick={() => setLoader({ active: true, message: 'Loading...!' })}
                             className="bg-primary text-light flex cursor-pointer items-center gap-2 rounded-md border px-4 py-2 text-sm font-medium shadow-sm transition hover:scale-105"
                         >
                             Sign in
@@ -109,28 +120,45 @@ export default function Header() {
                     </div>
                     {/* Drawer Nav Links */}
                     <nav className="text-dark flex flex-col gap-4 p-4">
-                        {navLinks.map(({ href, label }) => (
-                            <Link
-                                key={href}
-                                href={href}
-                                onClick={() => setDrawerOpen(false)}
-                                className="hover:bg-light-muted cursor-pointer rounded-md transition"
-                            >
-                                {label}
-                            </Link>
-                        ))}
+                        {navLinks.length !== 0 ? (
+                            navLinks.map(({ href, label }) => (
+                                <Link
+                                    key={href}
+                                    href={href}
+                                    onClick={() => setDrawerOpen(false)}
+                                    className="hover:bg-light-muted cursor-pointer rounded-md transition"
+                                >
+                                    {label}
+                                </Link>
+                            ))
+                        ) : (
+                            <p className="hover:bg-light-muted cursor-pointer rounded-md transition text-dark-muted/50 text-xs">
+                                Signin/Signup to use navigation
+                            </p>
+                        )}
                     </nav>
                 </div>
 
                 {/* Drawer Actions */}
                 <div className="border-dark-muted/10 mt-auto flex flex-col gap-4 border-t p-4">
+                    <ThemeButton className="w-full" />
+                    <p className="text-center">
+                        <Link
+                            href="https://github.com/joyal-george-kj/patchmyresume"
+                            target="_blank"
+                        >
+                            <span className="bg-light text-dark shadow-dark/35 text-shadow-primary inline-flex items-center gap-3 rounded px-3 py-1.5 capitalize shadow transition hover:scale-95">
+                                <FaGithub /> Star us on GitHub
+                            </span>
+                        </Link>
+                    </p>
                     {status === 'authenticated' ? (
                         <ProfileAvatar name={true} mobile={drawerOpen} session={session!} />
                     ) : (
                         <Link
                             href="/signin"
                             onClick={() => {
-                                setLoader({ active: true, message: '' });
+                                setLoader({ active: true, message: 'Loading...!' });
                                 setDrawerOpen(false);
                             }}
                             className="bg-primary text-light flex cursor-pointer items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium shadow-sm transition hover:scale-105"
@@ -138,7 +166,6 @@ export default function Header() {
                             Sign in
                         </Link>
                     )}
-                    <ThemeButton className="w-full" />
                 </div>
             </div>
         </header>
