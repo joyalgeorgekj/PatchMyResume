@@ -25,7 +25,7 @@ In the interest of fostering an open and welcoming environment, we pledge to:
 
 - Respect all individuals contributing through issues, discussions, pull requests, and other channels.
 - Provide a harassment-free experience for everyone, regardless of:
-  - Age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity, expression, sexual orientation, education, socio-economic status, nationality, personal appearance, race, religion, or technology choices.
+    - Age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity, expression, sexual orientation, education, socio-economic status, nationality, personal appearance, race, religion, or technology choices.
 - Create a collaborative and safe environment where knowledge sharing is prioritized.
 
 ---
@@ -56,9 +56,9 @@ In the interest of fostering an open and welcoming environment, we pledge to:
 
 ## 🛡️ Enforcement Responsibilities
 
-- Project maintainers are responsible for clarifying the standards of acceptable behavior.  
-- Maintainers have the right to remove, edit, or reject comments, commits, code, issues, and other contributions that do not align with this Code of Conduct.  
-- Maintainers may temporarily or permanently ban contributors for violations.  
+- Project maintainers are responsible for clarifying the standards of acceptable behavior.
+- Maintainers have the right to remove, edit, or reject comments, commits, code, issues, and other contributions that do not align with this Code of Conduct.
+- Maintainers may temporarily or permanently ban contributors for violations.
 
 ---
 
@@ -71,7 +71,7 @@ If you witness or are subject to unacceptable behavior:
 1. **Use the Private GitHub Reporting Channel.**
 2. **For all issues (including sensitive ones), click the 'Security' tab and select 'Report a vulnerability'.** This creates a private Draft Security Advisory.
 3. If the report is non-sensitive conduct related (e.g., inappropriate public comments), you may also contact the maintainers directly through their GitHub profile.
-4. All reports will be reviewed and investigated confidentially.  
+4. All reports will be reviewed and investigated confidentially.
 
 ---
 
@@ -81,9 +81,9 @@ If you witness or are subject to unacceptable behavior:
 
 This Code of Conduct applies to:
 
-- All project spaces (GitHub Issues, PRs, Discussions, and Docs).  
-- Public communication channels related to the project (social media, community forums).  
-- Any direct interaction where the project brand or maintainers are represented.  
+- All project spaces (GitHub Issues, PRs, Discussions, and Docs).
+- Public communication channels related to the project (social media, community forums).
+- Any direct interaction where the project brand or maintainers are represented.
 
 ---
 

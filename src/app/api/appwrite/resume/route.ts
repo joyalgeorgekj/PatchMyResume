@@ -2,8 +2,10 @@ import { ResumeSchema } from '@/data/constants/types';
 import { MODELS } from '@/data/constants/workflow';
 import { getAppwriteClient } from '@/lib/server/appwrite';
 import { decrypt, encrypt } from '@/lib/server/crypto';
+import { ratelimit } from '@/lib/server/rateLimiter';
+import { Response } from '@/lib/server/response';
 import { getServerSession } from 'next-auth';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { ID, Query } from 'node-appwrite';
 
 // helper to compare objects deeply
@@ -14,15 +16,28 @@ function isEqual(a: any, b: any) {
 export async function POST(req: NextRequest) {
     const session = await getServerSession();
     if (!session?.user?.email) {
-        return NextResponse.json(
-            { message: 'Unauthorized Access: Login to access!', type: 'error' },
-            { status: 401 }
-        );
+        return Response({ message: 'Unauthorized Access: Login to access!', type: 'error' }, 401);
     }
 
     const body = await req.json();
     const { databases } = getAppwriteClient();
     const email = session.user.email;
+
+    const { success, limit, remaining, reset } = await ratelimit.limit(session.user.id);
+
+    if (!success) {
+        const retryAfter = Math.ceil(reset / 1000);
+        console.log({
+            status: 429,
+            headers: {
+                'X-RateLimit-Limit': limit.toString(),
+                'X-RateLimit-Remaining': remaining.toString(),
+                'Retry-After': retryAfter.toString(),
+            },
+        });
+
+        return Response({ error: 'Too many requests, slow down!' }, 429);
+    }
 
     // 1. Validate early
     if (
@@ -30,10 +45,7 @@ export async function POST(req: NextRequest) {
         !MODELS.includes(body.model) ||
         ResumeSchema.safeParse(body.resume_user_data).error
     ) {
-        return NextResponse.json(
-            { message: 'Invalid data format', type: 'error' },
-            { status: 400 }
-        );
+        return Response({ message: 'Invalid data format', type: 'error' }, 400);
     }
 
     try {
@@ -62,16 +74,13 @@ export async function POST(req: NextRequest) {
                         model: body.model,
                     }
                 );
-                return NextResponse.json(
-                    { message: 'Document updated ✅', type: 'success' },
-                    { status: 200 }
-                );
+                return Response({ message: 'Document updated ✅', type: 'success' }, 200);
             }
 
             // 3b. Same data → no change
-            return NextResponse.json(
+            return Response(
                 { message: 'No changes detected. Document already up-to-date.', type: 'info' },
-                { status: 200 }
+                200
             );
         }
 
@@ -88,26 +97,33 @@ export async function POST(req: NextRequest) {
             }
         );
 
-        return NextResponse.json(
-            { message: 'Document created successfully 🚀', type: 'success' },
-            { status: 201 }
-        );
+        return Response({ message: 'Document created successfully 🚀', type: 'success' }, 201);
     } catch (error) {
         console.error('Appwrite error:', error);
-        return NextResponse.json(
-            { message: 'Something went wrong', type: 'error' },
-            { status: 500 }
-        );
+        return Response({ message: 'Something went wrong', type: 'error' }, 500);
     }
 }
 
 export async function GET() {
     const session = await getServerSession();
     if (!session?.user?.email) {
-        return NextResponse.json(
-            { message: 'Unauthorized Access: Login to access!', type: 'error' },
-            { status: 401 }
-        );
+        return Response({ message: 'Unauthorized Access: Login to access!', type: 'error' }, 401);
+    }
+
+    const { success, limit, remaining, reset } = await ratelimit.limit(session.user.id);
+
+    if (!success) {
+        const retryAfter = Math.ceil(reset / 1000);
+        console.log({
+            status: 429,
+            headers: {
+                'X-RateLimit-Limit': limit.toString(),
+                'X-RateLimit-Remaining': remaining.toString(),
+                'Retry-After': retryAfter.toString(),
+            },
+        });
+
+        return Response({ error: 'Too many requests, slow down!' }, 429);
     }
 
     const { databases } = getAppwriteClient();
@@ -121,10 +137,7 @@ export async function GET() {
         );
 
         if (existing.documents.length === 0) {
-            return NextResponse.json(
-                { message: "User collection doesn't exist!", type: 'info' },
-                { status: 404 }
-            );
+            return Response({ message: "User collection doesn't exist!", type: 'info' }, 404);
         }
 
         const doc = existing.documents[0];
@@ -134,12 +147,9 @@ export async function GET() {
             resume_user_data: JSON.parse(doc.resume_user_data),
         };
 
-        return NextResponse.json(result, { status: 200 });
+        return Response(result, 200);
     } catch (error) {
         console.error('Appwrite error:', error);
-        return NextResponse.json(
-            { message: 'Something went wrong', type: 'error' },
-            { status: 500 }
-        );
+        return Response({ message: 'Something went wrong', type: 'error' }, 500);
     }
 }
