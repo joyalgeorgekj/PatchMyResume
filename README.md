@@ -38,7 +38,6 @@
     </a>
 </p>
 
-
 ---
 
 ## 🗺️ Table of Contents
@@ -48,11 +47,11 @@
 3.  [🛠️ Tech Stack](#tech-stack)
 4.  [🤝 Contribution & Guidance](#contribution-guidance)
 5.  [🔒 Security & Data Handling](#security-data-handling)
-6.  [📂 Project Structure](#project-structure)
-7.  [📌 Roadmap](#roadmap)
-8.  [📝 License](#license)
+6.  [📌 Roadmap](#roadmap)
+7.  [📝 License](#license)
 
 ---
+
 <a name="features--how-it-works" id="features--how-it-works"></a>
 
 ## 🚀 Features & How It Works
@@ -76,6 +75,7 @@ PatchMyResume focuses on leveraging AI to create perfectly tailored resumes, max
 5.  **Export:** The final, tailored resume is exported as a clean, **ATS-friendly PDF**.
 
 ---
+
 <a name="getting-started-installation" id="getting-started-installation"></a>
 
 ## 🧑‍💻 Getting Started (Installation)
@@ -130,21 +130,21 @@ PatchMyResume is built on a modern, secure, and performant stack.
 
 ### Core Architecture
 
-| Category | Tools | Purpose |
-| :--- | :--- | :--- |
-| **Framework** | <img src="https://skillicons.dev/icons?i=nextjs,react,ts,nodejs" /> | Next.js (App Router), React, TypeScript, Node.js. |
-| **Styling** | <img src="https://skillicons.dev/icons?i=tailwind" /> | Tailwind CSS for utility-first styling. |
-| **Database/Auth** | <img src="https://skillicons.dev/icons?i=appwrite" /> | Appwrite for Backend-as-a-Service (BaaS), handling data storage and sessions. |
-| **Generative AI** | <img src="https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white" /> | Google Gemini API for resume tailoring and suggestions. |
+| Category          | Tools                                                                                                             | Purpose                                                                       |
+| :---------------- | :---------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------- |
+| **Framework**     | <img src="https://skillicons.dev/icons?i=nextjs,react,ts,nodejs" />                                               | Next.js (App Router), React, TypeScript, Node.js.                             |
+| **Styling**       | <img src="https://skillicons.dev/icons?i=tailwind" />                                                             | Tailwind CSS for utility-first styling.                                       |
+| **Database/Auth** | <img src="https://skillicons.dev/icons?i=appwrite" />                                                             | Appwrite for Backend-as-a-Service (BaaS), handling data storage and sessions. |
+| **Generative AI** | <img src="https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white" /> | Google Gemini API for resume tailoring and suggestions.                       |
 
 ### Development & DevOps
 
-| Category | Tools | Notes |
-| :--- | :--- | :--- |
-| **Package Manager** | <img src="https://skillicons.dev/icons?i=pnpm,npm,yarn" /> | pnpm (Recommended) for fast, efficient dependency management. |
-| **Testing** | <img src="https://skillicons.dev/icons?i=jest" /> | Jest for unit testing; Playwright is configured for End-to-End (E2E) testing. |
-| **Deployment** | <img src="https://img.shields.io/badge/Vercel-black?style=for-the-badge&logo=vercel" /> | Deployed via Vercel for continuous integration and hosting. |
-| **Version Control** | <img src="https://skillicons.dev/icons?i=git,github" /> | Git and GitHub for collaborative development. |
+| Category            | Tools                                                                                   | Notes                                                                         |
+| :------------------ | :-------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------- |
+| **Package Manager** | <img src="https://skillicons.dev/icons?i=pnpm,npm,yarn" />                              | pnpm (Recommended) for fast, efficient dependency management.                 |
+| **Testing**         | <img src="https://skillicons.dev/icons?i=jest" />                                       | Jest for unit testing; Playwright is configured for End-to-End (E2E) testing. |
+| **Deployment**      | <img src="https://img.shields.io/badge/Vercel-black?style=for-the-badge&logo=vercel" /> | Deployed via Vercel for continuous integration and hosting.                   |
+| **Version Control** | <img src="https://skillicons.dev/icons?i=git,github" />                                 | Git and GitHub for collaborative development.                                 |
 
 ### Auth Providers
 
@@ -190,6 +190,7 @@ We prioritize user security and data privacy. For detailed security policies and
 ### ⚠️ IMPORTANT: Private Vulnerability Reporting
 
 If you find a security vulnerability, **DO NOT** create a public GitHub Issue. Please report it privately using the designated channel:
+
 - Navigate to the **Security** tab of this repository and click **"Report a vulnerability"** to create a private Draft Security Advisory.
 
 ### Security Principles
@@ -202,74 +203,11 @@ If you find a security vulnerability, **DO NOT** create a public GitHub Issue. P
 
 | Data Point                | Storage Location              | Sharing Policy | Notes                                                                            |
 | :------------------------ | :---------------------------- | :------------- | :------------------------------------------------------------------------------- |
-| **User Resume Data** | Appwrite DB & Session Storage | **Private** | Stored securely, accessible only by the logged-in user.                          |
-| **User API Key (Gemini)** | Appwrite DB (Hashed)          | **Private** | Hashed and used server-side only to access the Gemini API.                       |
-| **Job Description** | Session/Local                 | **Not Saved** | Used temporarily for a single AI tailoring request.                              |
-| **AI Suggestions** | Session/Local                 | **Not Saved** | Discarded after the user makes their selection/moves on.                         |
-| **Final PDF Resume** | Local User Device             | **Not Stored** | Generated client-side (`src/lib/pdfHelpers.ts`) and never stored on our servers. |
-
----
-
-<a name="project-structure" id="project-structure"></a>
-
-## 📂 Project Structure
-
-The project follows a clean, module-based structure using the Next.js App Router.
-
-```
-PatchMyResume
-├── .gitignore
-├── jest.config.js                  \# Jest configuration for unit/integration tests
-├── LICENSE
-├── next.config.ts
-├── package.json
-├── playwright.config.js            \# Playwright configuration for E2E tests
-├── public                          \# Static assets (images, icons)
-│   └── image
-│       ├── banner.png              \# Project banner
-├── README.md
-├── security.md                     \# Detailed security policy and reporting guide
-├── src
-    ├── app                         \# Next.js App Router root
-    │   ├── api                     \# API Routes
-    │   │   ├── ai/.../route.ts     \# AI suggestions endpoint
-    │   │   ├── appwrite/.../route.ts \# Resume CRUD endpoint
-    │   │   └── auth/.../route.ts   \# NextAuth catch-all route
-    │   ├── (auth)                  \# Grouped authentication routes
-    │   │   ├── signin/page.tsx     \# Sign-in page
-    │   │   └── user/page.tsx       \# User profile/dashboard page
-    │   ├── globals.css             \# Global styles and Tailwind imports
-    │   └── page.tsx                \# Home/Landing page
-    ├── components
-    │   ├── forms                   \# Main form logic and components
-    │   │   └── stepper             \# Core workflow components (steps)
-    │   ├── layout                  \# Header, Footer, and common layout
-    │   ├── resume                  \# Components for rendering the resume preview
-    │   └── ui                      \# General UI elements
-    │       ├── auth                \# Auth-related UI (ProfileAvatar, ToHome)
-    │       └── form                \# Reusable form elements (Input, Select, DatePicker)
-    │       └── landing             \# Landing page components
-    ├── context                     \# React Contexts
-    │   ├── UIContext.tsx           \# UI state, theme, and toast management
-    │   └── UserContext.tsx         \# User state and data
-    ├── data                        \# Static data, constants, and AI prompts
-    │   ├── constants/...           \# Types and workflow configurations
-    │   ├── examples/...            \# Sample data for development/demo
-    │   ├── prompts/atsPrompt.ts    \# The prompt template for Gemini
-    │   └── templates               \# Resume PDF template structure
-    ├── hooks                       \# Custom React hooks
-    ├── lib                         \# Utility functions
-    │   ├── ai.ts                   \# Client-side AI utilities
-    │   ├── appwrite.ts             \# Client-side Appwrite utilities
-    │   ├── pdfHelpers.ts           \# Functions for PDF creation with PDF-LIB
-    │   ├── server                  \# Server-only utilities
-    │   │   └── crypto.ts           \# API key hashing/decryption
-    │   └── template.ts             \# Template selection and data mapping logic
-    ├── styles/context.css          \# Context-specific styles (e.g., custom CSS variables)
-    ├── tests                       \# Placeholder for all test types
-    └── types                       \# Type definitions
-
-```
+| **User Resume Data**      | Appwrite DB & Session Storage | **Private**    | Stored securely, accessible only by the logged-in user.                          |
+| **User API Key (Gemini)** | Appwrite DB (Hashed)          | **Private**    | Hashed and used server-side only to access the Gemini API.                       |
+| **Job Description**       | Session/Local                 | **Not Saved**  | Used temporarily for a single AI tailoring request.                              |
+| **AI Suggestions**        | Session/Local                 | **Not Saved**  | Discarded after the user makes their selection/moves on.                         |
+| **Final PDF Resume**      | Local User Device             | **Not Stored** | Generated client-side (`src/lib/pdfHelpers.ts`) and never stored on our servers. |
 
 ---
 
