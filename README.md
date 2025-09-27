@@ -10,6 +10,9 @@
   <br>
 </div>
 
+<h1 align="center" style="text-transform: capitalize;">Tailoring Resume for each Job Description can be a hasle thats what caused me to create this</h1>
+<p align="center" style="text-transform: capitalize;">In today's competitive job market, resumes must be perfectly optimized with keywords and phrasing specific to the target job description to pass Applicant Tracking Systems (ATS). Manually performing this optimization for every application is tedious and inefficient.</p>
+
 <p align="center" style="margin: 0; padding: 0;">
     <img src="https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js" />
     <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
@@ -64,7 +67,7 @@ PatchMyResume focuses on leveraging AI to create perfectly tailored resumes, max
 - **ATS-Optimized Export:** Generates clean, structured PDF resumes that are easily parsed by ATS software using **PDF-LIB**.
 - **Structured Data First:** Collects data using a strict, predefined schema to ensure consistency and quality.
 - **User-Owned AI:** You provide your own API key, giving you control over usage and ensuring your data privacy.
-- **Theming:** Full **Light/Dark** mode support powered by NextThemes.
+- **Theming:** Full **System/Light/Dark** mode support powered by NextThemes.
 
 ### How It Works (The Workflow)
 
@@ -80,7 +83,7 @@ PatchMyResume focuses on leveraging AI to create perfectly tailored resumes, max
 
 ## 🧑‍💻 Getting Started (Installation)
 
-Ready to start patching? Follow these steps to set up the project locally.
+Ready to start patching? Follow these steps to set up the project locally or You can use globally hosted [PatchMyResume](https://patchmyresume.joyalgeorgekj.com/) and skip the below steps!
 
 ### Prerequisites
 
@@ -106,6 +109,18 @@ You'll need the following installed:
     pnpm install
     ```
 
+    or
+
+    ```bash
+    npm install
+    ```
+
+    or
+
+    ```bash
+    yarn install
+    ```
+
 3.  **Set Up Environment Variables:**
 
     Create a file named `.env` in the root directory and populate it with your credentials. (Refer to `example.env.local` or the Appwrite documentation for required variables.)
@@ -115,7 +130,19 @@ You'll need the following installed:
 4.  **Run the Development Server:**
 
     ```bash
-    pnpm dev
+    pnpm run dev
+    ```
+
+    or
+
+    ```bash
+    npm run dev
+    ```
+
+    or
+
+    ```bash
+    yarn run dev
     ```
 
     Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
@@ -178,6 +205,7 @@ Please read our detailed **[Contribution Guidelines](./CONTRIBUTING.md)** for:
     - **No Tailwind Default Colors:** Stick to the predefined **CSS Variables** (e.g., `--primary`, `--secondary`).
     - **No `dark:` classes:** Theming is handled globally via vanilla CSS variables and the `[data-theme='dark']` selector.
 3.  **Testing:** We use `jest.config.js` for unit/integration tests and `playwright.config.js` for E2E tests. New features should include relevant test cases.
+4.  Check **Project Issue** section to start contributing.
 
 ---
 
@@ -205,8 +233,8 @@ If you find a security vulnerability, **DO NOT** create a public GitHub Issue. P
 | :------------------------ | :---------------------------- | :------------- | :------------------------------------------------------------------------------- |
 | **User Resume Data**      | Appwrite DB & Session Storage | **Private**    | Stored securely, accessible only by the logged-in user.                          |
 | **User API Key (Gemini)** | Appwrite DB (Hashed)          | **Private**    | Hashed and used server-side only to access the Gemini API.                       |
-| **Job Description**       | Session/Local                 | **Not Saved**  | Used temporarily for a single AI tailoring request.                              |
-| **AI Suggestions**        | Session/Local                 | **Not Saved**  | Discarded after the user makes their selection/moves on.                         |
+| **Job Description**       | State                         | **Not Saved**  | Used temporarily for a single AI tailoring request.                              |
+| **AI Suggestions**        | State                         | **Not Saved**  | Discarded after the user makes their selection/moves on.                         |
 | **Final PDF Resume**      | Local User Device             | **Not Stored** | Generated client-side (`src/lib/pdfHelpers.ts`) and never stored on our servers. |
 
 ---

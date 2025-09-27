@@ -16,13 +16,24 @@ This document outlines the coding standards, file conventions, and contribution 
 
 ---
 
+## IMPORTANT 
+
+- Before working on an Issue 
+    - Make sure to **check for anyother PR submited solving the Issue**.
+    - Make sure to ask in that Issue comment to **assign it to you**.
+    - **Assignees can be changed** if no progress was found in solving it.
+- **Follow the rules below** to get better understanding of the project.
+
 <a name="tools-environment" id="tools-environment"></a>
 
 ## 1. 🛠️ Tools & Environment
 
 ### 1.1 Language
 
+- **Framework:** Next JS with Tailwind CSS.
+- **Storage:** Appwrite and Upstash Redis.
 - **TypeScript (TS/TSX):** All code must be written in TypeScript for type safety and better tooling.
+- **Test:** Jest and playwright.
 
 ### 1.2 Formatting & Linting
 
@@ -131,7 +142,7 @@ This document outlines the coding standards, file conventions, and contribution 
 
 ### 4.2 Class Ordering
 
-- Maintain a **consistent order** for Tailwind utility classes in the `className` attribute.
+- Maintain a **consistent order** for Tailwind utility classes in the `className` attribute (Automated using formatter `npm run prettier:src`).
 - **Recommended Order:**
     1.  Layout (`flex`, `grid`, `block`, `absolute`, etc.)
     2.  Spacing (`p-`, `m-`, `gap-`)
@@ -165,19 +176,19 @@ This document outlines the coding standards, file conventions, and contribution 
 
 ### 5.2 Conventional Commits
 
-- We enforce **Conventional Commits** for clear and readable history.
-- The commit message must start with a type, followed by a colon and a space:
+- We enforce **Conventional PR Title** for clear and readable history.
+- The title must start with a type, followed by a colon and a space:
 
-| Type            | Description                                             | Example                                             |
-| :-------------- | :------------------------------------------------------ | :-------------------------------------------------- |
-| **`feat:`**     | A new feature or major addition.                        | `feat: implement PDF-LIB for export`                |
-| **`fix:`**      | A bug fix.                                              | `fix: correct Appwrite response handling`           |
-| **`docs:`**     | Changes to documentation only.                          | `docs: update README with new section`              |
-| **`ai:`**       | Changes to AI model logic, prompts, or model selection. | `ai: refine ATS prompt for better keyword matching` |
-| **`style:`**    | Formatting, missing semi-colons, whitespace.            | `style: reorder tailwind classes in button`         |
-| **`refactor:`** | Code restructure without changing behavior.             | `refactor: move form inputs to dedicated ui folder` |
-| **`test:`**     | Adding or correcting tests.                             | `test: add e2e test for signin flow`                |
-| **`chore:`**    | Maintenance tasks, config, dependency updates.          | `chore: update next.config and package-lock`        |
+| Type               | Description                                             | Example                                             |
+| :----------------- | :------------------------------------------------------ | :-------------------------------------------------- |
+| **`[FEAT]: `**     | A new feature or major addition.                        | `feat: implement PDF-LIB for export`                |
+| **`[FIX]: `**      | A bug fix.                                              | `fix: correct Appwrite response handling`           |
+| **`[DOC]: `**      | Changes to documentation only.                          | `docs: update README with new section`              |
+| **`[AI]: `**       | Changes to AI model logic, prompts, or model selection. | `ai: refine ATS prompt for better keyword matching` |
+| **`[UI/UX]: `**    | Formatting, missing semi-colons, whitespace.            | `UI/UX: reorder tailwind classes in button`         |
+| **`[REFACTOR]: `** | Code restructure without changing behavior.             | `refactor: move form inputs to dedicated ui folder` |
+| **`[TEST]: `**     | Adding or correcting tests.                             | `test: add e2e test for signin flow`                |
+| **`[CHORE]: `**    | Maintenance tasks, config, dependency updates.          | `chore: update next.config and package-lock`        |
 
 ---
 
