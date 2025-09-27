@@ -7,10 +7,16 @@
         "build": "next build",
         "start": "next start",
         "lint": "eslint",
-        "prettier:src": "prettier --write src/"
+        "prettier:src": "prettier --write src/",
+        "sync:pm": "npm install && npm run sync:pm:convert",
+        "sync:pm:convert": "npm run sync:pm:to-yarn && npm run sync:pm:to-pnpm",
+        "sync:pm:to-yarn": "npx synp --npm-to-yarn && yarn install --check-files",
+        "sync:pm:to-pnpm": "pnpm import && pnpm install"
     },
     "dependencies": {
         "@google/genai": "^1.19.0",
+        "@upstash/ratelimit": "^2.0.6",
+        "@upstash/redis": "^1.35.4",
         "appwrite": "^20.0.0",
         "next": "15.5.0",
         "next-auth": "^4.24.11",
@@ -35,6 +41,7 @@
         "jest": "^30.0.5",
         "prettier": "^3.6.2",
         "prettier-plugin-tailwindcss": "^0.6.14",
+        "synp": "^1.9.14",
         "tailwindcss": "^4",
         "typescript": "^5"
     }
