@@ -17,7 +17,7 @@ export default function HowItWorks() {
                         <span className="bg-accent mx-2 h-2 w-2 animate-pulse rounded-full" />
                         PatchMyResume
                     </span>
-                    <h2 className="text-dark laptop:text-4xl mt-4 text-xl md:text-3xl font-bold tracking-tight">
+                    <h2 className="text-dark laptop:text-4xl mt-4 text-xl font-bold tracking-tight md:text-3xl">
                         Tailor your resume in five precise steps
                     </h2>
                     <p className="text-dark-muted mt-3 text-xs md:text-base">
@@ -38,11 +38,11 @@ export default function HowItWorks() {
                             >
                                 {/* Step header */}
                                 <div className="flex items-start justify-between select-none">
-                                    <div className="flex gap-3 items-center">
+                                    <div className="flex items-center gap-3">
                                         <div className="bg-primary/10 text-primary flex h-8 w-8 items-center justify-center rounded-full text-sm font-extrabold">
                                             {s.id}
                                         </div>
-                                        <h3 className="text-dark pt-0.5 text-sm md:text-lg font-semibold">
+                                        <h3 className="text-dark pt-0.5 text-sm font-semibold md:text-lg">
                                             {s.title}
                                         </h3>
                                     </div>
@@ -55,7 +55,7 @@ export default function HowItWorks() {
                                 {/* Expanded content */}
                                 {isOpen && (
                                     <div className="border-dark-muted/25 border-t">
-                                        <p className="text-dark-muted/90 mt-2 text-xs md:text-sm leading-relaxed whitespace-pre-line select-none">
+                                        <p className="text-dark-muted/90 mt-2 text-xs leading-relaxed whitespace-pre-line select-none md:text-sm">
                                             {s.more}
                                         </p>
                                     </div>

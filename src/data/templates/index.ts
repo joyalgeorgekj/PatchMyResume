@@ -1,5 +1,5 @@
-import { modern } from "./modern";
+import { modern } from './modern';
 
 export const templates = {
-  modern: modern,
+    modern: modern,
 };

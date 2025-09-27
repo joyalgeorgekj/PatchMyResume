@@ -50,13 +50,13 @@ export async function modern(
         font: NormalFont,
     });
 
-            [page, trackerY] = cursorController({
-                currentY: trackerY,
-                margin: margin.y,
-                page: page,
-                pdf: pdf,
-                space: NormalFont.heightAtSize(sizes.heading) + lineHeight,
-            });
+    [page, trackerY] = cursorController({
+        currentY: trackerY,
+        margin: margin.y,
+        page: page,
+        pdf: pdf,
+        space: NormalFont.heightAtSize(sizes.heading) + lineHeight,
+    });
 
     page.drawText(`${data.location} | ${data.email}  | ${data.phone}`, {
         x:
@@ -72,13 +72,13 @@ export async function modern(
         maxWidth: width - margin.x * 2,
     });
 
-            [page, trackerY] = cursorController({
-                currentY: trackerY,
-                margin: margin.y,
-                page: page,
-                pdf: pdf,
-                space: NormalFont.heightAtSize(sizes.heading) + lineHeight,
-            });
+    [page, trackerY] = cursorController({
+        currentY: trackerY,
+        margin: margin.y,
+        page: page,
+        pdf: pdf,
+        space: NormalFont.heightAtSize(sizes.heading) + lineHeight,
+    });
 
     page.drawText(`${data.links[0].url} | ${data.links[1].url}  | ${data.links[2].url}`, {
         x:
@@ -256,7 +256,8 @@ export async function modern(
                 space: BoldItalicFont.heightAtSize(sizes.subheading) + lineHeight,
             });
 
-            val.code_link !== undefined && val.code_link !== "" &&
+            val.code_link !== undefined &&
+                val.code_link !== '' &&
                 page.drawText(
                     `${val.code_link}${val.preview_link !== undefined ? ' | ' + val.preview_link : ''}`,
                     {
@@ -269,13 +270,15 @@ export async function modern(
                     }
                 );
 
-            val.code_link !== undefined && val.code_link !== "" && ([page, trackerY] = cursorController({
-                currentY: trackerY,
-                margin: margin.y,
-                page: page,
-                pdf: pdf,
-                space: ItalicFont.heightAtSize(sizes.paragraph) + lineHeight,
-            }));
+            val.code_link !== undefined &&
+                val.code_link !== '' &&
+                ([page, trackerY] = cursorController({
+                    currentY: trackerY,
+                    margin: margin.y,
+                    page: page,
+                    pdf: pdf,
+                    space: ItalicFont.heightAtSize(sizes.paragraph) + lineHeight,
+                }));
 
             [page, trackerY] = drawParagraph(
                 pdf,

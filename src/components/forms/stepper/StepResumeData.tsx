@@ -176,7 +176,7 @@ export default function StepResumeData({
                             {resumeUserData.links.map((val, ind) => (
                                 <div
                                     className={
-                                        'border-light-muted flex-col md:flex-row flex gap-3 rounded-lg border p-4 shadow-sm'
+                                        'border-light-muted flex flex-col gap-3 rounded-lg border p-4 shadow-sm md:flex-row'
                                     }
                                     key={ind}
                                 >
@@ -983,7 +983,7 @@ export default function StepResumeData({
                                     className="border-light-muted space-y-3 rounded-lg border p-4 shadow-sm"
                                     key={ind}
                                 >
-                                    <div className="grid md:grid-cols-2 gap-4">
+                                    <div className="grid gap-4 md:grid-cols-2">
                                         <Select
                                             id={'proficiency_' + ind}
                                             options={[

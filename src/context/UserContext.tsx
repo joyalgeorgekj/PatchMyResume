@@ -60,15 +60,24 @@ function UserProvider({ children }: { children: ReactNode }) {
                 model: res.model,
                 resume_user_data: res.resume_user_data,
             };
-            
+
             if (res?.type === 'error') return;
-            
+
             sessionStorage.setItem('user_data', JSON.stringify(safe));
             setUserDocument(safe);
         });
     }, [user]);
 
-    useEffect(() => console.log('User Data from context: ', userDocument, 'Type of data: ', typeof userDocument), [userDocument]);
+    useEffect(
+        () =>
+            console.log(
+                'User Data from context: ',
+                userDocument,
+                'Type of data: ',
+                typeof userDocument
+            ),
+        [userDocument]
+    );
 
     const setUserData = (data: DocumentMainTypeZod) => {
         if (!DocumentMainScheme.safeParse(data).success) return false;

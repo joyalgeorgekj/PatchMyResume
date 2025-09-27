@@ -132,7 +132,7 @@ export default function Header() {
                                 </Link>
                             ))
                         ) : (
-                            <p className="hover:bg-light-muted cursor-pointer rounded-md transition text-dark-muted/50 text-xs">
+                            <p className="hover:bg-light-muted text-dark-muted/50 cursor-pointer rounded-md text-xs transition">
                                 Signin/Signup to use navigation
                             </p>
                         )}

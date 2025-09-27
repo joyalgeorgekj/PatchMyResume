@@ -2,9 +2,7 @@ export default function Main() {
     return (
         <section>
             <main className="mobile:px-8 laptop:px-12 mx-auto max-w-6xl px-6 py-20 text-center">
-                <h1
-                    className="text-dark md:text-5xl mb-2 text-xl leading-tight font-bold"
-                >
+                <h1 className="text-dark mb-2 text-xl leading-tight font-bold md:text-5xl">
                     Build Resume,{' '}
                     <span className="text-primary border-b-4">
                         Get Hired<span className="animate-pulse">!</span>

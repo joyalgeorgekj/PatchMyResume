@@ -59,7 +59,7 @@ export default function ProfileAvatar({
                     </div>
                     <button
                         onClick={() => signOut({ callbackUrl: '/' })}
-                        className="hover:bg-red-700 w-full cursor-pointer rounded-xl bg-red-600 px-4 py-2 text-center text-sm"
+                        className="w-full cursor-pointer rounded-xl bg-red-600 px-4 py-2 text-center text-sm hover:bg-red-700"
                     >
                         Sign out
                     </button>

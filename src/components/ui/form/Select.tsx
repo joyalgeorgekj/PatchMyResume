@@ -5,7 +5,7 @@ function Select({
     updator,
     options,
     id,
-    disable=false
+    disable = false,
 }: {
     defaultValue: string;
     updator: (e: ChangeEvent<HTMLSelectElement>) => void;

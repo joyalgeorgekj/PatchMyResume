@@ -7,7 +7,7 @@ function Textarea({
     rows = 3,
     required = false,
     placeholder = 'Responsibilities (one per line)',
-    className = "border-light-muted w-full rounded-lg border px-3 py-2 text-sm whitespace-pre-wrap break-words focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
+    className = 'border-light-muted w-full rounded-lg border px-3 py-2 text-sm whitespace-pre-wrap break-words focus:border-blue-600 focus:ring-2 focus:ring-blue-600',
 }: {
     defaultValue?: string;
     updator: (e: ChangeEvent<HTMLTextAreaElement>) => void;
@@ -15,7 +15,7 @@ function Textarea({
     required?: boolean;
     placeholder?: string;
     rows?: number;
-    className?: string
+    className?: string;
 }) {
     return (
         <textarea

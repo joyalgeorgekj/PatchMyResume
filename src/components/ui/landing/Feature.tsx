@@ -4,13 +4,13 @@ export default function Feature() {
     return (
         <section id="features" className="bg-light-muted py-8 md:py-20">
             <div className="mobile:px-8 mx-auto max-w-6xl px-6 lg:px-12">
-                <div className="grid grid-cols-1 gap-4 md:gap-8 md:grid-cols-3">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
                     {featureList.map((feature, i) => (
                         <div
                             key={i}
                             className="border-dark-muted/15 bg-light hover:shadow-dark-muted/50 rounded-2xl border p-6 transition-all hover:scale-95 hover:shadow"
                         >
-                            <h3 className="text-dark-intense mb-3 text-base md:text-xl font-bold">
+                            <h3 className="text-dark-intense mb-3 text-base font-bold md:text-xl">
                                 {feature.title}
                             </h3>
                             <p className="text-dark-muted text-xs md:text-base">{feature.desc}</p>

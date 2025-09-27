@@ -6,12 +6,12 @@ export default function StepJobDescription({
     jobDescription,
     setJobDescription,
     setUserPref,
-    userPref
+    userPref,
 }: {
     jobDescription: string;
     setJobDescription: Dispatch<SetStateAction<string>>;
     setUserPref: Dispatch<SetStateAction<string>>;
-    userPref: string
+    userPref: string;
 }) {
     return (
         <section>
@@ -27,7 +27,13 @@ export default function StepJobDescription({
             ></Textarea>
             <p className="text-dark-muted mt-1 text-xs">Min 50 chars, Max 500 chars</p>
 
-            <Input defaultValue={userPref} id='custom message for AI' seoedId='user_pref' updator={(e) => setUserPref(e.target.value)} className='mt-4' />
+            <Input
+                defaultValue={userPref}
+                id="custom message for AI"
+                seoedId="user_pref"
+                updator={(e) => setUserPref(e.target.value)}
+                className="mt-4"
+            />
         </section>
     );
 }

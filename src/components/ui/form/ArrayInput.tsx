@@ -9,7 +9,7 @@ function ArrayInput({
 }) {
     return (
         <span
-            className="bg-light-muted text-dark-intense text-xs font-medium me-2 px-2.5 py-0.5 pt-1 rounded-sm cursor-pointer"
+            className="bg-light-muted text-dark-intense me-2 cursor-pointer rounded-sm px-2.5 py-0.5 pt-1 text-xs font-medium"
             onClick={updator}
         >
             {value}

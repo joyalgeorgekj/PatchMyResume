@@ -5,10 +5,10 @@ function Input({
     updator,
     id,
     seoedId,
-    required=false,
-    type='text',
-    keyboard='text',
-    className=''
+    required = false,
+    type = 'text',
+    keyboard = 'text',
+    className = '',
 }: {
     defaultValue: string;
     updator: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -16,14 +16,14 @@ function Input({
     seoedId: string;
     required?: boolean;
     type?: HTMLInputTypeAttribute;
-    keyboard?: "email" | "search" | "tel" | "text" | "url" | "none" | "numeric" | "decimal";
+    keyboard?: 'email' | 'search' | 'tel' | 'text' | 'url' | 'none' | 'numeric' | 'decimal';
     className?: string;
 }) {
     return (
         <input
             type={type}
             autoComplete={id}
-            placeholder={"Enter " + id}
+            placeholder={'Enter ' + id}
             aria-label={id}
             id={seoedId}
             onChange={updator}

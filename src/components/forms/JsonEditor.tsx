@@ -33,7 +33,9 @@ export default function JsonEditor({
 
     return (
         <div>
-            <label className="mb-2 block text-sm font-medium" htmlFor='json_editor'>Resume JSON</label>
+            <label className="mb-2 block text-sm font-medium" htmlFor="json_editor">
+                Resume JSON
+            </label>
             <Textarea
                 id="json_editor"
                 rows={14}

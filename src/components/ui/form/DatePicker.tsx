@@ -59,7 +59,7 @@ function DateRangePicker({
     }, [value]);
 
     return (
-        <div className="flex-col flex">
+        <div className="flex flex-col">
             <div className="flex w-full flex-row items-center justify-between gap-4">
                 {/* Start */}
                 {start && (
@@ -86,7 +86,7 @@ function DateRangePicker({
                         {/* Year Input */}
                         <input
                             type="number"
-                            inputMode='numeric'
+                            inputMode="numeric"
                             name="year"
                             id={`${uniqueSectionID}_year_start`}
                             placeholder="YYYY"
@@ -102,46 +102,46 @@ function DateRangePicker({
                 {end && (
                     <>
                         <span>—</span>
-                            <div
-                                className={`flex w-full items-center gap-2 rounded-lg py-2 text-sm ${
-                                    currentlyWorking ? 'cursor-not-allowed opacity-50' : ''
-                                }`}
+                        <div
+                            className={`flex w-full items-center gap-2 rounded-lg py-2 text-sm ${
+                                currentlyWorking ? 'cursor-not-allowed opacity-50' : ''
+                            }`}
+                        >
+                            {/* Month Select */}
+                            <select
+                                name="month"
+                                id={`${uniqueSectionID}_month_end`}
+                                disabled={currentlyWorking}
+                                value={value['end'].split('/')[0] || ''}
+                                onChange={(e) => handleChange(e, 'end')}
+                                className="focus:ring-dark rounded-md border border-pink-300 bg-white px-2 py-1 focus:ring-2 focus:outline-none dark:bg-gray-800 dark:text-white"
                             >
-                                {/* Month Select */}
-                                <select
-                                    name="month"
-                                    id={`${uniqueSectionID}_month_end`}
-                                    disabled={currentlyWorking}
-                                    value={value['end'].split('/')[0] || ''}
-                                    onChange={(e) => handleChange(e, 'end')}
-                                    className="focus:ring-dark rounded-md border border-pink-300 bg-white px-2 py-1 focus:ring-2 focus:outline-none dark:bg-gray-800 dark:text-white"
-                                >
-                                    <option value="">MM</option>
-                                    {months.map((month, i) => {
-                                        const monthNumbered = String(i + 1).padStart(2, '0');
-                                        return (
-                                            <option key={monthNumbered} value={monthNumbered}>
-                                                {month}
-                                            </option>
-                                        );
-                                    })}
-                                </select>
-                                <span>/</span>
-                                {/* Year Input */}
-                                <input
-                                    type="number"
-                                    inputMode='numeric'
-                                    name="year"
-                                    id={`${uniqueSectionID}_year_end`}
-                                    placeholder="YYYY"
-                                    min="1900"
-                                    max={`${new Date().getFullYear()}`}
-                                    disabled={currentlyWorking}
-                                    value={value['end'].split('/')[1] || ''}
-                                    onChange={(e) => handleChange(e, 'end')}
-                                    className="w-20 rounded-md border border-pink-300 px-2 py-1 focus:ring-2 focus:ring-pink-400 focus:outline-none dark:bg-gray-800 dark:text-white"
-                                />
-                            </div>
+                                <option value="">MM</option>
+                                {months.map((month, i) => {
+                                    const monthNumbered = String(i + 1).padStart(2, '0');
+                                    return (
+                                        <option key={monthNumbered} value={monthNumbered}>
+                                            {month}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                            <span>/</span>
+                            {/* Year Input */}
+                            <input
+                                type="number"
+                                inputMode="numeric"
+                                name="year"
+                                id={`${uniqueSectionID}_year_end`}
+                                placeholder="YYYY"
+                                min="1900"
+                                max={`${new Date().getFullYear()}`}
+                                disabled={currentlyWorking}
+                                value={value['end'].split('/')[1] || ''}
+                                onChange={(e) => handleChange(e, 'end')}
+                                className="w-20 rounded-md border border-pink-300 px-2 py-1 focus:ring-2 focus:ring-pink-400 focus:outline-none dark:bg-gray-800 dark:text-white"
+                            />
+                        </div>
                     </>
                 )}
             </div>

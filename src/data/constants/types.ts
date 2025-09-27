@@ -227,7 +227,6 @@ export type AchievementTypeZod = z.infer<typeof AchievementTypeSchema>;
 export type ResumeDataTypeZod = z.infer<typeof ResumeSchema>;
 export type DocumentMainTypeZod = z.infer<typeof DocumentMainScheme>;
 
-
 // =========================================================
 //                   AI SUGGESTION TYPES
 // =========================================================

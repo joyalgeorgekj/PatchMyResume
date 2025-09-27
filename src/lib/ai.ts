@@ -6,7 +6,7 @@ export function getResumeSuggestions(jd: string, userPref?: string) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     jd: jd,
-                    userPref: userPref
+                    userPref: userPref,
                 }),
             });
 
