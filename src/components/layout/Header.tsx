@@ -29,10 +29,10 @@ export default function Header() {
                         src={'/image/logo.png'}
                         alt="logo"
                         className="drop-shadow-dark-muted/75 my-auto drop-shadow-md"
-                        height={60}
-                        width={60}
+                        height={50}
+                        width={50}
                     />
-                    <h1 className="text-dark pt-2 text-base/4">
+                    <h1 className="text-dark pt-2 text-xs/4 md:text-base/4">
                         PatchMy <br />
                         <span className="text-primary">Resume</span>
                         <p className="text-dark text-[10px] uppercase">
@@ -48,7 +48,9 @@ export default function Header() {
                         <Link
                             key={href}
                             href={href}
-                            onClick={() => setLoader({ active: true, message: 'Loading User Route' })}
+                            onClick={() =>
+                                setLoader({ active: true, message: 'Loading User Route' })
+                            }
                             className="hover:text-primary transition-colors"
                         >
                             {label}
@@ -85,45 +87,45 @@ export default function Header() {
             {/* Backdrop */}
             {drawerOpen && (
                 <div
-                    className="fixed inset-0 z-40 bg-black/40 md:hidden"
+                    className="fixed inset-0 z-40 h-screen bg-black/40 md:hidden"
                     onClick={() => setDrawerOpen(false)}
                 />
             )}
 
             {/* Sidebar */}
             <div
-                className={`bg-light fixed inset-y-0 right-0 z-50 w-64 transform shadow-xl transition-transform duration-300 md:hidden ${drawerOpen ? 'translate-x-0' : 'translate-x-full'}`}
+                className={`bg-light fixed inset-y-0 right-0 z-50 w-64 transform shadow-xl transition duration-300 md:hidden ${drawerOpen ? 'flex h-screen translate-x-0 flex-col' : 'hidden translate-x-full'}`}
             >
                 {/* Drawer Header */}
-                <div className="border-dark-muted/10 flex items-center justify-between border-b p-4">
-                    <span className="text-primary font-bold">Menu</span>
-                    <button
-                        onClick={() => setDrawerOpen(false)}
-                        className="text-dark cursor-pointer text-2xl"
-                    >
-                        <FiX />
-                    </button>
+                <div>
+                    <div className="border-dark-muted/10 flex items-center justify-between border-b p-4">
+                        <span className="text-primary font-bold">Menu</span>
+                        <button
+                            onClick={() => setDrawerOpen(false)}
+                            className="text-dark cursor-pointer text-2xl"
+                        >
+                            <FiX />
+                        </button>
+                    </div>
+                    {/* Drawer Nav Links */}
+                    <nav className="text-dark flex flex-col gap-4 p-4">
+                        {navLinks.map(({ href, label }) => (
+                            <Link
+                                key={href}
+                                href={href}
+                                onClick={() => setDrawerOpen(false)}
+                                className="hover:bg-light-muted cursor-pointer rounded-md transition"
+                            >
+                                {label}
+                            </Link>
+                        ))}
+                    </nav>
                 </div>
 
-                {/* Drawer Nav Links */}
-                <nav className="text-dark flex flex-col gap-4 p-4">
-                    {navLinks.map(({ href, label }) => (
-                        <Link
-                            key={href}
-                            href={href}
-                            onClick={() => setDrawerOpen(false)}
-                            className="hover:bg-light-muted cursor-pointer rounded-md px-3 py-2 transition"
-                        >
-                            {label}
-                        </Link>
-                    ))}
-                </nav>
-
                 {/* Drawer Actions */}
-                <div className="border-dark-muted/10 mt-auto flex flex-col gap-3 border-t p-4">
-                    <ThemeButton />
+                <div className="border-dark-muted/10 mt-auto flex flex-col gap-4 border-t p-4">
                     {status === 'authenticated' ? (
-                        <ProfileAvatar session={session!} />
+                        <ProfileAvatar name={true} mobile={drawerOpen} session={session!} />
                     ) : (
                         <Link
                             href="/signin"
@@ -136,6 +138,7 @@ export default function Header() {
                             Sign in
                         </Link>
                     )}
+                    <ThemeButton className="w-full" />
                 </div>
             </div>
         </header>
