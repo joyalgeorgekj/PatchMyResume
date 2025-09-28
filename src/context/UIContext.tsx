@@ -4,7 +4,7 @@ import { SessionProvider } from 'next-auth/react';
 import { createContext, useContext, useEffect, useState } from 'react';
 import '@/styles/context.css';
 
-export type Loader = { active: boolean; message?: string };
+export type Loader = { active: boolean; message?: string, persist?: boolean };
 export type Toast = { message: string; type?: 'success' | 'error' | 'info' };
 export type Alert = { message: string; onConfirm?: () => void; onCancel?: () => void };
 
@@ -28,13 +28,17 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
         if (toast) setTimeout(() => setToast(null), 5000);
     }, [toast]);
 
+    useEffect(() => {
+        if (loader.active && !loader.persist) setTimeout(() => setLoader({ active: false}), 5000);
+    }, [loader]);
+
     return (
         <UIContext.Provider value={{ loader, setLoader, toast, setToast, alert, setAlert }}>
             <SessionProvider>{children}</SessionProvider>
 
             {/* Loader */}
             {loader.active && (
-                <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50">
+                <div className="bg-light fixed inset-0 z-[9999] flex items-center justify-center">
                     <div id="wifi-loader" className="min-w-7xl">
                         <svg className="circle-outer" viewBox="0 0 86 86">
                             <circle className="back" cx="43" cy="43" r="40"></circle>

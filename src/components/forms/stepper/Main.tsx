@@ -77,7 +77,7 @@ export default function Main() {
                     break;
                 }
 
-                setLoader({ active: true, message: 'Formatting data' });
+                setLoader({ active: true, message: 'Formatting data', persist: true });
 
                 getResumeSuggestions(jobDescription, userPref)
                     .then(async (res) => {
@@ -88,7 +88,7 @@ export default function Main() {
                         ];
 
                         for (const msg of messages) {
-                            setLoader({ active: true, message: msg });
+                            setLoader({ active: true, message: msg, persist: true });
                             await new Promise((r) => setTimeout(r, 1200));
                         }
 
@@ -126,29 +126,29 @@ export default function Main() {
         }
     }, [userData]);
 
-    useEffect(() => {
-        console.log('API and Model: ', aiApiModel);
-    }, [aiApiModel]);
+    // useEffect(() => {
+    //     console.log('API and Model: ', aiApiModel);
+    // }, [aiApiModel]);
 
-    useEffect(() => {
-        console.log('AI Pref: ', userPref);
-    }, [userPref]);
+    // useEffect(() => {
+    //     console.log('AI Pref: ', userPref);
+    // }, [userPref]);
 
-    useEffect(() => {
-        console.log('User Resume Data: ', resumeUserData);
-    }, [resumeUserData]);
+    // useEffect(() => {
+    //     console.log('User Resume Data: ', resumeUserData);
+    // }, [resumeUserData]);
 
-    useEffect(() => {
-        console.log('Job Description: ', jobDescription);
-    }, [jobDescription]);
+    // useEffect(() => {
+    //     console.log('Job Description: ', jobDescription);
+    // }, [jobDescription]);
 
-    useEffect(() => {
-        console.log('AI Suggestions: ', suggestions);
-    }, [suggestions]);
+    // useEffect(() => {
+    //     console.log('AI Suggestions: ', suggestions);
+    // }, [suggestions]);
 
-    useEffect(() => {
-        console.log('Final Resume Data: ', final);
-    }, [final]);
+    // useEffect(() => {
+    //     console.log('Final Resume Data: ', final);
+    // }, [final]);
 
     return (
         <main aria-label="Resume Builder" className="bg-light text-dark mx-auto max-w-7xl">

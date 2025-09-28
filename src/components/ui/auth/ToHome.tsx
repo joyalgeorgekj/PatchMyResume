@@ -6,7 +6,7 @@ export default function ToHome() {
         <div className="space-y-3">
             <Link
                 href="/"
-                className="text-dark mb-2 flex w-min items-start gap-1 text-sm font-medium hover:underline"
+                className="text-dark mb-3 flex w-min items-start gap-1 text-sm font-medium hover:underline"
             >
                 <FaHome className="text-base" />
                 Home
