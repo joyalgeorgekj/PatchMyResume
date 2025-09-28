@@ -9,7 +9,7 @@ import { redirect } from 'next/navigation';
 import { authList } from '@/data/constants/workflow';
 
 export default function AuthPage() {
-    const [activeTab, setActiveTab] = useState<'login' | 'register'>('register');
+    const [page, setPage] = useState<'login' | 'register'>('register');
     const { setLoader, loader } = useUI();
     const { status } = useSession();
 
@@ -23,64 +23,53 @@ export default function AuthPage() {
 
     return (
         <div className="bg-light flex min-h-screen items-center justify-center px-4">
-            <div className="border-primary-muted bg-light w-full max-w-md rounded-lg border-2 p-8 shadow-lg">
+            <div className="md:border-primary-muted bg-light w-full max-w-md rounded-lg border-0 p-8 shadow-lg md:border-2">
                 <ToHome />
 
                 {/* Welcome Message */}
-                {activeTab === 'register' ? (
-                    <>
-                        <h2 className="text-dark mb-2 text-center text-2xl font-bold">
-                            Create your account
-                        </h2>
-                        <p className="text-dark-muted mb-6 text-center text-sm">
-                            Join us today! It's quick and easy.
-                        </p>
-                        <p className="text-dark-muted mb-6 text-center text-xs">
-                            *By becoming a user you are agreeing to the{' '}
-                            <a
-                                href="https://patchmyresume.joyalgeorgekj.com/termsandconditions"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                terms and conditions
-                            </a>
-                        </p>
-                    </>
-                ) : (
-                    <>
-                        <h2 className="text-dark mb-2 text-center text-2xl font-bold">
-                            Welcome back
-                        </h2>
-                        <p className="text-dark-muted mb-6 text-center text-sm">
-                            Login to continue to your account.
-                        </p>
-                        <p className="text-dark-muted mb-6 text-center text-xs">
-                            *Make sure you are following and agree to the{' '}
-                            <a
-                                href="https://patchmyresume.joyalgeorgekj.com/termsandconditions"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                terms and conditions
-                            </a>
-                        </p>
-                    </>
-                )}
+                <>
+                    <h2 className="text-dark text-center text-base md:text-2xl font-bold">
+                        {page === 'register' ? 'Create your account' : 'Welcome back'}
+                    </h2>
+                    <p className="text-dark-muted mb-3 text-center text-[12px] md:text-sm">
+                        {page === 'register'
+                            ? "Join us today! It's quick and easy."
+                            : 'Login to continue to your account.'}
+                    </p>
+                    <p className="text-dark-muted mb-3 rounded border-2 border-yellow-300/25 p-4 text-center text-[12px] md:text-xs font-medium md:font-bold">
+                        {page === 'register'
+                            ? '*By becoming a user you are agreeing to the '
+                            : '*Countinuing to Login means you are following the '}{' '}
+                        <a
+                            href="https://patchmyresume.joyalgeorgekj.com/termsandconditions"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className='underline'
+                        >
+                            terms and conditions
+                        </a>
+                    </p>
+                </>
 
                 {/* Auth Buttons */}
                 <div className="space-y-3">
                     {authList.map((val, ind) => (
-                        <AuthButton key={ind} Icon={val.Icon} label={val.label} />
+                        <AuthButton
+                            key={ind}
+                            Icon={val.Icon}
+                            label={val.label}
+                            disable={val.disable}
+                        />
                     ))}
                 </div>
 
                 {/* Redirect / Switch */}
-                <p className="text-dark mt-6 text-center text-sm">
-                    {activeTab === 'register' ? (
+                <p className="text-dark mt-6 text-center text-[12px] md:text-sm">
+                    {page === 'register' ? (
                         <>
                             Already have an account?{' '}
                             <button
-                                onClick={() => setActiveTab('login')}
+                                onClick={() => setPage('login')}
                                 className="text-dark cursor-pointer font-medium underline hover:underline"
                             >
                                 Login
@@ -90,7 +79,7 @@ export default function AuthPage() {
                         <>
                             Don’t have an account?{' '}
                             <button
-                                onClick={() => setActiveTab('register')}
+                                onClick={() => setPage('register')}
                                 className="text-dark cursor-pointer font-medium underline hover:underline"
                             >
                                 Register
