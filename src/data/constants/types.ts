@@ -7,6 +7,7 @@ import { MODELS } from './workflow';
 // =========================================================
 
 export interface AuthListType {
+    disable?: boolean;
     Icon: IconType;
     label: string;
 }

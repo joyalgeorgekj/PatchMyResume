@@ -17,7 +17,8 @@ export const authList: AuthListType[] = [
     },
     {
         Icon: FaApple,
-        label: 'Apple',
+        label: 'Apple (Comming Soon)',
+        disable: true
     },
 ];
 
