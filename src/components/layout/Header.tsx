@@ -61,17 +61,17 @@ export default function Header() {
 
                 {/* Desktop Actions */}
                 <div className="hidden items-center gap-3 md:flex">
-                    <ThemeButton />
                     <p className="text-center">
                         <Link
                             href="https://github.com/joyal-george-kj/patchmyresume"
                             target="_blank"
                         >
-                            <span className="bg-light text-dark shadow-dark/35 text-shadow-primary inline-flex items-center gap-3 rounded px-3 py-1.5 capitalize shadow transition hover:scale-95">
-                                <FaGithub /> Star us on GitHub
+                            <span className="bg-light text-dark shadow-dark/5 text-sm text-shadow-primary inline-flex items-center gap-3 rounded px-3 py-1.5 capitalize shadow transition hover:scale-95">
+                                <FaGithub /> Star on GitHub
                             </span>
                         </Link>
                     </p>
+                    <ThemeButton />
                     {status === 'authenticated' ? (
                         <ProfileAvatar session={session!} />
                     ) : (
@@ -87,6 +87,7 @@ export default function Header() {
 
                 {/* Mobile Hamburger */}
                 <button
+                    aria-label="hamburg-menu"
                     className="text-dark cursor-pointer text-2xl md:hidden"
                     onClick={() => setDrawerOpen(true)}
                 >
