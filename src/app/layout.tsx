@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className="font-mono antialiased" suppressHydrationWarning>
+            <body className="antialiased" suppressHydrationWarning>
                 <ThemeProvider attribute="class" enableSystem>
                     <UIProvider>
                         <LandingWrapper>{children}</LandingWrapper>
