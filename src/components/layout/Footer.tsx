@@ -11,7 +11,7 @@ export default function Footer() {
                     <Link href="/terms" className="hover:text-dark text-xs md:text-sm">
                         Terms
                     </Link>
-                    <Link href="/contact" className="hover:text-dark text-xs md:text-sm">
+                    <Link href="mailto:joyalgeorgekj@gmail.com" className="hover:text-dark text-xs md:text-sm">
                         Contact
                     </Link>
                 </nav>
