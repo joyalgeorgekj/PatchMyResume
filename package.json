@@ -6,6 +6,7 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
+        "type-check": "tsc --noEmit",
         "lint": "eslint",
         "prettier:src": "prettier --write src/",
         "sync:pm": "npm install && npm run sync:pm:convert",
