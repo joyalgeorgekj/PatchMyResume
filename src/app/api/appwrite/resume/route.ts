@@ -1,4 +1,4 @@
-import { ResumeSchema } from '@/data/constants/types';
+import { ResumeDataType, ResumeSchema } from '@/data/constants/types';
 import { MODELS } from '@/data/constants/workflow';
 import { getAppwriteClient } from '@/lib/server/appwrite';
 import { decrypt, encrypt } from '@/lib/server/crypto';
@@ -9,7 +9,7 @@ import { NextRequest } from 'next/server';
 import { ID, Query } from 'node-appwrite';
 
 // helper to compare objects deeply
-function isEqual(a: any, b: any) {
+function isEqual(a: ResumeDataType, b: ResumeDataType) {
     return JSON.stringify(a) === JSON.stringify(b);
 }
 

@@ -573,7 +573,7 @@ export default function StepResumeData({
 
                                                 console.log(e.target.value);
 
-                                                let data = e.target.value.split(', ');
+                                                const data = e.target.value.split(', ');
                                                 return resumeUserDataUpdator<ProjectTypeZod>(
                                                     prev,
                                                     'project', // section key

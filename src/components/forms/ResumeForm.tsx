@@ -1,4 +1,6 @@
-export default function ResumeForm({ data, setData }: { data: any; setData: (v: any) => void }) {
+import { ResumeDataType } from "@/data/constants/types";
+
+export default function ResumeForm({ data, setData }: { data: ResumeDataType; setData: (v: ResumeDataType) => void }) {
     return (
         <form className="space-y-4">
             <div>

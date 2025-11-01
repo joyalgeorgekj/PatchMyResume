@@ -149,7 +149,7 @@ export default function StepAiSuggestions({
                                                         updateFinal(section, opt.option1, idx);
                                                         setSelected((prev) => {
                                                             if (prev[section]) {
-                                                                let updated = prev[section];
+                                                                const updated = prev[section];
                                                                 updated[idx] = opt.option1;
                                                                 return {
                                                                     ...prev,
@@ -200,7 +200,7 @@ export default function StepAiSuggestions({
                                                         updateFinal(section, opt.option2, idx);
                                                         setSelected((prev) => {
                                                             if (prev[section]) {
-                                                                let updated = prev[section];
+                                                                const updated = prev[section];
                                                                 updated[idx] = opt.option2;
                                                                 return {
                                                                     ...prev,

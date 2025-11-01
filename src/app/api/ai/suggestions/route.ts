@@ -115,8 +115,9 @@ export async function POST(req: NextRequest) {
         console.log(parsed);
 
         return Response(parsed, 200);
-    } catch (error: any) {
-        console.log(error);
-        return Response({ message: error.message, type: 'error' }, Number(error.status) || 500);
+    } catch (error: unknown) {
+        const e = error as {message: string; status: number}
+        console.log(e, error);
+        return Response({ message: e.message, type: 'error' }, Number(e.status) || 500);
     }
 }
