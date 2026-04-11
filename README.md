@@ -4,7 +4,7 @@
     <picture>
       <source media="(prefers-color-scheme: light)" srcset="./src/assets/images/light.png">
       <source media="(prefers-color-scheme: dark)" srcset="./src/assets/images/dark.png">
-      <img src="./src/assets/images/dark.png" alt="react-bits logo" width="1000">
+      <img src="./src/assets/images/dark.png" alt="PatchMyResume logo" width="1000">
     </picture>
   <br>
   <br>
